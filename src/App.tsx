@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
-// --- DATA ---
 const fleetData = [
   { id: 'f1', name: 'SCANIA R770 + EFFER 955', cat: 'Gru', cap: '95 t/m — 770 CV', img: 'images/flotta-1.jpg', desc: 'Top di gamma per sollevamenti industriali pesanti. Equipaggiato con Jib per sbracci estremi.' },
   { id: 'f2', name: 'SCANIA R730 + GRU EFFER', cat: 'Gru', cap: 'V8 — 730 CV', img: 'images/flotta-2.jpg', desc: 'Potenza pura unita alla versatilità delle gru Effer per carichi impegnativi.' },
@@ -34,98 +33,77 @@ const projects = [
   { id: 'p3', title: 'Movimentazione Gru Potain', cat: 'Trasporti Speciali', img: 'images/progetto-3.jpg' },
 ];
 
-const tickerItems = [
-  'TRASPORTI ECCEZIONALI', 'AUTOGRÙ FINO A 95 T/M', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY',
-  'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'SCORTA TECNICA', 'TRENTO', 'AFFIDABILITÀ TOTALE',
-];
+const S = {
+  orange: '#EA580C',
+  black: '#0A0A0A',
+  dark: '#111111',
+  border: '#1C1C1C',
+  text: '#F5F5F0',
+  muted: '#9CA3AF',
+  gray: '#6B7280',
+  bebas: "'Bebas Neue', sans-serif",
+  inter: "'Inter', sans-serif",
+};
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('Gru');
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [tab, setTab] = useState('Gru');
+  const [scrolled, setScrolled] = useState(false);
+  const [mobile, setMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeFleetItem, setActiveFleetItem] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-  
+  const [modalId, setModalId] = useState<string | null>(null);
   const [state, handleSubmit] = useForm('xnjowlpd');
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 60);
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('scroll', onScroll);
-    window.addEventListener('resize', onResize);
-    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onResize); };
+    const checkMobile = () => setMobile(window.innerWidth < 900);
+    const checkScroll = () => setScrolled(window.scrollY > 50);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    window.addEventListener('scroll', checkScroll);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', checkScroll);
+    };
   }, []);
 
-  const scrollTo = (id: string) => {
+  const go = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMenuOpen(false);
     document.body.style.overflow = 'unset';
   };
 
-  const toggleMenu = () => {
-    setMenuOpen(p => {
-      document.body.style.overflow = !p ? 'hidden' : 'unset';
-      return !p;
-    });
-  };
+  const openMenu = () => { setMenuOpen(true); document.body.style.overflow = 'hidden'; };
+  const closeMenu = () => { setMenuOpen(false); document.body.style.overflow = 'unset'; };
 
-  const filteredFleet = fleetData.filter(m => m.cat === activeTab);
-  const activeItem = fleetData.find(m => m.id === activeFleetItem);
+  const fleet = fleetData.filter(m => m.cat === tab);
+  const modal = fleetData.find(m => m.id === modalId);
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", background: '#0A0A0A', color: '#F5F5F0', overflowX: 'hidden' }}>
+    <div style={{ fontFamily: S.inter, background: S.black, color: S.text, overflowX: 'hidden' }}>
 
-      {/* FLEET MODAL */}
-      {activeItem && (
-        <div
-          onClick={() => setActiveFleetItem(null)}
-          style={{
-            position: 'fixed', inset: 0, zIndex: 200,
-            background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px',
-          }}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            style={{
-              background: '#111', border: '1px solid #2a2a2a', borderRadius: '4px',
-              maxWidth: '680px', width: '100%', overflow: 'hidden',
-            }}
-          >
-            <div style={{ height: '300px', overflow: 'hidden', position: 'relative' }}>
-              <img src={activeItem.img} alt={activeItem.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
+        #ticker { animation: ticker 35s linear infinite; display: flex; white-space: nowrap; }
+      `}</style>
+
+      {/* MODAL */}
+      {modal && (
+        <div onClick={() => setModalId(null)} style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+          <div onClick={e => e.stopPropagation()} style={{ background: S.dark, border: `1px solid ${S.border}`, maxWidth: 680, width: '100%', overflow: 'hidden' }}>
+            <div style={{ height: 280, overflow: 'hidden', position: 'relative' }}>
+              <img src={modal.img} alt={modal.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #111 0%, transparent 60%)' }} />
-              <button
-                onClick={() => setActiveFleetItem(null)}
-                style={{
-                  position: 'absolute', top: '16px', right: '16px',
-                  background: 'rgba(0,0,0,0.6)', border: '1px solid #333',
-                  color: '#fff', width: '36px', height: '36px', borderRadius: '2px',
-                  cursor: 'pointer', fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}
-              >×</button>
-              <div style={{ position: 'absolute', bottom: '16px', left: '20px' }}>
-                <span style={{ background: '#EA580C', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>
-                  {activeItem.cat}
-                </span>
-              </div>
+              <button onClick={() => setModalId(null)} style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(0,0,0,0.7)', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', fontSize: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
+              <span style={{ position: 'absolute', bottom: 16, left: 20, background: S.orange, color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>{modal.cat}</span>
             </div>
-            <div style={{ padding: '28px 32px 32px' }}>
-              <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '32px', letterSpacing: '0.05em', color: '#F5F5F0', marginBottom: '8px' }}>
-                {activeItem.name}
-              </h3>
-              <div style={{ display: 'inline-block', background: '#1C1C1C', border: '1px solid #2a2a2a', padding: '4px 14px', marginBottom: '16px' }}>
-                <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#EA580C', textTransform: 'uppercase' }}>{activeItem.cap}</span>
+            <div style={{ padding: '24px 28px 28px' }}>
+              <div style={{ fontFamily: S.bebas, fontSize: 30, letterSpacing: '0.05em', color: S.text, marginBottom: 8 }}>{modal.name}</div>
+              <div style={{ display: 'inline-block', background: S.border, padding: '4px 12px', marginBottom: 14 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase' }}>{modal.cap}</span>
               </div>
-              <p style={{ color: '#9CA3AF', fontSize: '15px', lineHeight: '1.6', marginBottom: '24px' }}>{activeItem.desc}</p>
-              <button
-                onClick={() => { setActiveFleetItem(null); scrollTo('contatti'); }}
-                style={{
-                  width: '100%', background: '#EA580C', color: '#fff', border: 'none',
-                  padding: '14px', cursor: 'pointer', fontWeight: 700, fontSize: '11px',
-                  letterSpacing: '0.2em', textTransform: 'uppercase',
-                }}
-              >
+              <p style={{ color: S.muted, fontSize: 14, lineHeight: 1.65, marginBottom: 20 }}>{modal.desc}</p>
+              <button onClick={() => { setModalId(null); go('contatti'); }} style={{ width: '100%', background: S.orange, color: '#fff', border: 'none', padding: 14, cursor: 'pointer', fontWeight: 700, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
                 RICHIEDI PREVENTIVO
               </button>
             </div>
@@ -133,307 +111,178 @@ export default function App() {
         </div>
       )}
 
-      {/* NAVBAR */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        transition: 'all 0.3s',
-        background: isScrolled ? 'rgba(10,10,10,0.97)' : 'transparent',
-        borderBottom: isScrolled ? '1px solid #1C1C1C' : '1px solid transparent',
-        padding: isScrolled ? '14px 0' : '22px 0',
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: "0 32px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div onClick={() => scrollTo('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              background: '#EA580C', padding: '6px 10px',
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#fff',
-            }}>NARDIN</div>
-            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0' }}>AUTOTRASPORTI</span>
-          </div>
-
-          <div style={{ display: isMobile ? 'none' : 'flex', gap: '36px', alignItems: 'center' }}>
-            {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
-              <button key={id} onClick={() => scrollTo(id)} style={{
-                background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer',
-                fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
-                transition: 'color 0.2s', padding: 0,
-              }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#F5F5F0')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#9CA3AF')}
-              >{id.replace('-', ' ')}</button>
-            ))}
-            <a href="tel:+390461990268" style={{
-              background: '#EA580C', color: '#fff', padding: '10px 20px',
-              textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
-              textTransform: 'uppercase', transition: 'background 0.2s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#C2410C')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#EA580C')}
-            >CHIAMA ORA</a>
-          </div>
-
-          <div style={{ display: isMobile ? 'flex' : 'none', alignItems: 'center', gap: '12px' }}>
-            <a href="tel:+390461990268" style={{
-              background: '#EA580C', color: '#fff', padding: '9px 14px',
-              textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-            }}>CHIAMA</a>
-            <button onClick={toggleMenu} style={{
-              background: 'none', border: '1px solid #2a2a2a', color: '#F5F5F0',
-              width: '38px', height: '38px', cursor: 'pointer', display: 'flex',
-              flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '8px',
-            }}>
-              <span style={{ display: 'block', width: '18px', height: '2px', background: menuOpen ? 'transparent' : '#F5F5F0', transition: 'all 0.2s' }} />
-              <span style={{ display: 'block', width: '18px', height: '2px', background: '#F5F5F0' }} />
-              <span style={{ display: 'block', width: '18px', height: '2px', background: menuOpen ? 'transparent' : '#F5F5F0', transition: 'all 0.2s' }} />
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* MOBILE MENU */}
       {menuOpen && (
-        <div style={{
-          position: 'fixed', inset: 0, zIndex: 90, background: '#0A0A0A',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '32px',
-        }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 150, background: S.black, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 28 }}>
+          <button onClick={closeMenu} style={{ position: 'absolute', top: 20, right: 20, background: 'none', border: 'none', color: S.text, fontSize: 28, cursor: 'pointer' }}>×</button>
           {['home', 'chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
-            <button key={id} onClick={() => scrollTo(id)} style={{
-              background: 'none', border: 'none', color: '#F5F5F0', cursor: 'pointer',
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: '36px', letterSpacing: '0.1em', textTransform: 'uppercase',
-            }}>{id.replace('-', ' ')}</button>
+            <button key={id} onClick={() => go(id)} style={{ background: 'none', border: 'none', color: S.text, cursor: 'pointer', fontFamily: S.bebas, fontSize: 36, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              {id.replace('-', ' ')}
+            </button>
           ))}
-          <a href="tel:+390461990268" style={{
-            background: '#EA580C', color: '#fff', padding: '14px 36px',
-            textDecoration: 'none', fontSize: '12px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
-          }}>CHIAMA ORA</a>
+          <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
         </div>
       )}
 
+      {/* NAVBAR */}
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent', borderBottom: scrolled ? `1px solid ${S.border}` : '1px solid transparent', padding: scrolled ? '12px 0' : '20px 0', transition: 'all 0.3s' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+          {/* LOGO */}
+          <div onClick={() => go('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ background: S.orange, padding: '5px 10px', fontFamily: S.bebas, fontSize: 20, letterSpacing: '0.05em', color: '#fff' }}>NARDIN</div>
+            <span style={{ fontFamily: S.bebas, fontSize: 15, letterSpacing: '0.2em', color: S.text }}>AUTOTRASPORTI</span>
+          </div>
+
+          {/* DESKTOP LINKS */}
+          {!mobile && (
+            <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
+              {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+                <button key={id} onClick={() => go(id)} style={{ background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', padding: 0 }}
+                  onMouseEnter={e => (e.currentTarget.style.color = S.text)}
+                  onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
+                >{id.replace('-', ' ')}</button>
+              ))}
+              <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
+            </div>
+          )}
+
+          {/* MOBILE BUTTONS */}
+          {mobile && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
+              <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+                <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
+                <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
+                <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
+              </button>
+            </div>
+          )}
+        </div>
+      </nav>
+
       {/* HERO */}
-      <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: '80px', overflow: 'hidden' }}>
+      <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: 80, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0 }}>
           <img src="images/hero.jpg" alt="Nardin Autotrasporti" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25 }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #0A0A0A 40%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0A0A0A 20%, transparent 70%)' }} />
         </div>
-
-        {/* Big year in background */}
-        <div style={{
-          position: 'absolute', right: '-2%', bottom: '5%',
-          fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(180px, 28vw, 420px)',
-          color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none', letterSpacing: '-0.02em',
-          pointerEvents: 'none',
-        }}>1980</div>
-
-        <div style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 24px', width: '100%' }}>
-          <div style={{ maxWidth: '760px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
-              <div style={{ width: '32px', height: '2px', background: '#EA580C' }} />
-              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Trento — Dal 1980</span>
+        <div style={{ position: 'absolute', right: '-2%', bottom: '5%', fontFamily: S.bebas, fontSize: 'clamp(140px, 22vw, 380px)', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>1980</div>
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: 1280, margin: '0 auto', padding: '0 40px', width: '100%' }}>
+          <div style={{ maxWidth: 700 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+              <div style={{ width: 28, height: 2, background: S.orange }} />
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Trento — Dal 1980</span>
             </div>
-            <h1 style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 'clamp(44px, 7vw, 110px)',
-              lineHeight: 0.92, letterSpacing: '0.02em', marginBottom: '28px',
-              color: '#F5F5F0',
-            }}>
+            <h1 style={{ fontFamily: S.bebas, fontSize: 'clamp(48px, 6.5vw, 100px)', lineHeight: 0.93, letterSpacing: '0.02em', marginBottom: 24, color: S.text }}>
               TRASPORTI<br />
-              <span style={{ color: '#EA580C' }}>SPECIALI</span><br />
+              <span style={{ color: S.orange }}>SPECIALI</span><br />
               E AUTOGRÙ
             </h1>
-            <p style={{ fontSize: 'clamp(15px, 1.8vw, 19px)', color: '#9CA3AF', maxWidth: '520px', lineHeight: 1.65, marginBottom: '44px' }}>
+            <p style={{ fontSize: 'clamp(14px, 1.6vw, 18px)', color: S.muted, maxWidth: 500, lineHeight: 1.65, marginBottom: 40 }}>
               Sollevamento di precisione e trasporti eccezionali in tutto il Nord Italia. Flotta proprietaria, permessi inclusi, assistenza H24.
             </p>
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-              <button onClick={() => scrollTo('contatti')} style={{
-                background: '#EA580C', color: '#fff', border: 'none',
-                padding: '16px 36px', cursor: 'pointer', fontSize: '11px',
-                fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
-                transition: 'background 0.2s',
-              }}
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <button onClick={() => go('contatti')} style={{ background: S.orange, color: '#fff', border: 'none', padding: '14px 32px', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                 onMouseEnter={e => (e.currentTarget.style.background = '#C2410C')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#EA580C')}
+                onMouseLeave={e => (e.currentTarget.style.background = S.orange)}
               >PREVENTIVO GRATUITO</button>
-              <button onClick={() => scrollTo('flotta')} style={{
-                background: 'transparent', color: '#F5F5F0',
-                border: '1px solid #2a2a2a', padding: '16px 36px', cursor: 'pointer',
-                fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
-                transition: 'border-color 0.2s',
-              }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = '#EA580C')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = '#2a2a2a')}
+              <button onClick={() => go('flotta')} style={{ background: 'transparent', color: S.text, border: `1px solid ${S.border}`, padding: '14px 32px', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = S.orange)}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = S.border)}
               >SCOPRI LA FLOTTA</button>
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div style={{ position: 'absolute', bottom: '32px', right: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '1px', height: '48px', background: 'linear-gradient(to bottom, transparent, #EA580C)' }} />
-          <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.25em', color: '#6B7280', textTransform: 'uppercase', writingMode: 'vertical-rl' }}>SCROLL</span>
-        </div>
       </section>
 
-      {/* TICKER BAR */}
-      <div style={{ background: '#EA580C', overflow: 'hidden', padding: '12px 0', borderTop: '1px solid #C2410C' }}>
-        <div id="ticker-inner" style={{ display: 'flex', gap: '0', whiteSpace: 'nowrap' }}>
-          {[...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
-            <span key={i} style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', color: '#fff', textTransform: 'uppercase', padding: '0 28px' }}>
-              {item} <span style={{ opacity: 0.5, marginLeft: '28px' }}>◆</span>
+      {/* TICKER */}
+      <div style={{ background: S.orange, overflow: 'hidden', padding: '11px 0', borderTop: '1px solid #C2410C' }}>
+        <div id="ticker">
+          {['TRASPORTI ECCEZIONALI', 'AUTOGRÙ FINO A 95 T/M', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY', 'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'SCORTA TECNICA', 'TRENTO', 'AFFIDABILITÀ TOTALE',
+            'TRASPORTI ECCEZIONALI', 'AUTOGRÙ FINO A 95 T/M', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY', 'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'SCORTA TECNICA', 'TRENTO', 'AFFIDABILITÀ TOTALE',
+            'TRASPORTI ECCEZIONALI', 'AUTOGRÙ FINO A 95 T/M', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY', 'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'SCORTA TECNICA', 'TRENTO', 'AFFIDABILITÀ TOTALE'].map((item, i) => (
+            <span key={i} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: '#fff', textTransform: 'uppercase', padding: '0 24px' }}>
+              {item} <span style={{ opacity: 0.4 }}>◆</span>
             </span>
           ))}
         </div>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
-          * { box-sizing: border-box; margin: 0; padding: 0; }
-          @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
-          [ref] { animation: ticker 25s linear infinite; }
-          .nav-links { display: flex !important; }
-          .nav-mobile { display: none !important; }
-          .nav-brand-text { display: block !important; }
-          @media (max-width: 768px) {
-            .nav-links { display: none !important; }
-            .nav-mobile { display: flex !important; }
-          }
-          @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-          .fade-in { animation: fadeInUp 0.5s ease forwards; }
-        `}</style>
       </div>
 
-      {/* Ticker animation via inline style */}
-      <style>{`
-        div[data-ticker] { animation: ticker 30s linear infinite; }
-      `}</style>
-
-      {/* STATS BAR */}
-      <div style={{ background: '#111', borderBottom: '1px solid #1C1C1C' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
-          {[
-            { num: '40+', label: 'Anni di Esperienza' },
-            { num: '95', label: 't/m Portata Massima' },
-            { num: 'H24', label: 'Pronto Intervento' },
-            { num: '16+', label: 'Mezzi in Flotta' },
-          ].map((s, i) => (
-            <div key={i} style={{
-              padding: '32px 24px', borderRight: i < 3 ? '1px solid #1C1C1C' : 'none',
-              textAlign: 'center',
-            }}>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px, 4vw, 52px)', color: '#EA580C', letterSpacing: '0.05em', lineHeight: 1 }}>{s.num}</div>
-              <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginTop: '6px' }}>{s.label}</div>
+      {/* STATS */}
+      <div style={{ background: S.dark, borderBottom: `1px solid ${S.border}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)' }}>
+          {[{ n: '40+', l: 'Anni di Esperienza' }, { n: '95', l: 't/m Portata Massima' }, { n: 'H24', l: 'Pronto Intervento' }, { n: '16+', l: 'Mezzi in Flotta' }].map((s, i) => (
+            <div key={i} style={{ padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? `1px solid ${S.border}` : 'none' }}>
+              <div style={{ fontFamily: S.bebas, fontSize: 'clamp(32px, 4vw, 48px)', color: S.orange, lineHeight: 1 }}>{s.n}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginTop: 5 }}>{s.l}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* CHI SIAMO */}
-      <section id="chi-siamo" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#0A0A0A' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }} className="chi-siamo-grid">
+      <section id="chi-siamo" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? 40 : 80, alignItems: 'center' }}>
           <div style={{ position: 'relative' }}>
             <img src="images/about.jpg" alt="Nardin Autotrasporti" style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
-            <div style={{
-              position: 'absolute', bottom: '-1px', left: '-1px', right: '-1px',
-              background: 'linear-gradient(to top, #0A0A0A 0%, transparent 40%)',
-              height: '200px',
-            }} />
-            <div style={{
-              position: 'absolute', bottom: '24px', left: '24px', right: '24px',
-              background: 'rgba(10,10,10,0.9)', border: '1px solid #1C1C1C',
-              padding: '20px 24px',
-            }}>
-              <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#F5F5F0', marginBottom: '6px' }}>
-                "La nostra forza è l'uomo dietro la macchina."
-              </p>
-              <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase' }}>
-                Walter & Ivana Nardin
-              </p>
+            <div style={{ position: 'absolute', top: -8, left: -8, width: 36, height: 36, background: S.orange }} />
+            <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20, background: 'rgba(10,10,10,0.92)', border: `1px solid ${S.border}`, padding: '18px 22px' }}>
+              <p style={{ fontFamily: S.bebas, fontSize: 18, letterSpacing: '0.05em', color: S.text, marginBottom: 5 }}>"La nostra forza è l'uomo dietro la macchina."</p>
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase' }}>Walter & Ivana Nardin</p>
             </div>
-            {/* Orange corner accent */}
-            <div style={{ position: 'absolute', top: '-8px', left: '-8px', width: '40px', height: '40px', background: '#EA580C' }} />
           </div>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-              <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>La Nostra Storia</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+              <div style={{ width: 22, height: 2, background: S.orange }} />
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>La Nostra Storia</span>
             </div>
-            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 5vw, 68px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '28px' }}>
-              DAL 1980<br />ECCELLENZA<br /><span style={{ color: '#EA580C' }}>TECNICA</span>
+            <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,5vw,64px)', lineHeight: 0.95, letterSpacing: '0.03em', color: S.text, marginBottom: 24 }}>
+              DAL 1980<br />ECCELLENZA<br /><span style={{ color: S.orange }}>TECNICA</span>
             </h2>
-            <div style={{ width: '40px', height: '3px', background: '#EA580C', marginBottom: '28px' }} />
-            <p style={{ color: '#9CA3AF', fontSize: '16px', lineHeight: 1.75, marginBottom: '20px' }}>
-              Tutto ha inizio nel <strong style={{ color: '#F5F5F0' }}>1980</strong>, quando Nardin Mario fonda l'azienda con una visione chiara: offrire servizi di trasporto caratterizzati da massima affidabilità.
+            <div style={{ width: 36, height: 3, background: S.orange, marginBottom: 24 }} />
+            <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.75, marginBottom: 16 }}>
+              Tutto ha inizio nel <strong style={{ color: S.text }}>1980</strong>, quando Nardin Mario fonda l'azienda con una visione chiara: offrire servizi di trasporto caratterizzati da massima affidabilità.
             </p>
-            <p style={{ color: '#9CA3AF', fontSize: '16px', lineHeight: 1.75, marginBottom: '40px' }}>
-              Oggi, quella passione continua con <strong style={{ color: '#F5F5F0' }}>Walter e Ivana Nardin</strong>. Siamo il punto di riferimento a Trento per sollevamenti pesanti con autogrù Effer e Hiab fino a 95 t/m.
+            <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.75, marginBottom: 36 }}>
+              Oggi, quella passione continua con <strong style={{ color: S.text }}>Walter e Ivana Nardin</strong>. Siamo il punto di riferimento a Trento per sollevamenti pesanti con autogrù Effer e Hiab fino a 95 t/m.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#1C1C1C', border: '1px solid #1C1C1C' }}>
-              {[
-                { icon: '🛡️', title: 'Assicurazione Vettoriale', sub: 'Copertura All-Risks' },
-                { icon: '🚨', title: 'H24 Emergency', sub: 'Pronto Intervento Gru' },
-                { icon: '📍', title: 'Sede a Trento', sub: 'Nord Italia' },
-                { icon: '⚙️', title: 'Scorta Tecnica', sub: 'Permessi Speciali' },
-              ].map((item, i) => (
-                <div key={i} style={{ background: '#111', padding: '20px', display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: '20px' }}>{item.icon}</span>
-                  <div>
-                    <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#F5F5F0', textTransform: 'uppercase', marginBottom: '2px' }}>{item.title}</p>
-                    <p style={{ fontSize: '11px', color: '#6B7280' }}>{item.sub}</p>
-                  </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: S.border, border: `1px solid ${S.border}` }}>
+              {[{ t: 'Assicurazione Vettoriale', s: 'Copertura All-Risks' }, { t: 'H24 Emergency', s: 'Pronto Intervento Gru' }, { t: 'Sede a Trento', s: 'Nord Italia' }, { t: 'Scorta Tecnica', s: 'Permessi Speciali' }].map((item, i) => (
+                <div key={i} style={{ background: S.dark, padding: 18 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.text, textTransform: 'uppercase', marginBottom: 2 }}>{item.t}</p>
+                  <p style={{ fontSize: 11, color: S.gray }}>{item.s}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <style>{`.chi-siamo-grid { @media (max-width: 768px) { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
       {/* SERVIZI */}
-      <section id="servizi" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C', borderBottom: '1px solid #1C1C1C' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Cosa Facciamo</span>
+      <section id="servizi" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 22, height: 2, background: S.orange }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Cosa Facciamo</span>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '60px' }}>
-            I NOSTRI<br /><span style={{ color: '#EA580C' }}>SERVIZI</span>
+          <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
+            I NOSTRI<br /><span style={{ color: S.orange }}>SERVIZI</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 2, background: S.border }}>
             {[
-              {
-                num: '01', title: 'Trasporti Eccezionali',
-                desc: 'Gestione completa per carichi fuori sagoma, permessi speciali e scorte tecniche. Operiamo in tutto il Nord Italia con la massima sicurezza stradale.',
-                tags: ['Carichi Fuori Sagoma', 'Permessi Speciali', 'Scorta Tecnica'],
-              },
-              {
-                num: '02', title: 'Sollevamento Autogrù',
-                desc: 'Autogrù Effer e Hiab fino a 95 t/m. Ideali per montaggi industriali, carpenterie metalliche e movimentazioni in spazi angusti.',
-                tags: ['Effer fino a 95 t/m', 'Montaggi Industriali', 'Spazi Ristretti'],
-              },
-              {
-                num: '03', title: 'Trasporto Gru Edili',
-                desc: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain e similari. Pianificazione logistica completa per cantieri di ogni dimensione.',
-                tags: ['Gru Potain', 'Logistica Cantiere', 'Tutto il Nord Italia'],
-              },
-              {
-                num: '04', title: 'Logistica Industriale',
-                desc: 'Movimentazione di macchinari pesanti, componenti prefabbricati e attrezzature speciali. Soluzioni su misura per ogni esigenza industriale.',
-                tags: ['Macchinari Pesanti', 'Prefabbricati', 'Su Misura'],
-              },
+              { n: '01', t: 'Trasporti Eccezionali', d: 'Gestione completa per carichi fuori sagoma, permessi speciali e scorte tecniche in tutto il Nord Italia.', tags: ['Carichi Fuori Sagoma', 'Permessi Speciali', 'Scorta Tecnica'] },
+              { n: '02', t: 'Sollevamento Autogrù', d: 'Autogrù Effer e Hiab fino a 95 t/m per montaggi industriali e movimentazioni in spazi angusti.', tags: ['Effer fino a 95 t/m', 'Montaggi Industriali'] },
+              { n: '03', t: 'Trasporto Gru Edili', d: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain. Pianificazione logistica completa.', tags: ['Gru Potain', 'Logistica Cantiere'] },
+              { n: '04', t: 'Logistica Industriale', d: 'Movimentazione di macchinari pesanti, prefabbricati e attrezzature speciali. Soluzioni su misura.', tags: ['Macchinari Pesanti', 'Su Misura'] },
             ].map((s, i) => (
-              <div key={i} style={{
-                background: '#0A0A0A', padding: 'clamp(28px, 4vw, 52px)',
-                transition: 'background 0.2s',
-                cursor: 'default',
-              }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#0f0f0f')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#0A0A0A')}
-              >
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', color: 'rgba(234,88,12,0.12)', lineHeight: 1, marginBottom: '16px', letterSpacing: '0.05em' }}>{s.num}</div>
-                <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(24px, 2.5vw, 34px)', letterSpacing: '0.04em', color: '#F5F5F0', marginBottom: '16px' }}>{s.title}</h3>
-                <p style={{ color: '#6B7280', fontSize: '15px', lineHeight: 1.7, marginBottom: '24px' }}>{s.desc}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {s.tags.map(tag => (
-                    <span key={tag} style={{ border: '1px solid #2a2a2a', padding: '4px 12px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', color: '#6B7280', textTransform: 'uppercase' }}>{tag}</span>
-                  ))}
+              <div key={i} style={{ background: S.black, padding: 'clamp(24px,4vw,48px)' }}>
+                <div style={{ fontFamily: S.bebas, fontSize: 56, color: 'rgba(234,88,12,0.1)', lineHeight: 1, marginBottom: 12 }}>{s.n}</div>
+                <h3 style={{ fontFamily: S.bebas, fontSize: 'clamp(22px,2.5vw,32px)', color: S.text, marginBottom: 12 }}>{s.t}</h3>
+                <p style={{ color: S.gray, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>{s.d}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {s.tags.map(tag => <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>)}
                 </div>
               </div>
             ))}
@@ -442,26 +291,26 @@ export default function App() {
       </section>
 
       {/* PORTFOLIO */}
-      <section id="portfolio" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Esperienza sul Campo</span>
+      <section id="portfolio" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 22, height: 2, background: S.orange }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Esperienza sul Campo</span>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '48px' }}>
-            LAVORI<br /><span style={{ color: '#EA580C' }}>RECENTI</span>
+          <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 40 }}>
+            LAVORI<br /><span style={{ color: S.orange }}>RECENTI</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,1fr)', gap: 2, background: S.border }}>
             {projects.map(p => (
               <div key={p.id} style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/10', cursor: 'pointer' }}>
-                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s', filter: 'grayscale(20%)' }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
+                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)', transition: 'transform 0.6s, filter 0.6s' }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'grayscale(20%)'; }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)' }} />
-                <div style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px' }}>
-                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>{p.cat}</span>
-                  <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '22px', letterSpacing: '0.04em', color: '#F5F5F0', lineHeight: 1.1 }}>{p.title}</h4>
+                <div style={{ position: 'absolute', bottom: 18, left: 18, right: 18 }}>
+                  <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', display: 'block', marginBottom: 5 }}>{p.cat}</span>
+                  <h4 style={{ fontFamily: S.bebas, fontSize: 20, color: S.text, lineHeight: 1.1 }}>{p.title}</h4>
                 </div>
               </div>
             ))}
@@ -470,24 +319,24 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#0A0A0A', borderTop: '1px solid #1C1C1C' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Dicono di Noi</span>
+      <section style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 22, height: 2, background: S.orange }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Dicono di Noi</span>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '48px' }}>
-            PARTNER DI<br /><span style={{ color: '#EA580C' }}>FIDUCIA</span>
+          <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 40 }}>
+            PARTNER DI<br /><span style={{ color: S.orange }}>FIDUCIA</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(4,1fr)', gap: 2, background: S.border }}>
             {testimonials.map((t, i) => (
-              <div key={i} style={{ background: '#111', padding: 'clamp(24px, 3vw, 36px)', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ color: '#EA580C', fontSize: '18px', letterSpacing: '2px', marginBottom: '20px' }}>★★★★★</div>
-                <p style={{ color: '#9CA3AF', fontSize: '14px', lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: '24px' }}>"{t.text}"</p>
-                <div style={{ borderTop: '1px solid #1C1C1C', paddingTop: '20px' }}>
-                  <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#F5F5F0', textTransform: 'uppercase', marginBottom: '2px' }}>{t.name}</p>
-                  <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '10px' }}>{t.comp}</p>
-                  <span style={{ border: '1px solid #2a2a2a', padding: '3px 10px', fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', color: '#6B7280', textTransform: 'uppercase' }}>{t.spec}</span>
+              <div key={i} style={{ background: S.black, padding: 'clamp(20px,3vw,32px)', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ color: S.orange, fontSize: 16, letterSpacing: 2, marginBottom: 16 }}>★★★★★</div>
+                <p style={{ color: S.muted, fontSize: 13, lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: 20 }}>"{t.text}"</p>
+                <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 16 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.text, textTransform: 'uppercase', marginBottom: 2 }}>{t.name}</p>
+                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase', marginBottom: 8 }}>{t.comp}</p>
+                  <span style={{ border: `1px solid ${S.border}`, padding: '3px 9px', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', color: S.gray, textTransform: 'uppercase' }}>{t.spec}</span>
                 </div>
               </div>
             ))}
@@ -496,51 +345,42 @@ export default function App() {
       </section>
 
       {/* FLOTTA */}
-      <section id="flotta" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Flotta Proprietaria</span>
+      <section id="flotta" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 22, height: 2, background: S.orange }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Flotta Proprietaria</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '24px' }}>
-            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0' }}>
-              PARCO<br /><span style={{ color: '#EA580C' }}>MEZZI</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
+            <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text }}>
+              PARCO<br /><span style={{ color: S.orange }}>MEZZI</span>
             </h2>
-            <div style={{ display: 'flex', gap: '2px', background: '#1C1C1C' }}>
+            <div style={{ display: 'flex', gap: 2, background: S.border }}>
               {categories.map(cat => (
-                <button key={cat} onClick={() => setActiveTab(cat)} style={{
-                  background: activeTab === cat ? '#EA580C' : '#0A0A0A',
-                  color: activeTab === cat ? '#fff' : '#6B7280',
-                  border: 'none', padding: '12px 24px', cursor: 'pointer',
-                  fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase',
-                  transition: 'all 0.2s',
-                }}>
+                <button key={cat} onClick={() => setTab(cat)} style={{ background: tab === cat ? S.orange : S.dark, color: tab === cat ? '#fff' : S.gray, border: 'none', padding: '10px 22px', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', transition: 'all 0.2s' }}>
                   {cat}
                 </button>
               ))}
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: '#1C1C1C' }}>
-            {filteredFleet.map(item => (
-              <div key={item.id} onClick={() => setActiveFleetItem(item.id)} style={{
-                background: '#0A0A0A', cursor: 'pointer', overflow: 'hidden',
-                transition: 'background 0.2s',
-              }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#0f0f0f')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#0A0A0A')}
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,1fr)', gap: 2, background: S.border }}>
+            {fleet.map(item => (
+              <div key={item.id} onClick={() => setModalId(item.id)} style={{ background: S.dark, cursor: 'pointer', overflow: 'hidden' }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#161616')}
+                onMouseLeave={e => (e.currentTarget.style.background = S.dark)}
               >
-                <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
-                  <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s' }}
+                <div style={{ height: 190, overflow: 'hidden', position: 'relative' }}>
+                  <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                     onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
                     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
                   />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)' }} />
                 </div>
-                <div style={{ padding: '20px' }}>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '8px' }}>{item.cap}</div>
-                  <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.04em', color: '#F5F5F0', marginBottom: '8px', lineHeight: 1.1 }}>{item.name}</h4>
-                  <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.5, marginBottom: '16px' }}>{item.desc}</p>
-                  <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase' }}>DETTAGLI →</span>
+                <div style={{ padding: 18 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{item.cap}</div>
+                  <h4 style={{ fontFamily: S.bebas, fontSize: 18, color: S.text, marginBottom: 6, lineHeight: 1.1 }}>{item.name}</h4>
+                  <p style={{ fontSize: 12, color: S.gray, lineHeight: 1.5, marginBottom: 12 }}>{item.desc}</p>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase' }}>DETTAGLI →</span>
                 </div>
               </div>
             ))}
@@ -549,87 +389,82 @@ export default function App() {
       </section>
 
       {/* CONTATTI */}
-      <section id="contatti" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Contattaci</span>
+      <section id="contatti" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 22, height: 2, background: S.orange }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Contattaci</span>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '60px' }}>
-            PREVENTIVO<br /><span style={{ color: '#EA580C' }}>GRATUITO</span>
+          <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
+            PREVENTIVO<br /><span style={{ color: S.orange }}>GRATUITO</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '2px', background: '#1C1C1C', alignItems: 'stretch' }}>
-            {/* Info panel */}
-            <div style={{ background: '#0A0A0A', padding: 'clamp(32px, 4vw, 60px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1.6fr', gap: 2, background: S.border }}>
+            <div style={{ background: S.black, padding: 'clamp(28px,4vw,52px)', display: 'flex', flexDirection: 'column', gap: 28 }}>
               <div>
-                <div style={{ marginBottom: '40px' }}>
-                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Telefono Diretto</p>
-                  <a href="tel:+390461990268" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '0.03em', color: '#F5F5F0', textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#EA580C')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#F5F5F0')}
-                  >+39 0461 990268</a>
-                </div>
-                <div style={{ marginBottom: '40px' }}>
-                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>WhatsApp</p>
-                  <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(22px, 2.5vw, 32px)', letterSpacing: '0.03em', color: '#F5F5F0', textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#22C55E')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#F5F5F0')}
-                  >+39 348 4420285</a>
-                </div>
-                <div style={{ marginBottom: '40px' }}>
-                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Sede</p>
-                  <p style={{ color: '#F5F5F0', fontSize: '16px', lineHeight: 1.5 }}>Via Aeroporto, 31<br />38121 Trento (TN)</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Email</p>
-                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: '#EA580C', fontSize: '15px', textDecoration: 'none' }}>info@nardinautotrasporti.it</a>
-                </div>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono Diretto</p>
+                <a href="tel:+390461990268" style={{ fontFamily: S.bebas, fontSize: 'clamp(24px,3vw,36px)', color: S.text, textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = S.orange)}
+                  onMouseLeave={e => (e.currentTarget.style.color = S.text)}
+                >+39 0461 990268</a>
               </div>
-              <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid #1C1C1C' }}>
-                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.25em', color: '#2a2a2a', textTransform: 'uppercase' }}>PRECISIONE • FORZA • TRENTO</p>
+              <div>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>WhatsApp</p>
+                <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ fontFamily: S.bebas, fontSize: 'clamp(20px,2.5vw,30px)', color: S.text, textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#22C55E')}
+                  onMouseLeave={e => (e.currentTarget.style.color = S.text)}
+                >+39 348 4420285</a>
+              </div>
+              <div>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Sede</p>
+                <p style={{ color: S.text, fontSize: 15, lineHeight: 1.5 }}>Via Aeroporto, 31<br />38121 Trento (TN)</p>
+              </div>
+              <div>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email</p>
+                <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, fontSize: 14, textDecoration: 'none' }}>info@nardinautotrasporti.it</a>
+              </div>
+              <div style={{ marginTop: 'auto', paddingTop: 24, borderTop: `1px solid ${S.border}` }}>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.25em', color: S.border, textTransform: 'uppercase' }}>PRECISIONE • FORZA • TRENTO</p>
               </div>
             </div>
-            {/* Form */}
-            <div style={{ background: '#111', padding: 'clamp(32px, 4vw, 60px)' }}>
+            <div style={{ background: S.dark, padding: 'clamp(28px,4vw,52px)' }}>
               {state.succeeded ? (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: '16px' }}>
-                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '80px', color: '#EA580C' }}>✓</div>
-                  <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '36px', letterSpacing: '0.05em', color: '#F5F5F0' }}>MESSAGGIO INVIATO</h3>
-                  <p style={{ color: '#6B7280', fontSize: '15px' }}>Ti ricontatteremo al più presto.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: 14 }}>
+                  <div style={{ fontFamily: S.bebas, fontSize: 72, color: S.orange }}>✓</div>
+                  <h3 style={{ fontFamily: S.bebas, fontSize: 32, color: S.text }}>MESSAGGIO INVIATO</h3>
+                  <p style={{ color: S.gray, fontSize: 14 }}>Ti ricontatteremo al più presto.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 12 }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Ragione Sociale *</label>
-                      <input name="name" type="text" required style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none' }}
-                        onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
-                        onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
+                      <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ragione Sociale *</label>
+                      <input name="name" type="text" required style={{ width: '100%', background: S.black, border: `1px solid ${S.border}`, color: S.text, padding: '12px 14px', fontSize: 14, outline: 'none', fontFamily: S.inter }}
+                        onFocus={e => (e.currentTarget.style.borderColor = S.orange)}
+                        onBlur={e => (e.currentTarget.style.borderColor = S.border)}
                       />
-                      <ValidationError prefix="Name" field="name" errors={state.errors} style={{ color: '#EF4444', fontSize: '11px', marginTop: '4px' }} />
+                      <ValidationError prefix="Name" field="name" errors={state.errors} style={{ color: '#EF4444', fontSize: 11, marginTop: 3 }} />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Telefono *</label>
-                      <input name="phone" type="tel" required style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none' }}
-                        onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
-                        onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
-                        placeholder="+39 ..."
+                      <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono *</label>
+                      <input name="phone" type="tel" required placeholder="+39 ..." style={{ width: '100%', background: S.black, border: `1px solid ${S.border}`, color: S.text, padding: '12px 14px', fontSize: 14, outline: 'none', fontFamily: S.inter }}
+                        onFocus={e => (e.currentTarget.style.borderColor = S.orange)}
+                        onBlur={e => (e.currentTarget.style.borderColor = S.border)}
                       />
                     </div>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Email *</label>
-                    <input name="email" type="email" required style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none' }}
-                      onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
-                      onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
+                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email *</label>
+                    <input name="email" type="email" required style={{ width: '100%', background: S.black, border: `1px solid ${S.border}`, color: S.text, padding: '12px 14px', fontSize: 14, outline: 'none', fontFamily: S.inter }}
+                      onFocus={e => (e.currentTarget.style.borderColor = S.orange)}
+                      onBlur={e => (e.currentTarget.style.borderColor = S.border)}
                     />
-                    <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: '11px', marginTop: '4px' }} />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: 11, marginTop: 3 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Servizio Richiesto</label>
-                    <select name="service" style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none', cursor: 'pointer' }}
-                      onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
-                      onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
+                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Servizio Richiesto</label>
+                    <select name="service" style={{ width: '100%', background: S.black, border: `1px solid ${S.border}`, color: S.text, padding: '12px 14px', fontSize: 14, outline: 'none', cursor: 'pointer', fontFamily: S.inter }}
+                      onFocus={e => (e.currentTarget.style.borderColor = S.orange)}
+                      onBlur={e => (e.currentTarget.style.borderColor = S.border)}
                     >
                       <option>Trasporto Eccezionale</option>
                       <option>Autogrù / Sollevamento</option>
@@ -638,21 +473,16 @@ export default function App() {
                     </select>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Dettagli Lavoro</label>
-                    <textarea name="message" rows={4} placeholder="Pesi, dimensioni, località, tempistiche..." style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }}
-                      onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
-                      onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
+                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Dettagli Lavoro</label>
+                    <textarea name="message" rows={4} placeholder="Pesi, dimensioni, località, tempistiche..." style={{ width: '100%', background: S.black, border: `1px solid ${S.border}`, color: S.text, padding: '12px 14px', fontSize: 14, outline: 'none', resize: 'vertical', fontFamily: S.inter }}
+                      onFocus={e => (e.currentTarget.style.borderColor = S.orange)}
+                      onBlur={e => (e.currentTarget.style.borderColor = S.border)}
                     />
-                    <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: '11px', marginTop: '4px' }} />
+                    <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: 11, marginTop: 3 }} />
                   </div>
-                  <button type="submit" disabled={state.submitting} style={{
-                    background: '#EA580C', color: '#fff', border: 'none', padding: '18px',
-                    cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1,
-                    fontSize: '11px', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase',
-                    transition: 'background 0.2s',
-                  }}
+                  <button type="submit" disabled={state.submitting} style={{ background: S.orange, color: '#fff', border: 'none', padding: 16, cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1, fontSize: 11, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}
                     onMouseEnter={e => { if (!state.submitting) e.currentTarget.style.background = '#C2410C'; }}
-                    onMouseLeave={e => { if (!state.submitting) e.currentTarget.style.background = '#EA580C'; }}
+                    onMouseLeave={e => { if (!state.submitting) e.currentTarget.style.background = S.orange; }}
                   >
                     {state.submitting ? 'INVIO IN CORSO...' : 'INVIA RICHIESTA'}
                   </button>
@@ -664,63 +494,51 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: '#0A0A0A', borderTop: '1px solid #1C1C1C', padding: 'clamp(40px, 6vw, 80px) 0 40px' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '48px', flexWrap: 'wrap', gap: '32px' }}>
+      <footer style={{ background: S.black, borderTop: `1px solid ${S.border}`, padding: 'clamp(36px,6vw,72px) 0 32px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 28 }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                <div style={{ background: '#EA580C', padding: '6px 10px', fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#fff' }}>NARDIN</div>
-                <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0' }}>AUTOTRASPORTI</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                <div style={{ background: S.orange, padding: '5px 9px', fontFamily: S.bebas, fontSize: 18, color: '#fff' }}>NARDIN</div>
+                <span style={{ fontFamily: S.bebas, fontSize: 14, letterSpacing: '0.2em', color: S.text }}>AUTOTRASPORTI</span>
               </div>
-              <p style={{ color: '#6B7280', fontSize: '13px', maxWidth: '300px', lineHeight: 1.6 }}>Trasporti speciali e sollevamento di precisione a Trento dal 1980.</p>
+              <p style={{ color: S.gray, fontSize: 12, maxWidth: 280, lineHeight: 1.6 }}>Trasporti speciali e sollevamento di precisione a Trento dal 1980.</p>
             </div>
-            <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
               <div>
-                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '16px' }}>Navigazione</p>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Navigazione</p>
                 {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
-                  <button key={id} onClick={() => scrollTo(id)} style={{
-                    display: 'block', background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer',
-                    fontSize: '13px', textTransform: 'capitalize', padding: '4px 0', letterSpacing: '0.05em', textAlign: 'left',
-                    transition: 'color 0.2s',
-                  }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#F5F5F0')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
+                  <button key={id} onClick={() => go(id)} style={{ display: 'block', background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 12, textTransform: 'capitalize', padding: '3px 0', textAlign: 'left' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = S.text)}
+                    onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
                   >{id.replace('-', ' ')}</button>
                 ))}
               </div>
               <div>
-                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '16px' }}>Contatti</p>
-                <p style={{ color: '#6B7280', fontSize: '13px', lineHeight: 1.8 }}>
+                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Contatti</p>
+                <p style={{ color: S.gray, fontSize: 12, lineHeight: 1.8 }}>
                   Via Aeroporto, 31<br />38121 Trento (TN)<br />
-                  <a href="tel:+390461990268" style={{ color: '#6B7280', textDecoration: 'none' }}>+39 0461 990268</a><br />
-                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: '#EA580C', textDecoration: 'none', fontSize: '12px' }}>info@nardinautotrasporti.it</a>
+                  <a href="tel:+390461990268" style={{ color: S.gray, textDecoration: 'none' }}>+39 0461 990268</a><br />
+                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, textDecoration: 'none', fontSize: 11 }}>info@nardinautotrasporti.it</a>
                 </p>
               </div>
             </div>
           </div>
-          <div style={{ borderTop: '1px solid #1C1C1C', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-            <p style={{ fontSize: '11px', color: '#374151', lineHeight: 1.7 }}>
-              NARDIN AUTOTRASPORTI s.n.c. di Nardin Walter e Ivana | P. IVA 01762870226 | Albo TN/2053832Z
-            </p>
-            <div style={{ display: 'flex', gap: '20px' }}>
-              <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#374151', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#F5F5F0')}
+          <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
+            <p style={{ fontSize: 10, color: '#374151', lineHeight: 1.6 }}>NARDIN AUTOTRASPORTI s.n.c. | P. IVA 01762870226 | Albo TN/2053832Z</p>
+            <div style={{ display: 'flex', gap: 16 }}>
+              <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, fontWeight: 700, color: '#374151', textDecoration: 'none', textTransform: 'uppercase' }}
+                onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                 onMouseLeave={e => (e.currentTarget.style.color = '#374151')}
               >Instagram</a>
-              <span style={{ fontSize: '11px', color: '#1C1C1C' }}>© 2026</span>
+              <span style={{ fontSize: 10, color: S.border }}>© 2026</span>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* WhatsApp FAB */}
-      <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{
-        position: 'fixed', bottom: '24px', right: '24px', zIndex: 110,
-        background: '#16A34A', color: '#fff', width: '52px', height: '52px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        textDecoration: 'none', transition: 'background 0.2s, transform 0.2s',
-        border: '2px solid rgba(255,255,255,0.15)',
-      }}
+      {/* WHATSAPP FAB */}
+      <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 110, background: '#16A34A', color: '#fff', width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', border: '2px solid rgba(255,255,255,0.15)' }}
         onMouseEnter={e => { e.currentTarget.style.background = '#15803D'; e.currentTarget.style.transform = 'scale(1.1)'; }}
         onMouseLeave={e => { e.currentTarget.style.background = '#16A34A'; e.currentTarget.style.transform = 'scale(1)'; }}
       >
@@ -729,15 +547,6 @@ export default function App() {
         </svg>
       </a>
 
-      {/* Ticker animation */}
-      <style>{`
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
-        #ticker-inner { animation: ticker 35s linear infinite; display: flex; }
-        #ticker-inner:hover { animation-play-state: paused; }
-        @media (max-width: 900px) {
-          .chi-siamo-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </div>
   );
 }
