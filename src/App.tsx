@@ -144,7 +144,7 @@ export default function App() {
               background: '#EA580C', padding: '6px 10px',
               fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#fff',
             }}>NARDIN</div>
-            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0', display: 'none' }} className="nav-brand-text">AUTOTRASPORTI</span>
+            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0', display: 'block' }} className="nav-brand-text">AUTOTRASPORTI</span>
           </div>
 
           <div style={{ display: 'flex', gap: '36px', alignItems: 'center' }} className="nav-links">
@@ -222,7 +222,7 @@ export default function App() {
           pointerEvents: 'none',
         }}>1980</div>
 
-        <div style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 24px', width: '100%' }}>
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 48px', width: '100%' }}>
           <div style={{ maxWidth: '760px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
               <div style={{ width: '32px', height: '2px', background: '#EA580C' }} />
