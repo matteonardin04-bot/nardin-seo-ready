@@ -138,7 +138,7 @@ export default function App() {
         borderBottom: isScrolled ? '1px solid #1C1C1C' : '1px solid transparent',
         padding: isScrolled ? '14px 0' : '22px 0',
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: "0 32px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div onClick={() => scrollTo('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               background: '#EA580C', padding: '6px 10px',
@@ -230,7 +230,7 @@ export default function App() {
             </div>
             <h1 style={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 'clamp(56px, 10vw, 140px)',
+              fontSize: 'clamp(44px, 7vw, 110px)',
               lineHeight: 0.92, letterSpacing: '0.02em', marginBottom: '28px',
               color: '#F5F5F0',
             }}>
@@ -438,59 +438,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* FLOTTA */}
-      <section id="flotta" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#0A0A0A' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Flotta Proprietaria</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '24px' }}>
-            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0' }}>
-              PARCO<br /><span style={{ color: '#EA580C' }}>MEZZI</span>
-            </h2>
-            <div style={{ display: 'flex', gap: '2px', background: '#1C1C1C' }}>
-              {categories.map(cat => (
-                <button key={cat} onClick={() => setActiveTab(cat)} style={{
-                  background: activeTab === cat ? '#EA580C' : '#111',
-                  color: activeTab === cat ? '#fff' : '#6B7280',
-                  border: 'none', padding: '12px 24px', cursor: 'pointer',
-                  fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase',
-                  transition: 'all 0.2s',
-                }}>
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: '#1C1C1C' }}>
-            {filteredFleet.map(item => (
-              <div key={item.id} onClick={() => setActiveFleetItem(item.id)} style={{
-                background: '#111', cursor: 'pointer', overflow: 'hidden',
-                transition: 'background 0.2s',
-              }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#161616')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#111')}
-              >
-                <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
-                  <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s' }}
-                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)' }} />
-                </div>
-                <div style={{ padding: '20px' }}>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '8px' }}>{item.cap}</div>
-                  <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.04em', color: '#F5F5F0', marginBottom: '8px', lineHeight: 1.1 }}>{item.name}</h4>
-                  <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.5, marginBottom: '16px' }}>{item.desc}</p>
-                  <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase' }}>DETTAGLI →</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* PORTFOLIO */}
       <section id="portfolio" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
@@ -538,6 +485,59 @@ export default function App() {
                   <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#F5F5F0', textTransform: 'uppercase', marginBottom: '2px' }}>{t.name}</p>
                   <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '10px' }}>{t.comp}</p>
                   <span style={{ border: '1px solid #2a2a2a', padding: '3px 10px', fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', color: '#6B7280', textTransform: 'uppercase' }}>{t.spec}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FLOTTA */}
+      <section id="flotta" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Flotta Proprietaria</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '24px' }}>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0' }}>
+              PARCO<br /><span style={{ color: '#EA580C' }}>MEZZI</span>
+            </h2>
+            <div style={{ display: 'flex', gap: '2px', background: '#1C1C1C' }}>
+              {categories.map(cat => (
+                <button key={cat} onClick={() => setActiveTab(cat)} style={{
+                  background: activeTab === cat ? '#EA580C' : '#0A0A0A',
+                  color: activeTab === cat ? '#fff' : '#6B7280',
+                  border: 'none', padding: '12px 24px', cursor: 'pointer',
+                  fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase',
+                  transition: 'all 0.2s',
+                }}>
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+            {filteredFleet.map(item => (
+              <div key={item.id} onClick={() => setActiveFleetItem(item.id)} style={{
+                background: '#0A0A0A', cursor: 'pointer', overflow: 'hidden',
+                transition: 'background 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#0f0f0f')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#0A0A0A')}
+              >
+                <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
+                  <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s' }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)' }} />
+                </div>
+                <div style={{ padding: '20px' }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '8px' }}>{item.cap}</div>
+                  <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.04em', color: '#F5F5F0', marginBottom: '8px', lineHeight: 1.1 }}>{item.name}</h4>
+                  <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.5, marginBottom: '16px' }}>{item.desc}</p>
+                  <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase' }}>DETTAGLI →</span>
                 </div>
               </div>
             ))}
