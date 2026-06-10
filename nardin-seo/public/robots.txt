@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nardinautotrasporti.it/sitemap.xml

@@ -3,403 +3,487 @@ import { useForm, ValidationError } from '@formspree/react';
 
 // --- DATA ---
 const fleetData = [
-  { id: 'f1', name: 'MOTRICE SCANIA R770 4 ASSI + EFFER 955', cat: 'Gru', cap: '95 t/m - 770 CV', img: `${import.meta.env.BASE_URL}images/flotta-1.jpg`, desc: 'Top di gamma per sollevamenti industriali pesanti. Equipaggiato con Jib per sbracci estremi.' },
-  { id: 'f2', name: 'MOTRICE SCANIA 4 ASSI R730 + GRU EFFER', cat: 'Gru', cap: 'V8 730 CV', img: `${import.meta.env.BASE_URL}images/flotta-2.jpg`, desc: 'Potenza pura unita alla versatilità delle gru Effer per carichi impegnativi.' },
-  { id: 'f3', name: 'Trattore Scania S520 2 assi', cat: 'Camion', cap: '520 CV V8', img: `${import.meta.env.BASE_URL}images/flotta-3.jpg`, desc: 'Motrice dedicata al traino di semirimorchi ribassati per trasporti nazionali.' },
-  { id: 'f5', name: 'Trattore Scania R560 2 assi', cat: 'Camion', cap: '560 CV V8', img: `${import.meta.env.BASE_URL}images/flotta-7.jpg`, desc: 'Potenza e versatilità per trasporti a lungo raggio e logistica pesante.' },
-  { id: 'f4_c', name: 'TRATTORE VOLVO 3 ASSI + EFFER 525', cat: 'Camion', cap: '52.5 t/m', img: `${import.meta.env.BASE_URL}images/flotta-4.jpg`, desc: 'Equilibrio perfetto tra capacità di carico e agilità di manovra.' },
-  { id: 'f6_c', name: 'TRATTORE MERCEDES 2 ASSI + EFFER 375', cat: 'Camion', cap: '37.5 t/m', img: `${import.meta.env.BASE_URL}images/flotta-8.jpg`, desc: 'Unità compatta e potente per lavori in centri urbani e spazi ristretti.' },
-  { id: 'f4', name: 'TRATTORE VOLVO 3 ASSI + EFFER 525', cat: 'Gru', cap: '52.5 t/m', img: `${import.meta.env.BASE_URL}images/flotta-4.jpg`, desc: 'Equilibrio perfetto tra capacità di carico e agilità di manovra.' },
-  { id: 'f6', name: 'TRATTORE MERCEDES 2 ASSI + EFFER 375', cat: 'Gru', cap: '37.5 t/m', img: `${import.meta.env.BASE_URL}images/flotta-8.jpg`, desc: 'Unità compatta e potente per lavori in centri urbani e spazi ristretti.' },
-  { id: 'f_soon', name: 'COMING SOON', cat: 'Gru', cap: 'Nuovo Mezzo in Arrivo', img: `${import.meta.env.BASE_URL}images/coming-soon.jpg`, desc: 'Stiamo ampliando la nostra flotta con nuovi mezzi all\'avanguardia.' },
-  { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI CON RAMPE", cat: 'Rimorchi', cap: '3 Assi - Rampe', img: `${import.meta.env.BASE_URL}images/flotta-5.jpg`, desc: "Pianale tecnico FGM a 3 assi con rampe idrauliche per il carico di mezzi d'opera." },
-  { id: 'r3', name: "PIANALE COLLO D'OCA 4 ASSI CON RAMPE", cat: 'Rimorchi', cap: '4 Assi - Carichi Pesanti', img: `${import.meta.env.BASE_URL}images/flotta-9.jpg`, desc: 'Soluzione robusta a 4 assi per il trasporto di macchinari industriali pesanti con sbalzi ridotti.' },
-  { id: 'r4', name: 'SEMIRIMORCHIO CULLA RIBASSATO 3 ASSI', cat: 'Rimorchi', cap: 'Culla Ribassata', img: `${import.meta.env.BASE_URL}images/flotta-10.jpg`, desc: 'Ideale per il trasporto di macchine agricole o operatrici con altezza elevata.' },
-  { id: 'r5', name: 'PIANALE ALLUNGABILE 3 ASSI', cat: 'Rimorchi', cap: 'Allungabile', img: `${import.meta.env.BASE_URL}images/flotta-11.jpg`, desc: 'Versatilità massima per il trasporto di travi, prefabbricati o carichi longitudinali eccezionali.' },
-  { id: 'r6', name: 'PIANALE PASSO CORTO 2 ASSI', cat: 'Rimorchi', cap: 'Agile - 2 Assi', img: `${import.meta.env.BASE_URL}images/flotta-12.jpg`, desc: 'Compattezza e manovrabilità per carichi meno ingombranti in contesti difficili.' },
-  { id: 'r2', name: 'Rimorchio 3 Assi CON SPONDE', cat: 'Rimorchi', cap: 'Carico Variabile', img: `${import.meta.env.BASE_URL}images/flotta-6.jpg`, desc: 'Versione con sponde in alluminio per materiali sfusi e attrezzature.' },
-  { id: 'r7', name: 'SEMIRIMORCHIO CENTINATO 3 ASSI', cat: 'Rimorchi', cap: 'Centinato - 3 Assi', img: `${import.meta.env.BASE_URL}images/flotta-13.jpg`, desc: 'Semirimorchio classico con centina e teli scorrevoli per il trasporto di merci pallettizzate e carichi protetti.' }
+  { id: 'f1', name: 'SCANIA R770 + EFFER 955', cat: 'Gru', cap: '95 t/m — 770 CV', img: 'images/flotta-1.jpg', desc: 'Top di gamma per sollevamenti industriali pesanti. Equipaggiato con Jib per sbracci estremi.' },
+  { id: 'f2', name: 'SCANIA R730 + GRU EFFER', cat: 'Gru', cap: 'V8 — 730 CV', img: 'images/flotta-2.jpg', desc: 'Potenza pura unita alla versatilità delle gru Effer per carichi impegnativi.' },
+  { id: 'f4', name: 'VOLVO 3 ASSI + EFFER 525', cat: 'Gru', cap: '52.5 t/m', img: 'images/flotta-4.jpg', desc: 'Equilibrio perfetto tra capacità di carico e agilità di manovra.' },
+  { id: 'f6', name: 'MERCEDES 2 ASSI + EFFER 375', cat: 'Gru', cap: '37.5 t/m', img: 'images/flotta-8.jpg', desc: 'Unità compatta per lavori in centri urbani e spazi ristretti.' },
+  { id: 'f3', name: 'SCANIA S520 2 ASSI', cat: 'Camion', cap: '520 CV V8', img: 'images/flotta-3.jpg', desc: 'Motrice dedicata al traino di semirimorchi ribassati per trasporti nazionali.' },
+  { id: 'f5', name: 'SCANIA R560 2 ASSI', cat: 'Camion', cap: '560 CV V8', img: 'images/flotta-7.jpg', desc: 'Potenza e versatilità per trasporti a lungo raggio e logistica pesante.' },
+  { id: 'f4c', name: 'VOLVO 3 ASSI + EFFER 525', cat: 'Camion', cap: '52.5 t/m', img: 'images/flotta-4.jpg', desc: 'Equilibrio perfetto tra capacità di carico e agilità di manovra.' },
+  { id: 'f6c', name: 'MERCEDES 2 ASSI + EFFER 375', cat: 'Camion', cap: '37.5 t/m', img: 'images/flotta-8.jpg', desc: 'Unità compatta e potente per lavori in centri urbani e spazi ristretti.' },
+  { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI", cat: 'Rimorchi', cap: '3 Assi — Rampe', img: 'images/flotta-5.jpg', desc: "Pianale tecnico FGM a 3 assi con rampe idrauliche per il carico di mezzi d'opera." },
+  { id: 'r3', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi Pesanti', img: 'images/flotta-9.jpg', desc: 'Soluzione robusta a 4 assi per il trasporto di macchinari industriali pesanti.' },
+  { id: 'r4', name: 'CULLA RIBASSATO 3 ASSI', cat: 'Rimorchi', cap: 'Altezza ridotta', img: 'images/flotta-10.jpg', desc: 'Ideale per macchine agricole o operatrici con altezza elevata.' },
+  { id: 'r5', name: 'PIANALE ALLUNGABILE 3 ASSI', cat: 'Rimorchi', cap: 'Lunghezza variabile', img: 'images/flotta-11.jpg', desc: 'Per travi, prefabbricati e carichi longitudinali eccezionali.' },
+  { id: 'r6', name: 'PIANALE PASSO CORTO 2 ASSI', cat: 'Rimorchi', cap: 'Agile — 2 Assi', img: 'images/flotta-12.jpg', desc: 'Compattezza e manovrabilità per carichi meno ingombranti.' },
+  { id: 'r7', name: 'CENTINATO 3 ASSI', cat: 'Rimorchi', cap: 'Merci pallettizzate', img: 'images/flotta-13.jpg', desc: 'Teli scorrevoli per il trasporto di merci pallettizzate e carichi protetti.' },
 ];
 
-const categories = [
-  { id: 'Camion', title: 'Camion e Trattori', icon: '🚛', desc: 'Motrici Scania e Volvo per carichi pesanti.' },
-  { id: 'Gru', title: 'Autogrù Effer/Hiab', icon: '🏗️', desc: 'Sollevamenti fino a 95 t/m con precisione millimetrica.' },
-  { id: 'Rimorchi', title: 'Rimorchi e Semirimorchi', icon: '🛣️', desc: 'Unità a 3 assi con rampe e sponde per ogni esigenza.' }
-];
-
-const projects = [
-  { id: 'p1', title: 'Sollevamento Strutture Cemento', cat: 'Cantieristica', img: `${import.meta.env.BASE_URL}images/progetto-1.jpg` },
-  { id: 'p2', title: 'Logistica Vigneti Eroici', cat: 'Agricoltura', img: `${import.meta.env.BASE_URL}images/progetto-2.jpg` },
-  { id: 'p3', title: 'Movimentazione Gru Potain', cat: 'Trasporti Speciali', img: `${import.meta.env.BASE_URL}images/progetto-3.jpg` }
-];
+const categories = ['Gru', 'Camion', 'Rimorchi'];
 
 const testimonials = [
   { name: 'Andrea M.', comp: 'Mak Costruzioni', text: 'Collaboriamo con Nardin per i sollevamenti più delicati. Ineguagliabili.', spec: 'Sollevamenti Speciali' },
-  { name: 'Giuseppe B.', comp: 'E-Mac (GB Manci)', text: 'Esperti assoluti nel trasporto di gru a torre. Logistica impeccabile.', spec: 'Trasporto Gru' },
+  { name: 'Giuseppe B.', comp: 'E-Mac / GB Manci', text: 'Esperti assoluti nel trasporto di gru a torre. Logistica impeccabile.', spec: 'Trasporto Gru' },
   { name: 'Luca T.', comp: 'Tecnoedil', text: 'Professionalità e mezzi sempre al top. Un riferimento a Trento.', spec: 'Trasporto Gru' },
-  { name: 'Hans G.', comp: 'Geobau', text: 'Unica scelta possibile per contesti alpini difficili.', spec: 'Trasporto Sonde' }
+  { name: 'Hans G.', comp: 'Geobau', text: 'Unica scelta possibile per contesti alpini difficili.', spec: 'Trasporto Sonde' },
+];
+
+const projects = [
+  { id: 'p1', title: 'Sollevamento Strutture Cemento', cat: 'Cantieristica', img: 'images/progetto-1.jpg' },
+  { id: 'p2', title: 'Logistica Vigneti Eroici', cat: 'Agricoltura', img: 'images/progetto-2.jpg' },
+  { id: 'p3', title: 'Movimentazione Gru Potain', cat: 'Trasporti Speciali', img: 'images/progetto-3.jpg' },
+];
+
+const tickerItems = [
+  'TRASPORTI ECCEZIONALI', 'AUTOGRÙ FINO A 95 T/M', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY',
+  'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'SCORTA TECNICA', 'TRENTO', 'AFFIDABILITÀ TOTALE',
 ];
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSubpage, setActiveSubpage] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('Gru');
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeFleetItem, setActiveFleetItem] = useState<string | null>(null);
+  
   const [state, handleSubmit] = useForm('xnjowlpd');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      if (isMenuOpen) {
-        setIsMenuOpen(false);
-        document.body.style.overflow = 'unset';
-      }
-    }
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => {
-      const next = !prev;
-      document.body.style.overflow = next ? 'hidden' : 'unset';
-      return next;
-    });
-  };
-
-  const openSubpage = (catId: string) => {
-    setActiveSubpage(catId);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeSubpage = () => {
-    setActiveSubpage(null);
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
     document.body.style.overflow = 'unset';
   };
 
-  return (
-    <div className="bg-white text-gray-900 overflow-x-hidden antialiased font-sans">
-      {/* SUBPAGE OVERLAY */}
-      {activeSubpage && (
-        <div id="subpage-overlay" className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in duration-500">
-          <nav className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-gray-100 z-10 px-4 py-6">
-            <div className="container mx-auto flex justify-between items-center">
-              <button
-                onClick={closeSubpage}
-                className="flex items-center space-x-2 text-gray-900 font-black uppercase italic text-xs bg-transparent border-none cursor-pointer hover:text-orange-600 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" />
-                </svg>
-                <span>Chiudi</span>
-              </button>
-              <div className="text-center">
-                <h2 id="subpage-title" className="text-xl font-black uppercase italic text-orange-600 leading-none tracking-tight">
-                  {activeSubpage}
-                </h2>
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-1 italic">Nardin Fleet Detail</p>
-              </div>
-              <div className="w-10" />
-            </div>
-          </nav>
+  const toggleMenu = () => {
+    setMenuOpen(p => {
+      document.body.style.overflow = !p ? 'hidden' : 'unset';
+      return !p;
+    });
+  };
 
-          <div className="container mx-auto px-4 py-16">
-            <div id="subpage-content" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {fleetData
-                .filter((m) => m.cat === activeSubpage)
-                .map((item) => (
-                  <div
-                    key={item.id}
-                    className="bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-xl flex flex-col group hover:shadow-2xl transition-all duration-500"
-                  >
-                    <div className="h-72 overflow-hidden relative">
-                      <img
-                        src={item.img}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                        alt={item.name}
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute top-6 left-6 bg-orange-600 text-white px-4 py-1 rounded-full text-[9px] font-black uppercase italic tracking-widest">
-                        {item.cat}
-                      </div>
-                    </div>
-                    <div className="p-10 flex-grow">
-                      <h4 className="text-2xl font-black uppercase italic mb-4 group-hover:text-orange-600 transition-colors leading-tight tracking-tight">
-                        {item.name}
-                      </h4>
-                      <div className="bg-gray-50 px-5 py-3 rounded-xl border border-gray-100 inline-block mb-8">
-                        <span className="text-gray-900 font-black text-xs uppercase tracking-tight">{item.cap}</span>
-                      </div>
-                      <p className="text-gray-500 text-sm mb-8 italic leading-relaxed">{item.desc}</p>
-                      <button
-                        onClick={() => {
-                          closeSubpage();
-                          setTimeout(() => scrollToSection('contatti'), 500);
-                        }}
-                        className="w-full py-5 bg-gray-900 text-white font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl hover:bg-orange-600 border-none cursor-pointer transition-all shadow-lg active:scale-95"
-                      >
-                        Richiedi Preventivo
-                      </button>
-                    </div>
-                  </div>
-                ))}
+  const filteredFleet = fleetData.filter(m => m.cat === activeTab);
+  const activeItem = fleetData.find(m => m.id === activeFleetItem);
+
+  return (
+    <div style={{ fontFamily: "'Inter', sans-serif", background: '#0A0A0A', color: '#F5F5F0', overflowX: 'hidden' }}>
+
+      {/* FLEET MODAL */}
+      {activeItem && (
+        <div
+          onClick={() => setActiveFleetItem(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 200,
+            background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#111', border: '1px solid #2a2a2a', borderRadius: '4px',
+              maxWidth: '680px', width: '100%', overflow: 'hidden',
+            }}
+          >
+            <div style={{ height: '300px', overflow: 'hidden', position: 'relative' }}>
+              <img src={activeItem.img} alt={activeItem.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #111 0%, transparent 60%)' }} />
+              <button
+                onClick={() => setActiveFleetItem(null)}
+                style={{
+                  position: 'absolute', top: '16px', right: '16px',
+                  background: 'rgba(0,0,0,0.6)', border: '1px solid #333',
+                  color: '#fff', width: '36px', height: '36px', borderRadius: '2px',
+                  cursor: 'pointer', fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}
+              >×</button>
+              <div style={{ position: 'absolute', bottom: '16px', left: '20px' }}>
+                <span style={{ background: '#EA580C', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>
+                  {activeItem.cat}
+                </span>
+              </div>
+            </div>
+            <div style={{ padding: '28px 32px 32px' }}>
+              <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '32px', letterSpacing: '0.05em', color: '#F5F5F0', marginBottom: '8px' }}>
+                {activeItem.name}
+              </h3>
+              <div style={{ display: 'inline-block', background: '#1C1C1C', border: '1px solid #2a2a2a', padding: '4px 14px', marginBottom: '16px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#EA580C', textTransform: 'uppercase' }}>{activeItem.cap}</span>
+              </div>
+              <p style={{ color: '#9CA3AF', fontSize: '15px', lineHeight: '1.6', marginBottom: '24px' }}>{activeItem.desc}</p>
+              <button
+                onClick={() => { setActiveFleetItem(null); scrollTo('contatti'); }}
+                style={{
+                  width: '100%', background: '#EA580C', color: '#fff', border: 'none',
+                  padding: '14px', cursor: 'pointer', fontWeight: 700, fontSize: '11px',
+                  letterSpacing: '0.2em', textTransform: 'uppercase',
+                }}
+              >
+                RICHIEDI PREVENTIVO
+              </button>
             </div>
           </div>
         </div>
       )}
 
       {/* NAVBAR */}
-      <nav
-        id="main-navbar"
-        className={`fixed w-full z-40 transition-all duration-500 ${
-          isScrolled ? 'bg-white shadow-xl py-3' : 'bg-transparent py-6'
-        }`}
-      >
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2 cursor-pointer group" onClick={() => scrollToSection('home')}>
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl font-oswald text-xl font-black italic tracking-tighter group-hover:scale-105 transition-transform">
-              NARDIN
-            </div>
-            <span
-              id="logo-text"
-              className={`font-oswald text-lg font-bold tracking-[0.2em] hidden sm:block ${
-                isScrolled ? 'text-gray-900' : 'text-white'
-              }`}
-            >
-              AUTOTRASPORTI
-            </span>
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        transition: 'all 0.3s',
+        background: isScrolled ? 'rgba(10,10,10,0.97)' : 'transparent',
+        borderBottom: isScrolled ? '1px solid #1C1C1C' : '1px solid transparent',
+        padding: isScrolled ? '14px 0' : '22px 0',
+      }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div onClick={() => scrollTo('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              background: '#EA580C', padding: '6px 10px',
+              fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#fff',
+            }}>NARDIN</div>
+            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0', display: 'none' }} className="nav-brand-text">AUTOTRASPORTI</span>
           </div>
 
-          <div className="hidden md:flex space-x-8">
-            {['home', 'chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map((id) => (
-              <button
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className={`nav-link text-[10px] font-black uppercase tracking-[0.2em] hover:text-orange-600 transition-colors bg-transparent border-none cursor-pointer outline-none italic ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
-                }`}
-              >
-                {id.replace('-', ' ')}
-              </button>
+          <div style={{ display: 'flex', gap: '36px', alignItems: 'center' }} className="nav-links">
+            {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+              <button key={id} onClick={() => scrollTo(id)} style={{
+                background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer',
+                fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
+                transition: 'color 0.2s', padding: 0,
+              }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#F5F5F0')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#9CA3AF')}
+              >{id.replace('-', ' ')}</button>
             ))}
+            <a href="tel:+390461990268" style={{
+              background: '#EA580C', color: '#fff', padding: '10px 20px',
+              textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
+              textTransform: 'uppercase', transition: 'background 0.2s',
+            }}
+              onMouseEnter={e => (e.currentTarget.style.background = '#C2410C')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#EA580C')}
+            >CHIAMA ORA</a>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <a
-              href="tel:+390461990268"
-              className="block bg-orange-600 text-white px-5 sm:px-8 py-3 sm:py-3.5 rounded-2xl font-black text-[10px] hover:bg-orange-700 transition-all no-underline tracking-[0.2em] shadow-xl italic active:scale-95"
-            >
-              CHIAMA ORA
-            </a>
-
-            <button
-              id="hamburger-btn"
-              onClick={toggleMenu}
-              className={`block md:hidden text-2xl z-50 bg-transparent border-none cursor-pointer outline-none transition-colors ${
-                isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'
-              }`}
-            >
-              {isMenuOpen ? '✕' : '☰'}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} className="nav-mobile">
+            <a href="tel:+390461990268" style={{
+              background: '#EA580C', color: '#fff', padding: '9px 14px',
+              textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>CHIAMA</a>
+            <button onClick={toggleMenu} style={{
+              background: 'none', border: '1px solid #2a2a2a', color: '#F5F5F0',
+              width: '38px', height: '38px', cursor: 'pointer', display: 'flex',
+              flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '5px', padding: '8px',
+            }}>
+              <span style={{ display: 'block', width: '18px', height: '2px', background: menuOpen ? 'transparent' : '#F5F5F0', transition: 'all 0.2s' }} />
+              <span style={{ display: 'block', width: '18px', height: '2px', background: '#F5F5F0' }} />
+              <span style={{ display: 'block', width: '18px', height: '2px', background: menuOpen ? 'transparent' : '#F5F5F0', transition: 'all 0.2s' }} />
             </button>
           </div>
-        </div>
-
-        <div
-          id="mobile-menu-overlay"
-          className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 animate-in fade-in slide-in-from-top duration-300 ${
-            isMenuOpen ? 'flex' : 'hidden'
-          }`}
-        >
-          {['home', 'chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map((id) => (
-            <button
-              key={id}
-              onClick={() => scrollToSection(id)}
-              className="text-2xl font-black uppercase tracking-[0.2em] text-gray-900 hover:text-orange-600 transition-colors bg-transparent border-none cursor-pointer italic"
-            >
-              {id.replace('-', ' ')}
-            </button>
-          ))}
-          <a
-            href="tel:+390461990268"
-            className="bg-orange-600 text-white px-10 py-5 rounded-2xl font-black text-xs hover:bg-orange-700 transition-all no-underline tracking-[0.2em] shadow-xl italic"
-          >
-            CHIAMA ORA
-          </a>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section id="home" className="relative h-screen lg:h-auto lg:min-h-[120vh] lg:py-48 flex items-center justify-center bg-gray-950 text-center">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={`${import.meta.env.BASE_URL}images/hero.jpg`}
-            className="w-full h-full object-cover opacity-20 grayscale"
-            alt="Hero"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-950/50 to-gray-950" />
+      {/* MOBILE MENU */}
+      {menuOpen && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 90, background: '#0A0A0A',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '32px',
+        }}>
+          {['home', 'chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+            <button key={id} onClick={() => scrollTo(id)} style={{
+              background: 'none', border: 'none', color: '#F5F5F0', cursor: 'pointer',
+              fontFamily: "'Bebas Neue', sans-serif", fontSize: '36px', letterSpacing: '0.1em', textTransform: 'uppercase',
+            }}>{id.replace('-', ' ')}</button>
+          ))}
+          <a href="tel:+390461990268" style={{
+            background: '#EA580C', color: '#fff', padding: '14px 36px',
+            textDecoration: 'none', fontSize: '12px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
+          }}>CHIAMA ORA</a>
         </div>
-        <div className="relative z-10 px-4">
-          <div className="mb-8 inline-block px-4 py-1.5 rounded-full border border-orange-600/30 bg-orange-600/10 backdrop-blur-sm animate-pulse">
-            <span className="text-orange-600 font-black uppercase italic tracking-[0.3em] text-[10px]">Eccellenza Trentina dal 1980</span>
+      )}
+
+      {/* HERO */}
+      <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: '80px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <img src="images/hero.jpg" alt="Nardin Autotrasporti" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25 }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #0A0A0A 40%, transparent 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0A0A0A 20%, transparent 70%)' }} />
+        </div>
+
+        {/* Big year in background */}
+        <div style={{
+          position: 'absolute', right: '-2%', bottom: '5%',
+          fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(180px, 28vw, 420px)',
+          color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none', letterSpacing: '-0.02em',
+          pointerEvents: 'none',
+        }}>1980</div>
+
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 24px', width: '100%' }}>
+          <div style={{ maxWidth: '760px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
+              <div style={{ width: '32px', height: '2px', background: '#EA580C' }} />
+              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Trento — Dal 1980</span>
+            </div>
+            <h1 style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: 'clamp(56px, 10vw, 140px)',
+              lineHeight: 0.92, letterSpacing: '0.02em', marginBottom: '28px',
+              color: '#F5F5F0',
+            }}>
+              TRASPORTI<br />
+              <span style={{ color: '#EA580C' }}>SPECIALI</span><br />
+              E AUTOGRÙ
+            </h1>
+            <p style={{ fontSize: 'clamp(15px, 1.8vw, 19px)', color: '#9CA3AF', maxWidth: '520px', lineHeight: 1.65, marginBottom: '44px' }}>
+              Sollevamento di precisione e trasporti eccezionali in tutto il Nord Italia. Flotta proprietaria, permessi inclusi, assistenza H24.
+            </p>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+              <button onClick={() => scrollTo('contatti')} style={{
+                background: '#EA580C', color: '#fff', border: 'none',
+                padding: '16px 36px', cursor: 'pointer', fontSize: '11px',
+                fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
+                transition: 'background 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#C2410C')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#EA580C')}
+              >PREVENTIVO GRATUITO</button>
+              <button onClick={() => scrollTo('flotta')} style={{
+                background: 'transparent', color: '#F5F5F0',
+                border: '1px solid #2a2a2a', padding: '16px 36px', cursor: 'pointer',
+                fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
+                transition: 'border-color 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = '#EA580C')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = '#2a2a2a')}
+              >SCOPRI LA FLOTTA</button>
+            </div>
           </div>
-          <h1 className="text-4xl sm:text-7xl md:text-[9rem] font-black text-white uppercase italic mb-8 tracking-tighter leading-none">
-            NARDIN <span className="text-orange-600">AUTOTRASPORTI</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-gray-400 text-base md:text-2xl mb-14 italic font-medium uppercase tracking-[0.2em] leading-relaxed">
-            Trasporti Speciali e Sollevamento <br className="hidden md:block" /> di Precisione a Trento.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-            <button
-              onClick={() => scrollToSection('contatti')}
-              className="bg-orange-600 text-white px-8 sm:px-14 py-5 sm:py-6 rounded-[2rem] font-black uppercase italic tracking-widest hover:bg-orange-700 border-none cursor-pointer transition-all shadow-2xl active:scale-95 text-xs sm:text-base"
-            >
-              Richiedi Preventivo
-            </button>
-            <button
-              onClick={() => scrollToSection('flotta')}
-              className="bg-white/5 text-white px-8 sm:px-14 py-5 sm:py-6 rounded-[2rem] font-black uppercase italic tracking-widest border border-white/10 backdrop-blur-md cursor-pointer hover:bg-white/10 transition-all active:scale-95 text-xs sm:text-base"
-            >
-              Sfoglia Parco Mezzi
-            </button>
-          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div style={{ position: 'absolute', bottom: '32px', right: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '1px', height: '48px', background: 'linear-gradient(to bottom, transparent, #EA580C)' }} />
+          <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.25em', color: '#6B7280', textTransform: 'uppercase', writingMode: 'vertical-rl' }}>SCROLL</span>
         </div>
       </section>
 
-      {/* TRUST BAR */}
-      <div className="bg-white border-y border-gray-100 py-8 md:py-12">
-        <div className="container mx-auto px-4 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {/* TICKER BAR */}
+      <div style={{ background: '#EA580C', overflow: 'hidden', padding: '12px 0', borderTop: '1px solid #C2410C' }}>
+        <div id="ticker-inner" style={{ display: 'flex', gap: '0', whiteSpace: 'nowrap' }}>
+          {[...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
+            <span key={i} style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', color: '#fff', textTransform: 'uppercase', padding: '0 28px' }}>
+              {item} <span style={{ opacity: 0.5, marginLeft: '28px' }}>◆</span>
+            </span>
+          ))}
+        </div>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+          * { box-sizing: border-box; margin: 0; padding: 0; }
+          @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+          [ref] { animation: ticker 25s linear infinite; }
+          .nav-links { display: flex !important; }
+          .nav-mobile { display: none !important; }
+          .nav-brand-text { display: block !important; }
+          @media (max-width: 768px) {
+            .nav-links { display: none !important; }
+            .nav-mobile { display: flex !important; }
+          }
+          @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+          .fade-in { animation: fadeInUp 0.5s ease forwards; }
+        `}</style>
+      </div>
+
+      {/* Ticker animation via inline style */}
+      <style>{`
+        div[data-ticker] { animation: ticker 30s linear infinite; }
+      `}</style>
+
+      {/* STATS BAR */}
+      <div style={{ background: '#111', borderBottom: '1px solid #1C1C1C' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
           {[
-            { icon: '🛡️', title: 'Assicurazione Vettoriale', sub: 'Copertura All-Risks' },
-            { icon: '📍', title: 'Sede a Trento', sub: 'Operativi in tutto il Nord' },
-            { icon: '🚨', title: 'Scorta Tecnica', sub: 'Permessi Speciali Inclusi' },
-            { icon: '⚙️', title: 'H24 Emergency', sub: 'Pronto Intervento Gru' }
-          ].map((item, i) => (
-            <div key={i} className="flex items-center space-x-3 md:space-x-4 group">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-50 rounded-xl md:rounded-2xl flex items-center justify-center text-xl md:text-2xl group-hover:bg-orange-600 group-hover:scale-110 transition-all duration-300 shrink-0">
-                {item.icon}
-              </div>
-              <div>
-                <p className="text-gray-900 font-black text-[8px] md:text-[10px] uppercase tracking-widest">{item.title}</p>
-                <p className="text-gray-500 text-[7px] md:text-[9px] font-bold uppercase tracking-tighter italic">{item.sub}</p>
-              </div>
+            { num: '40+', label: 'Anni di Esperienza' },
+            { num: '95', label: 't/m Portata Massima' },
+            { num: 'H24', label: 'Pronto Intervento' },
+            { num: '16+', label: 'Mezzi in Flotta' },
+          ].map((s, i) => (
+            <div key={i} style={{
+              padding: '32px 24px', borderRight: i < 3 ? '1px solid #1C1C1C' : 'none',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px, 4vw, 52px)', color: '#EA580C', letterSpacing: '0.05em', lineHeight: 1 }}>{s.num}</div>
+              <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginTop: '6px' }}>{s.label}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* CHI SIAMO */}
-      <section id="chi-siamo" className="py-16 md:py-32 bg-white">
-        <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-10 md:gap-20">
-          <div className="w-full lg:w-1/2 relative">
-            <div className="absolute -top-4 -left-4 w-16 md:w-24 h-16 md:h-24 bg-orange-600 rounded-lg -z-10" />
-            <img
-              src={`${import.meta.env.BASE_URL}images/about.jpg`}
-              alt="Team"
-              className="rounded-3xl md:rounded-[3rem] shadow-2xl w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10 bg-white/95 backdrop-blur-md p-5 md:p-8 rounded-2xl md:rounded-3xl shadow-2xl border border-orange-500/10">
-              <p className="text-gray-900 font-bold text-base md:text-xl italic uppercase leading-tight">"La nostra forza è l'uomo dietro la macchina."</p>
-              <p className="text-orange-600 font-oswald text-[10px] md:text-xs font-black uppercase tracking-widest mt-3 md:mt-4">WALTER & IVANA NARDIN</p>
+      <section id="chi-siamo" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#0A0A0A' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }} className="chi-siamo-grid">
+          <div style={{ position: 'relative' }}>
+            <img src="images/about.jpg" alt="Nardin Autotrasporti" style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
+            <div style={{
+              position: 'absolute', bottom: '-1px', left: '-1px', right: '-1px',
+              background: 'linear-gradient(to top, #0A0A0A 0%, transparent 40%)',
+              height: '200px',
+            }} />
+            <div style={{
+              position: 'absolute', bottom: '24px', left: '24px', right: '24px',
+              background: 'rgba(10,10,10,0.9)', border: '1px solid #1C1C1C',
+              padding: '20px 24px',
+            }}>
+              <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#F5F5F0', marginBottom: '6px' }}>
+                "La nostra forza è l'uomo dietro la macchina."
+              </p>
+              <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase' }}>
+                Walter & Ivana Nardin
+              </p>
             </div>
+            {/* Orange corner accent */}
+            <div style={{ position: 'absolute', top: '-8px', left: '-8px', width: '40px', height: '40px', background: '#EA580C' }} />
           </div>
-          <div className="lg:w-1/2">
-            <h2 className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 italic">La Nostra Storia</h2>
-            <h3 className="text-3xl md:text-5xl font-black text-gray-900 uppercase italic mb-6 md:mb-10 leading-none tracking-tight">
-              DAL <span className="text-orange-600">1980</span> <br />
-              ECCELLENZA TECNICA
-            </h3>
-            <div className="space-y-4 md:space-y-6 text-gray-600 text-base md:text-lg italic leading-relaxed">
-              <p>
-                Tutto ha inizio nel <strong>1980</strong>, quando Nardin Mario fonda l'azienda con una visione chiara: offrire servizi di trasporto caratterizzati da massima affidabilità.
-              </p>
-              <p>
-                Oggi, quella passione continua con <strong>Walter e Ivana Nardin</strong>. Siamo il punto di riferimento a Trento per sollevamenti pesanti con autogrù Effer e Hiab.
-              </p>
-              <div className="grid grid-cols-2 gap-6 md:gap-10 pt-6 md:pt-10">
-                <div>
-                  <span className="block text-3xl md:text-5xl font-black text-orange-600 font-oswald italic leading-none">40+</span>
-                  <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-400">Anni di Esperienza</span>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+              <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>La Nostra Storia</span>
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 5vw, 68px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '28px' }}>
+              DAL 1980<br />ECCELLENZA<br /><span style={{ color: '#EA580C' }}>TECNICA</span>
+            </h2>
+            <div style={{ width: '40px', height: '3px', background: '#EA580C', marginBottom: '28px' }} />
+            <p style={{ color: '#9CA3AF', fontSize: '16px', lineHeight: 1.75, marginBottom: '20px' }}>
+              Tutto ha inizio nel <strong style={{ color: '#F5F5F0' }}>1980</strong>, quando Nardin Mario fonda l'azienda con una visione chiara: offrire servizi di trasporto caratterizzati da massima affidabilità.
+            </p>
+            <p style={{ color: '#9CA3AF', fontSize: '16px', lineHeight: 1.75, marginBottom: '40px' }}>
+              Oggi, quella passione continua con <strong style={{ color: '#F5F5F0' }}>Walter e Ivana Nardin</strong>. Siamo il punto di riferimento a Trento per sollevamenti pesanti con autogrù Effer e Hiab fino a 95 t/m.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: '#1C1C1C', border: '1px solid #1C1C1C' }}>
+              {[
+                { icon: '🛡️', title: 'Assicurazione Vettoriale', sub: 'Copertura All-Risks' },
+                { icon: '🚨', title: 'H24 Emergency', sub: 'Pronto Intervento Gru' },
+                { icon: '📍', title: 'Sede a Trento', sub: 'Nord Italia' },
+                { icon: '⚙️', title: 'Scorta Tecnica', sub: 'Permessi Speciali' },
+              ].map((item, i) => (
+                <div key={i} style={{ background: '#111', padding: '20px', display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: '20px' }}>{item.icon}</span>
+                  <div>
+                    <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#F5F5F0', textTransform: 'uppercase', marginBottom: '2px' }}>{item.title}</p>
+                    <p style={{ fontSize: '11px', color: '#6B7280' }}>{item.sub}</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="block text-3xl md:text-5xl font-black text-orange-600 font-oswald italic leading-none">38121</span>
-                  <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-400">Radici a Trento</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
+        <style>{`.chi-siamo-grid { @media (max-width: 768px) { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
       {/* SERVIZI */}
-      <section id="servizi" className="py-16 md:py-32 bg-gray-50 text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 italic">Cosa Facciamo</h2>
-          <h3 className="text-3xl md:text-6xl font-black text-gray-900 uppercase italic mb-12 md:mb-24 leading-none tracking-tight">
-            I NOSTRI <span className="text-orange-600 underline decoration-gray-900 decoration-[10px] md:decoration-[14px]">SERVIZI</span>
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto text-left">
-            <div className="bg-white p-8 md:p-14 rounded-3xl md:rounded-[4rem] shadow-sm border border-gray-100 group hover:shadow-2xl transition-all duration-500">
-              <div className="text-5xl md:text-7xl mb-6 md:text-10 group-hover:scale-110 transition-transform duration-500 inline-block drop-shadow-lg">🚛</div>
-              <h4 className="text-2xl md:text-3xl font-black uppercase italic mb-4 md:mb-6 tracking-tight">Trasporti Eccezionali</h4>
-              <p className="text-gray-500 text-base md:text-lg leading-relaxed italic">
-                Gestione completa per carichi fuori sagoma, permessi speciali e scorte tecniche. Operiamo in tutto il Nord Italia con la massima sicurezza stradale.
-              </p>
-            </div>
-            <div className="bg-white p-8 md:p-14 rounded-3xl md:rounded-[4rem] shadow-sm border border-gray-100 group hover:shadow-2xl transition-all duration-500">
-              <div className="text-5xl md:text-7xl mb-6 md:text-10 group-hover:scale-110 transition-transform duration-500 inline-block drop-shadow-lg">🏗️</div>
-              <h4 className="text-2xl md:text-3xl font-black uppercase italic mb-4 md:mb-6 tracking-tight">Sollevamento Gru</h4>
-              <p className="text-gray-500 text-base md:text-lg leading-relaxed italic">
-                Autogrù Effer e Hiab fino a 95 t/m. Ideali per montaggi industriali, carpenterie metalliche e movimentazioni in spazi angusti.
-              </p>
-            </div>
+      <section id="servizi" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C', borderBottom: '1px solid #1C1C1C' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Cosa Facciamo</span>
+          </div>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '60px' }}>
+            I NOSTRI<br /><span style={{ color: '#EA580C' }}>SERVIZI</span>
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+            {[
+              {
+                num: '01', title: 'Trasporti Eccezionali',
+                desc: 'Gestione completa per carichi fuori sagoma, permessi speciali e scorte tecniche. Operiamo in tutto il Nord Italia con la massima sicurezza stradale.',
+                tags: ['Carichi Fuori Sagoma', 'Permessi Speciali', 'Scorta Tecnica'],
+              },
+              {
+                num: '02', title: 'Sollevamento Autogrù',
+                desc: 'Autogrù Effer e Hiab fino a 95 t/m. Ideali per montaggi industriali, carpenterie metalliche e movimentazioni in spazi angusti.',
+                tags: ['Effer fino a 95 t/m', 'Montaggi Industriali', 'Spazi Ristretti'],
+              },
+              {
+                num: '03', title: 'Trasporto Gru Edili',
+                desc: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain e similari. Pianificazione logistica completa per cantieri di ogni dimensione.',
+                tags: ['Gru Potain', 'Logistica Cantiere', 'Tutto il Nord Italia'],
+              },
+              {
+                num: '04', title: 'Logistica Industriale',
+                desc: 'Movimentazione di macchinari pesanti, componenti prefabbricati e attrezzature speciali. Soluzioni su misura per ogni esigenza industriale.',
+                tags: ['Macchinari Pesanti', 'Prefabbricati', 'Su Misura'],
+              },
+            ].map((s, i) => (
+              <div key={i} style={{
+                background: '#0A0A0A', padding: 'clamp(28px, 4vw, 52px)',
+                transition: 'background 0.2s',
+                cursor: 'default',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#0f0f0f')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#0A0A0A')}
+              >
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', color: 'rgba(234,88,12,0.12)', lineHeight: 1, marginBottom: '16px', letterSpacing: '0.05em' }}>{s.num}</div>
+                <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(24px, 2.5vw, 34px)', letterSpacing: '0.04em', color: '#F5F5F0', marginBottom: '16px' }}>{s.title}</h3>
+                <p style={{ color: '#6B7280', fontSize: '15px', lineHeight: 1.7, marginBottom: '24px' }}>{s.desc}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {s.tags.map(tag => (
+                    <span key={tag} style={{ border: '1px solid #2a2a2a', padding: '4px 12px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', color: '#6B7280', textTransform: 'uppercase' }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FLOTTA CATEGORIES */}
-      <section id="flotta" className="py-16 md:py-32 bg-white text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 italic">Flotta Proprietaria</h2>
-          <h3 className="text-3xl md:text-6xl font-black text-gray-900 uppercase italic mb-6 md:mb-8 leading-none tracking-tight">
-            SCOPRI I <span className="text-orange-600">MEZZI</span>
-          </h3>
-          <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[9px] md:text-[11px] italic mb-12 md:mb-24">
-            Seleziona una categoria per accedere ai dettagli tecnici
-          </p>
-          <div id="categories-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 max-w-6xl mx-auto">
-            {categories.map((cat) => (
-              <div
-                key={cat.id}
-                onClick={() => openSubpage(cat.id)}
-                className="relative bg-gray-50 p-8 md:p-14 rounded-3xl md:rounded-[4rem] cursor-pointer hover:bg-orange-600 group transition-all duration-700 border border-gray-100 shadow-sm overflow-hidden transform hover:-translate-y-2"
+      {/* FLOTTA */}
+      <section id="flotta" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#0A0A0A' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Flotta Proprietaria</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '24px' }}>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0' }}>
+              PARCO<br /><span style={{ color: '#EA580C' }}>MEZZI</span>
+            </h2>
+            <div style={{ display: 'flex', gap: '2px', background: '#1C1C1C' }}>
+              {categories.map(cat => (
+                <button key={cat} onClick={() => setActiveTab(cat)} style={{
+                  background: activeTab === cat ? '#EA580C' : '#111',
+                  color: activeTab === cat ? '#fff' : '#6B7280',
+                  border: 'none', padding: '12px 24px', cursor: 'pointer',
+                  fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase',
+                  transition: 'all 0.2s',
+                }}>
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+            {filteredFleet.map(item => (
+              <div key={item.id} onClick={() => setActiveFleetItem(item.id)} style={{
+                background: '#111', cursor: 'pointer', overflow: 'hidden',
+                transition: 'background 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#161616')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#111')}
               >
-                <div className="relative z-10">
-                  <div className="text-6xl md:text-8xl mb-6 md:mb-10 group-hover:scale-110 transition-transform duration-700 drop-shadow-2xl">{cat.icon}</div>
-                  <h4 className="text-xl md:text-2xl font-black uppercase italic mb-4 md:mb-5 text-gray-900 group-hover:text-white transition-colors tracking-tight">
-                    {cat.title}
-                  </h4>
-                  <p className="text-gray-500 text-[10px] md:text-[11px] font-bold uppercase tracking-widest group-hover:text-white/80 transition-colors mb-6 md:mb-10 italic">
-                    {cat.desc}
-                  </p>
-                  <div className="inline-flex items-center space-x-3 text-orange-600 group-hover:text-white font-black uppercase italic text-[10px] md:text-[11px] tracking-[0.3em] bg-white group-hover:bg-white/10 px-5 md:px-6 py-2.5 md:py-3 rounded-2xl transition-all">
-                    <span>Vedi Tutti</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
+                <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
+                  <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s' }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)' }} />
                 </div>
-                <div className="absolute -bottom-10 md:-bottom-16 -right-10 md:-right-16 text-[8rem] md:text-[15rem] font-black italic text-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-tighter">
-                  {cat.id[0]}
+                <div style={{ padding: '20px' }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '8px' }}>{item.cap}</div>
+                  <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.04em', color: '#F5F5F0', marginBottom: '8px', lineHeight: 1.1 }}>{item.name}</h4>
+                  <p style={{ fontSize: '13px', color: '#6B7280', lineHeight: 1.5, marginBottom: '16px' }}>{item.desc}</p>
+                  <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#EA580C', textTransform: 'uppercase' }}>DETTAGLI →</span>
                 </div>
               </div>
             ))}
@@ -408,26 +492,26 @@ export default function App() {
       </section>
 
       {/* PORTFOLIO */}
-      <section id="portfolio" className="py-16 md:py-32 bg-gray-50 text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 italic">Esperienza sul Campo</h2>
-          <h3 className="text-3xl md:text-5xl font-black text-gray-900 uppercase italic mb-12 md:mb-20 tracking-tight">
-            LAVORI <span className="text-orange-600">RECENTI</span>
-          </h3>
-          <div id="projects-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto text-left">
-            {projects.map((p) => (
-              <div key={p.id} className="group relative overflow-hidden rounded-2xl md:rounded-[3rem] aspect-video cursor-pointer shadow-xl">
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                  referrerPolicy="no-referrer"
+      <section id="portfolio" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Esperienza sul Campo</span>
+          </div>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '48px' }}>
+            LAVORI<br /><span style={{ color: '#EA580C' }}>RECENTI</span>
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: '#1C1C1C' }}>
+            {projects.map(p => (
+              <div key={p.id} style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/10', cursor: 'pointer' }}>
+                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s', filter: 'grayscale(20%)' }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'grayscale(20%)'; }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-10 opacity-90 group-hover:opacity-100 transition-opacity">
-                  <span className="text-orange-500 font-black text-[10px] uppercase tracking-[0.3em] mb-2 md:mb-3 italic">{p.cat}</span>
-                  <h4 className="text-white font-black text-lg md:text-xl italic leading-tight group-hover:text-orange-500 transition-colors tracking-tight">
-                    {p.title}
-                  </h4>
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)' }} />
+                <div style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px' }}>
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>{p.cat}</span>
+                  <h4 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '22px', letterSpacing: '0.04em', color: '#F5F5F0', lineHeight: 1.1 }}>{p.title}</h4>
                 </div>
               </div>
             ))}
@@ -436,26 +520,24 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section id="testimonial" className="py-16 md:py-32 bg-white text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 italic">Dicono Di Noi</h2>
-          <h3 className="text-3xl md:text-6xl font-black text-gray-900 uppercase italic mb-12 md:mb-24 leading-none tracking-tight">
-            PARTNER DI <span className="text-orange-600 underline decoration-gray-900 decoration-[10px] md:decoration-[14px]">FIDUCIA</span>
-          </h3>
-          <div id="testimonials-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-left max-w-7xl mx-auto">
+      <section style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#0A0A0A', borderTop: '1px solid #1C1C1C' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Dicono di Noi</span>
+          </div>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '48px' }}>
+            PARTNER DI<br /><span style={{ color: '#EA580C' }}>FIDUCIA</span>
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2px', background: '#1C1C1C' }}>
             {testimonials.map((t, i) => (
-              <div
-                key={i}
-                className="bg-gray-50 p-8 md:p-12 rounded-3xl md:rounded-[4rem] shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full group hover:-translate-y-2"
-              >
-                <div className="text-orange-500 mb-6 md:mb-10 text-xl md:text-3xl">★★★★★</div>
-                <p className="text-gray-600 text-[13px] md:text-sm italic mb-8 md:mb-12 leading-relaxed flex-grow">"{t.text}"</p>
-                <div className="pt-6 md:pt-10 border-t border-gray-100">
-                  <p className="text-gray-900 font-black text-[11px] md:text-[13px] uppercase italic mb-1 tracking-tight">{t.name}</p>
-                  <p className="text-orange-600 font-black text-[9px] md:text-[10px] uppercase tracking-[0.2em]">{t.comp}</p>
-                  <div className="mt-4 md:mt-5 inline-block px-3 md:px-4 py-1.5 bg-gray-900 text-white text-[8px] md:text-[9px] font-black uppercase rounded-xl tracking-widest">
-                    {t.spec}
-                  </div>
+              <div key={i} style={{ background: '#111', padding: 'clamp(24px, 3vw, 36px)', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ color: '#EA580C', fontSize: '18px', letterSpacing: '2px', marginBottom: '20px' }}>★★★★★</div>
+                <p style={{ color: '#9CA3AF', fontSize: '14px', lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: '24px' }}>"{t.text}"</p>
+                <div style={{ borderTop: '1px solid #1C1C1C', paddingTop: '20px' }}>
+                  <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', color: '#F5F5F0', textTransform: 'uppercase', marginBottom: '2px' }}>{t.name}</p>
+                  <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '10px' }}>{t.comp}</p>
+                  <span style={{ border: '1px solid #2a2a2a', padding: '3px 10px', fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', color: '#6B7280', textTransform: 'uppercase' }}>{t.spec}</span>
                 </div>
               </div>
             ))}
@@ -464,123 +546,112 @@ export default function App() {
       </section>
 
       {/* CONTATTI */}
-      <section id="contatti" className="py-16 md:py-32 bg-gray-950">
-        <div className="container mx-auto px-4">
-          <div className="bg-white rounded-3xl md:rounded-[5rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
-            <div className="lg:w-1/3 bg-gray-900 p-10 md:p-16 lg:p-20 text-white flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute -top-32 -right-32 w-80 h-80 bg-orange-600 rounded-full opacity-10 animate-pulse" />
-              <div className="relative z-10">
-                <h3 className="text-3xl md:text-5xl font-black uppercase italic mb-10 md:mb-20 tracking-tighter leading-none">
-                  PREVENTIVO <br />
-                  <span className="text-orange-600 underline decoration-white/10">GRATUITO</span>
-                </h3>
-                <div className="space-y-10 md:space-y-14">
-                  <div>
-                    <p className="text-[9px] md:text-[10px] font-black uppercase text-gray-500 mb-2 md:mb-3 tracking-[0.3em] italic">Telefono Diretto</p>
-                    <a href="tel:+390461990268" className="text-2xl md:text-3xl font-black text-white no-underline hover:text-orange-600 transition-colors tracking-tighter italic">
-                      +39 0461 990268
-                    </a>
-                  </div>
-                  <div>
-                    <p className="text-[9px] md:text-[10px] font-black uppercase text-gray-500 mb-2 md:mb-3 tracking-[0.3em] italic">Sede Trento</p>
-                    <p className="text-xl md:text-2xl font-black italic leading-tight">
-                      Via Aeroporto 31, 38121
-                      <br />
-                      <span className="text-orange-600 text-xs md:text-sm font-bold uppercase tracking-widest italic opacity-50">Trento (Italy)</span>
-                    </p>
-                  </div>
-                  <div className="pt-6 md:pt-8">
-                    <a
-                      href="https://wa.me/393484420285"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-4 md:space-x-5 bg-green-600 text-white px-8 md:px-12 py-4 md:py-6 rounded-2xl md:rounded-[2rem] font-black uppercase italic text-[10px] md:text-xs no-underline hover:bg-green-700 transition-all shadow-2xl transform hover:scale-105 active:scale-95"
-                    >
-                      <span>WhatsApp Diretto</span>
-                    </a>
-                  </div>
+      <section id="contatti" style={{ padding: 'clamp(60px, 8vw, 120px) 0', background: '#111', borderTop: '1px solid #1C1C1C' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ width: '24px', height: '2px', background: '#EA580C' }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.3em', color: '#EA580C', textTransform: 'uppercase' }}>Contattaci</span>
+          </div>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 80px)', lineHeight: 0.95, letterSpacing: '0.03em', color: '#F5F5F0', marginBottom: '60px' }}>
+            PREVENTIVO<br /><span style={{ color: '#EA580C' }}>GRATUITO</span>
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '2px', background: '#1C1C1C', alignItems: 'stretch' }}>
+            {/* Info panel */}
+            <div style={{ background: '#0A0A0A', padding: 'clamp(32px, 4vw, 60px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ marginBottom: '40px' }}>
+                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Telefono Diretto</p>
+                  <a href="tel:+390461990268" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '0.03em', color: '#F5F5F0', textDecoration: 'none', transition: 'color 0.2s' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#EA580C')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#F5F5F0')}
+                  >+39 0461 990268</a>
+                </div>
+                <div style={{ marginBottom: '40px' }}>
+                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>WhatsApp</p>
+                  <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(22px, 2.5vw, 32px)', letterSpacing: '0.03em', color: '#F5F5F0', textDecoration: 'none', transition: 'color 0.2s' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#22C55E')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#F5F5F0')}
+                  >+39 348 4420285</a>
+                </div>
+                <div style={{ marginBottom: '40px' }}>
+                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Sede</p>
+                  <p style={{ color: '#F5F5F0', fontSize: '16px', lineHeight: 1.5 }}>Via Aeroporto, 31<br />38121 Trento (TN)</p>
+                </div>
+                <div>
+                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Email</p>
+                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: '#EA580C', fontSize: '15px', textDecoration: 'none' }}>info@nardinautotrasporti.it</a>
                 </div>
               </div>
-              <p className="text-[9px] md:text-[10px] text-gray-700 font-black uppercase tracking-[0.4em] md:tracking-[0.5em] mt-12 md:mt-20 italic border-t border-white/5 pt-8 md:pt-12">
-                Precisione • Forza • Trento
-              </p>
+              <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid #1C1C1C' }}>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.25em', color: '#2a2a2a', textTransform: 'uppercase' }}>PRECISIONE • FORZA • TRENTO</p>
+              </div>
             </div>
-
-            <div className="lg:w-2/3 p-8 md:p-16 lg:p-28 text-left">
+            {/* Form */}
+            <div style={{ background: '#111', padding: 'clamp(32px, 4vw, 60px)' }}>
               {state.succeeded ? (
-                <div className="flex flex-col items-center justify-center h-full text-center space-y-6 animate-in">
-                  <div className="text-6xl">✅</div>
-                  <h3 className="text-3xl font-black uppercase italic text-gray-900">Messaggio Inviato!</h3>
-                  <p className="text-gray-500 italic">Ti ricontatteremo al più presto.</p>
-                  <button onClick={() => window.location.reload()} className="text-orange-600 font-black uppercase italic text-xs tracking-widest">
-                    Invia un altro messaggio
-                  </button>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: '16px' }}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '80px', color: '#EA580C' }}>✓</div>
+                  <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '36px', letterSpacing: '0.05em', color: '#F5F5F0' }}>MESSAGGIO INVIATO</h3>
+                  <p style={{ color: '#6B7280', fontSize: '15px' }}>Ti ricontatteremo al più presto.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-8 md:space-y-12">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <div className="space-y-3 md:space-y-4">
-                      <label className="text-[9px] md:text-[10px] font-black uppercase text-gray-400 tracking-[0.3em] italic ml-2">Ragione Sociale</label>
-                      <input
-                        name="name"
-                        type="text"
-                        required
-                        className="w-full px-6 md:px-10 py-4 md:py-6 bg-gray-50 border-none rounded-2xl md:rounded-[2rem] text-sm outline-none focus:ring-8 focus:ring-orange-600/5 transition-all italic font-medium"
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Ragione Sociale *</label>
+                      <input name="name" type="text" required style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none' }}
+                        onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
+                        onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
                       />
-                      <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-500 text-[10px] font-bold uppercase italic ml-2" />
+                      <ValidationError prefix="Name" field="name" errors={state.errors} style={{ color: '#EF4444', fontSize: '11px', marginTop: '4px' }} />
                     </div>
-
-                    <div className="space-y-3 md:space-y-4">
-                      <label className="text-[9px] md:text-[10px] font-black uppercase text-gray-400 tracking-[0.3em] italic ml-2">Email Aziendale</label>
-                      <input
-                        name="email"
-                        type="email"
-                        required
-                        className="w-full px-6 md:px-10 py-4 md:py-6 bg-gray-50 border-none rounded-2xl md:rounded-[2rem] text-sm outline-none focus:ring-8 focus:ring-orange-600/5 transition-all italic font-medium"
+                    <div>
+                      <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Telefono *</label>
+                      <input name="phone" type="tel" required style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none' }}
+                        onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
+                        onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
+                        placeholder="+39 ..."
                       />
-                      <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-[10px] font-bold uppercase italic ml-2" />
                     </div>
                   </div>
-
-                  <div className="space-y-3 md:space-y-4">
-                    <label className="text-[9px] md:text-[10px] font-black uppercase text-gray-400 tracking-[0.3em] italic ml-2">Telefono / Cellulare</label>
-                    <input
-                      name="phone"
-                      type="tel"
-                      className="w-full px-6 md:px-10 py-4 md:py-6 bg-gray-50 border-none rounded-2xl md:rounded-[2rem] text-sm outline-none focus:ring-8 focus:ring-orange-600/5 transition-all italic font-medium"
-                      placeholder="+39 ..."
+                  <div>
+                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Email *</label>
+                    <input name="email" type="email" required style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none' }}
+                      onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
+                      onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
                     />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: '11px', marginTop: '4px' }} />
                   </div>
-
-                  <div className="space-y-3 md:space-y-4">
-                    <label className="text-[9px] md:text-[10px] font-black uppercase text-gray-400 tracking-[0.3em] italic ml-2">Servizio Desiderato</label>
-                    <select
-                      name="service"
-                      className="w-full px-6 md:px-10 py-4 md:py-6 bg-gray-50 border-none rounded-2xl md:rounded-[2rem] text-sm outline-none appearance-none cursor-pointer italic font-medium"
+                  <div>
+                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Servizio Richiesto</label>
+                    <select name="service" style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none', cursor: 'pointer' }}
+                      onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
+                      onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
                     >
                       <option>Trasporto Eccezionale</option>
                       <option>Autogrù / Sollevamento</option>
                       <option>Trasporto Gru Edili</option>
+                      <option>Logistica Industriale</option>
                     </select>
                   </div>
-
-                  <div className="space-y-3 md:space-y-4">
-                    <label className="text-[9px] md:text-[10px] font-black uppercase text-gray-400 tracking-[0.3em] italic ml-2">Dettagli Lavoro</label>
-                    <textarea
-                      name="message"
-                      rows={5}
-                      className="w-full px-6 md:px-10 py-4 md:py-6 bg-gray-50 border-none rounded-2xl md:rounded-[2rem] text-sm outline-none focus:ring-8 focus:ring-orange-600/5 resize-none transition-all italic font-medium"
-                      placeholder="Pesi, dimensioni, località..."
+                  <div>
+                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px' }}>Dettagli Lavoro</label>
+                    <textarea name="message" rows={4} placeholder="Pesi, dimensioni, località, tempistiche..." style={{ width: '100%', background: '#0A0A0A', border: '1px solid #1C1C1C', color: '#F5F5F0', padding: '14px 16px', fontSize: '14px', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }}
+                      onFocus={e => (e.currentTarget.style.borderColor = '#EA580C')}
+                      onBlur={e => (e.currentTarget.style.borderColor = '#1C1C1C')}
                     />
-                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-[10px] font-bold uppercase italic ml-2" />
+                    <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: '11px', marginTop: '4px' }} />
                   </div>
-
-                  <button
-                    type="submit"
-                    disabled={state.submitting}
-                    className="w-full py-6 md:py-8 bg-orange-600 text-white font-black uppercase italic tracking-[0.4em] md:tracking-[0.5em] rounded-2xl md:rounded-[2.5rem] shadow-2xl hover:bg-orange-700 transition-all border-none cursor-pointer transform hover:scale-[1.01] active:scale-95 text-[10px] md:text-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+                  <button type="submit" disabled={state.submitting} style={{
+                    background: '#EA580C', color: '#fff', border: 'none', padding: '18px',
+                    cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1,
+                    fontSize: '11px', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase',
+                    transition: 'background 0.2s',
+                  }}
+                    onMouseEnter={e => { if (!state.submitting) e.currentTarget.style.background = '#C2410C'; }}
+                    onMouseLeave={e => { if (!state.submitting) e.currentTarget.style.background = '#EA580C'; }}
                   >
-                    {state.submitting ? 'Invio in corso...' : 'Invia Richiesta'}
+                    {state.submitting ? 'INVIO IN CORSO...' : 'INVIA RICHIESTA'}
                   </button>
                 </form>
               )}
@@ -590,68 +661,80 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-gray-950 text-white py-16 md:py-32 text-center border-t border-white/5">
-        <div className="container mx-auto px-4">
-          <div className="font-oswald text-4xl md:text-6xl font-black italic mb-10 md:mb-12 tracking-tighter">
-            NARDIN <span className="text-orange-600">AUTOTRASPORTI</span>
+      <footer style={{ background: '#0A0A0A', borderTop: '1px solid #1C1C1C', padding: 'clamp(40px, 6vw, 80px) 0 40px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '48px', flexWrap: 'wrap', gap: '32px' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                <div style={{ background: '#EA580C', padding: '6px 10px', fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#fff' }}>NARDIN</div>
+                <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0' }}>AUTOTRASPORTI</span>
+              </div>
+              <p style={{ color: '#6B7280', fontSize: '13px', maxWidth: '300px', lineHeight: 1.6 }}>Trasporti speciali e sollevamento di precisione a Trento dal 1980.</p>
+            </div>
+            <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
+              <div>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '16px' }}>Navigazione</p>
+                {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+                  <button key={id} onClick={() => scrollTo(id)} style={{
+                    display: 'block', background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer',
+                    fontSize: '13px', textTransform: 'capitalize', padding: '4px 0', letterSpacing: '0.05em', textAlign: 'left',
+                    transition: 'color 0.2s',
+                  }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#F5F5F0')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
+                  >{id.replace('-', ' ')}</button>
+                ))}
+              </div>
+              <div>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#EA580C', textTransform: 'uppercase', marginBottom: '16px' }}>Contatti</p>
+                <p style={{ color: '#6B7280', fontSize: '13px', lineHeight: 1.8 }}>
+                  Via Aeroporto, 31<br />38121 Trento (TN)<br />
+                  <a href="tel:+390461990268" style={{ color: '#6B7280', textDecoration: 'none' }}>+39 0461 990268</a><br />
+                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: '#EA580C', textDecoration: 'none', fontSize: '12px' }}>info@nardinautotrasporti.it</a>
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-12 md:mb-16 text-[9px] md:text-[11px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-gray-600 italic">
-            <a
-              href="https://www.instagram.com/nardinautotrasporti/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white no-underline transition-colors"
-            >
-              Instagram
-            </a>
-            <button
-              onClick={() => scrollToSection('home')}
-              className="hover:text-white transition-colors bg-transparent border-none cursor-pointer font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-[9px] md:text-[11px] italic"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection('flotta')}
-              className="hover:text-white transition-colors bg-transparent border-none cursor-pointer font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-[9px] md:text-[11px] italic"
-            >
-              Flotta
-            </button>
-            <button
-              onClick={() => scrollToSection('servizi')}
-              className="hover:text-white transition-colors bg-transparent border-none cursor-pointer font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-[9px] md:text-[11px] italic"
-            >
-              Servizi
-            </button>
+          <div style={{ borderTop: '1px solid #1C1C1C', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+            <p style={{ fontSize: '11px', color: '#374151', lineHeight: 1.7 }}>
+              NARDIN AUTOTRASPORTI s.n.c. di Nardin Walter e Ivana | P. IVA 01762870226 | Albo TN/2053832Z
+            </p>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: '#374151', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#F5F5F0')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#374151')}
+              >Instagram</a>
+              <span style={{ fontSize: '11px', color: '#1C1C1C' }}>© 2026</span>
+            </div>
           </div>
-          <div className="max-w-5xl mx-auto h-[1px] bg-white/5 mb-10 md:mb-12 opacity-50" />
-          <div className="max-w-6xl mx-auto space-y-2 md:space-y-3 text-gray-500 text-[9px] md:text-[11px] font-bold uppercase tracking-wider italic leading-relaxed">
-            <p className="text-gray-400">
-              <span className="text-white font-black">NARDIN AUTOTRASPORTI s.n.c. di Nardin Walter e Ivana</span> | Via Aeroporto, 31 | 38121 TRENTO | Tel. 0461.990268 | Fax 0461.992462
-            </p>
-            <p>
-              P. IVA 01762870226 | codice SDI 5RU082D ("O" lettera) | info@nardinautotrasporti.it | nardinautotrasporti@pec.trovarti.it
-            </p>
-            <p>
-              Albo Autotrasportatori c/terzi TN/2053832Z | Albo Gestori Ambientali TN04948 | Albo Impr. Artigiane n. 47413 | Reg. Impr. CCIAA n. 177305
-            </p>
-          </div>
-          <p className="mt-12 text-gray-800 text-[8px] font-black uppercase tracking-[0.5em] italic">
-            © 2026 NARDIN AUTOTRASPORTI — PRECISIONE • FORZA • TRENTO
-          </p>
         </div>
       </footer>
 
       {/* WhatsApp FAB */}
-      <a
-        href="https://wa.me/393484420285"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 md:bottom-12 right-6 md:right-12 z-[110] bg-green-600 text-white p-4 md:p-6 rounded-full shadow-2xl hover:bg-green-700 transition-all transform hover:scale-110 flex items-center justify-center border-4 border-white no-underline active:scale-90"
+      <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{
+        position: 'fixed', bottom: '24px', right: '24px', zIndex: 110,
+        background: '#16A34A', color: '#fff', width: '52px', height: '52px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        textDecoration: 'none', transition: 'background 0.2s, transform 0.2s',
+        border: '2px solid rgba(255,255,255,0.15)',
+      }}
+        onMouseEnter={e => { e.currentTarget.style.background = '#15803D'; e.currentTarget.style.transform = 'scale(1.1)'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = '#16A34A'; e.currentTarget.style.transform = 'scale(1)'; }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="md:w-8 md:h-8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.539 2.016 2.126-.54c1.029.563 2.025.844 3.162.844 3.181 0 5.767-2.586 5.768-5.766.001-3.18-2.587-5.767-5.768-5.767zm3.39 8.251c-.146.415-.852.756-1.201.838-.34.08-.783.14-1.258-.02-.275-.092-.591-.219-1.025-.407-1.84-.794-3.037-2.673-3.129-2.797-.093-.125-.751-.998-.751-1.913 0-.915.481-1.363.652-1.547.171-.184.372-.231.496-.231s.248.001.356.006c.115.005.27-.042.423.328.158.382.541 1.32.588 1.414.047.094.078.204.016.331-.062.126-.093.204-.186.31l-.279.325c-.093.107-.191.224-.083.41.108.187.481.794 1.033 1.285.711.634 1.312.83 1.5.922.188.092.297.077.406-.05.109-.127.466-.541.59-.727.124-.186.248-.156.417-.094s1.071.505 1.257.599c.186.094.31.141.356.221s.047.533-.099.948zM12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11z" />
         </svg>
       </a>
+
+      {/* Ticker animation */}
+      <style>{`
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
+        #ticker-inner { animation: ticker 35s linear infinite; display: flex; }
+        #ticker-inner:hover { animation-play-state: paused; }
+        @media (max-width: 900px) {
+          .chi-siamo-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }
