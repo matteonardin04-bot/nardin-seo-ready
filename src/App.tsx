@@ -287,7 +287,7 @@ export default function App() {
           [ref] { animation: ticker 25s linear infinite; }
           .nav-links { display: flex !important; }
           .nav-mobile { display: none !important; }
-          .nav-brand-text { display: block !important; }
+          .nav-brand-text { display: block; }
           @media (max-width: 768px) {
             .nav-links { display: none !important; }
             .nav-mobile { display: flex !important; }
