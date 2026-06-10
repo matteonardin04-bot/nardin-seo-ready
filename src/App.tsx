@@ -171,10 +171,6 @@ export default function App() {
         <div style={{ position: 'absolute', right: '-2%', bottom: '5%', fontFamily: S.bebas, fontSize: 'clamp(140px, 22vw, 380px)', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>1980</div>
         <div style={{ position: 'relative', zIndex: 10, maxWidth: 1280, margin: '0 auto', padding: '0 40px', width: '100%' }}>
           <div style={{ maxWidth: 700 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-              <div style={{ width: 28, height: 2, background: S.orange }} />
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Trento — Dal 1980</span>
-            </div>
             <h1 style={{ fontFamily: S.bebas, fontSize: 'clamp(48px, 6.5vw, 100px)', lineHeight: 0.93, letterSpacing: '0.02em', marginBottom: 24, color: S.text }}>
               TRASPORTI<br />
               <span style={{ color: S.orange }}>SPECIALI</span><br />
