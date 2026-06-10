@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
 // --- DATA ---
@@ -44,13 +44,16 @@ export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFleetItem, setActiveFleetItem] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   
   const [state, handleSubmit] = useForm('xnjowlpd');
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 60);
+    const onResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onResize); };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -144,10 +147,10 @@ export default function App() {
               background: '#EA580C', padding: '6px 10px',
               fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', letterSpacing: '0.05em', color: '#fff',
             }}>NARDIN</div>
-            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0', display: 'block' }} className="nav-brand-text">AUTOTRASPORTI</span>
+            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '16px', letterSpacing: '0.2em', color: '#F5F5F0' }}>AUTOTRASPORTI</span>
           </div>
 
-          <div style={{ display: 'flex', gap: '36px', alignItems: 'center' }} className="nav-links">
+          <div style={{ display: isMobile ? 'none' : 'flex', gap: '36px', alignItems: 'center' }}>
             {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
               <button key={id} onClick={() => scrollTo(id)} style={{
                 background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer',
@@ -168,7 +171,7 @@ export default function App() {
             >CHIAMA ORA</a>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} className="nav-mobile">
+          <div style={{ display: isMobile ? 'flex' : 'none', alignItems: 'center', gap: '12px' }}>
             <a href="tel:+390461990268" style={{
               background: '#EA580C', color: '#fff', padding: '9px 14px',
               textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
@@ -222,7 +225,7 @@ export default function App() {
           pointerEvents: 'none',
         }}>1980</div>
 
-        <div style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 48px', width: '100%' }}>
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 24px', width: '100%' }}>
           <div style={{ maxWidth: '760px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
               <div style={{ width: '32px', height: '2px', background: '#EA580C' }} />
@@ -287,7 +290,7 @@ export default function App() {
           [ref] { animation: ticker 25s linear infinite; }
           .nav-links { display: flex !important; }
           .nav-mobile { display: none !important; }
-          .nav-brand-text { display: block; }
+          .nav-brand-text { display: block !important; }
           @media (max-width: 768px) {
             .nav-links { display: none !important; }
             .nav-mobile { display: flex !important; }
