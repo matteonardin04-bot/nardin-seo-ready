@@ -130,7 +130,7 @@ export default function App() {
 
           {/* LOGO */}
           <div onClick={() => go('home')} style={{ cursor: 'pointer' }}>
-           <img src="images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 205 }} />
+           <img src="images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 150 }} />
           </div>
 
           {/* DESKTOP LINKS */}
