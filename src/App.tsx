@@ -129,9 +129,8 @@ export default function App() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 
           {/* LOGO */}
-          <div onClick={() => go('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ background: S.orange, padding: '5px 10px', fontFamily: S.bebas, fontSize: 20, letterSpacing: '0.05em', color: '#fff' }}>NARDIN</div>
-            <span style={{ fontFamily: S.bebas, fontSize: 15, letterSpacing: '0.2em', color: S.text }}>AUTOTRASPORTI</span>
+          <div onClick={() => go('home')} style={{ cursor: 'pointer' }}>
+           <img src="images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 48 }} />
           </div>
 
           {/* DESKTOP LINKS */}
