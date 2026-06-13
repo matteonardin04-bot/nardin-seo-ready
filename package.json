@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite --port 3000 --host 0.0.0.0",
     "build": "tsc && vite build && node scripts/inject-seo.mjs",
-    "preview": "vite preview --port 3000 --host 0.0.0.0",
-    "lint": "echo 'No lint step needed'"
+    "preview": "npm run build && wrangler dev",
+    "lint": "echo 'No lint step needed'",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
@@ -16,6 +17,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.40.2",
     "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -23,6 +25,7 @@
     "react-snap": "^1.23.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",
-    "vite": "^8.0.6"
+    "vite": "^8.0.6",
+    "wrangler": "^4.100.0"
   }
 }
