@@ -162,7 +162,7 @@ export default function App() {
       {menuOpen && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 150, background: S.black, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 24 }}>
           <button onClick={closeMenu} style={{ position: 'absolute', top: 20, right: 20, background: 'none', border: 'none', color: S.text, fontSize: 28, cursor: 'pointer' }}>×</button>
-          {['home', 'chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+          {['home', 'chi-siamo', 'servizi', 'flotta', 'contatti'].map(id => (
             <button key={id} onClick={() => go(id)} style={{ background: 'none', border: 'none', color: S.text, cursor: 'pointer', fontFamily: S.bebas, fontSize: 34, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               {id.replace('-', ' ')}
             </button>
@@ -179,7 +179,7 @@ export default function App() {
           </div>
           {!mobile && (
             <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
-              {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+              {['chi-siamo', 'servizi', 'flotta', 'contatti'].map(id => (
                 <button key={id} onClick={() => go(id)} style={{ background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', padding: 0 }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
@@ -409,33 +409,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* PORTFOLIO */}
-      <section id="portfolio" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-            <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Esperienza sul Campo</span>
-          </div>
-          <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 40 }}>
-            LAVORI<br /><span style={{ color: S.orange }}>RECENTI</span>
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,1fr)', gap: 2, background: S.border }}>
-            {projects.map(p => (
-              <div key={p.id} style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/10', cursor: 'pointer' }}>
-                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)', transition: 'transform 0.6s, filter 0.6s' }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'grayscale(20%)'; }}
-                />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)' }} />
-                <div style={{ position: 'absolute', bottom: 18, left: 18, right: 18 }}>
-                  <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', display: 'block', marginBottom: 5 }}>{p.cat}</span>
-                  <h4 style={{ fontFamily: S.bebas, fontSize: 20, color: S.text, lineHeight: 1.1 }}>{p.title}</h4>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* TESTIMONIALS */}
       <section style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
@@ -674,7 +648,7 @@ export default function App() {
             <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
               <div>
                 <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Navigazione</p>
-                {['chi-siamo', 'servizi', 'flotta', 'portfolio', 'contatti'].map(id => (
+                {['chi-siamo', 'servizi', 'flotta', 'contatti'].map(id => (
                   <button key={id} onClick={() => go(id)} style={{ display: 'block', background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 12, textTransform: 'capitalize', padding: '3px 0', textAlign: 'left' }}
                     onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                     onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
