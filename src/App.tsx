@@ -43,25 +43,25 @@ const projects = [
 
 const caseStudies = [
   {
-    title: 'Sollevamento Gru Potain 12t',
-    sub: 'Centro storico Trento',
-    desc: 'Montaggio gru a torre in spazio ristretto nel centro storico. Operazione completata in un solo giorno con autogrù Effer 95 t/m.',
-    tags: ['Autogrù Effer 95 t/m', '1 giorno', 'Trento'],
-    img: 'images/progetto-3.jpg',
-  },
-  {
-    title: 'Trasporto Carpenteria Metallica',
-    sub: 'Capannone industriale Rovereto',
-    desc: 'Movimentazione strutture metalliche prefabbricate da 8t per nuovo capannone industriale. Pianale ribassato con scorta tecnica inclusa.',
-    tags: ['Pianale ribassato', 'Nord Italia', 'Carpenteria'],
+    title: 'Montaggio Gru Edile Terex FC6.24H',
+    sub: 'Centro storico — Gru a rotazione in alto',
+    desc: 'Montaggio di gru a torre Terex FC6.24 a rotazione in alto per cantiere in centro storico. Altezza di lavoro 18 m, braccio da 24 m. Soluzione studiata per spazi urbani ristretti dove le gru tradizionali non possono operare.',
+    tags: ['Terex FC6.24', 'Altezza 18 m — Braccio 24 m', 'Centro storico'],
     img: 'images/progetto-1.jpg',
   },
   {
-    title: 'Logistica Vigneti Eroici',
-    sub: 'Valli del Trentino',
-    desc: 'Trasporto attrezzature agricole in zona alpina impervia. Soluzione su misura per terreni difficili con mezzi specializzati.',
-    tags: ['Trasporto speciale', 'Zona alpina', 'Agricoltura'],
+    title: 'Montaggio Impianto Lavorazione Legname',
+    sub: 'Montaggio industriale in combinata',
+    desc: 'Installazione di impianto per lavorazione legname da 8 tonnellate con impiego simultaneo di due autogrù in combinata. La doppia gru si è resa necessaria per gestire le dimensioni e l\'altezza dell\'impianto in sicurezza.',
+    tags: ['Doppia gru in combinata', '8 tonnellate', 'Montaggio industriale'],
     img: 'images/progetto-2.jpg',
+  },
+  {
+    title: 'Trasporto Eccezionale — Paratoie La Spezia',
+    sub: 'Bacino di contenimento — La Spezia',
+    desc: 'Trasporto di paratoie metalliche da 20 metri di lunghezza destinate a un bacino di contenimento a La Spezia. Gestione completa di permessi eccezionali, scorta tecnica e logistica su percorso nazionale.',
+    tags: ['Trasporto Eccezionale', '20 m lunghezza', 'La Spezia'],
+    img: 'images/progetto-3.jpg',
   },
 ];
 
