@@ -2,20 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
 const fleetData = [
-  { id: 'f1', name: 'SCANIA R770 + EFFER 955', cat: 'Gru', cap: '95 t/m — 770 CV', img: 'images/flotta-1.jpg', desc: 'Top di gamma per sollevamenti industriali pesanti. Equipaggiato con Jib per sbracci estremi.' },
-  { id: 'f2', name: 'SCANIA R730 + GRU EFFER', cat: 'Gru', cap: 'V8 — 730 CV', img: 'images/flotta-2.jpg', desc: 'Potenza pura unita alla versatilità delle gru Effer per carichi impegnativi.' },
-  { id: 'f4', name: 'VOLVO 3 ASSI + EFFER 525', cat: 'Gru', cap: '52.5 t/m', img: 'images/flotta-4.jpg', desc: 'Equilibrio perfetto tra capacità di carico e agilità di manovra.' },
-  { id: 'f6', name: 'MERCEDES 2 ASSI + EFFER 375', cat: 'Gru', cap: '37.5 t/m', img: 'images/flotta-8.jpg', desc: 'Unità compatta per lavori in centri urbani e spazi ristretti.' },
-  { id: 'f3', name: 'SCANIA S520 2 ASSI', cat: 'Camion', cap: '520 CV V8', img: 'images/flotta-3.jpg', desc: 'Motrice dedicata al traino di semirimorchi ribassati per trasporti nazionali.' },
-  { id: 'f5', name: 'SCANIA R560 2 ASSI', cat: 'Camion', cap: '560 CV V8', img: 'images/flotta-7.jpg', desc: 'Potenza e versatilità per trasporti a lungo raggio e logistica pesante.' },
-  { id: 'f4c', name: 'VOLVO 3 ASSI + EFFER 525', cat: 'Camion', cap: '52.5 t/m', img: 'images/flotta-4.jpg', desc: 'Equilibrio perfetto tra capacità di carico e agilità di manovra.' },
-  { id: 'f6c', name: 'MERCEDES 2 ASSI + EFFER 375', cat: 'Camion', cap: '37.5 t/m', img: 'images/flotta-8.jpg', desc: 'Unità compatta e potente per lavori in centri urbani e spazi ristretti.' },
-  { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI", cat: 'Rimorchi', cap: '3 Assi — Rampe', img: 'images/flotta-5.jpg', desc: "Pianale tecnico FGM a 3 assi con rampe idrauliche per il carico di mezzi d'opera." },
-  { id: 'r3', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi Pesanti', img: 'images/flotta-9.jpg', desc: 'Soluzione robusta a 4 assi per il trasporto di macchinari industriali pesanti.' },
-  { id: 'r4', name: 'CULLA RIBASSATO 3 ASSI', cat: 'Rimorchi', cap: 'Altezza ridotta', img: 'images/flotta-10.jpg', desc: 'Ideale per macchine agricole o operatrici con altezza elevata.' },
-  { id: 'r5', name: 'PIANALE ALLUNGABILE 3 ASSI', cat: 'Rimorchi', cap: 'Lunghezza variabile', img: 'images/flotta-11.jpg', desc: 'Per travi, prefabbricati e carichi longitudinali eccezionali.' },
-  { id: 'r6', name: 'PIANALE PASSO CORTO 2 ASSI', cat: 'Rimorchi', cap: 'Agile — 2 Assi', img: 'images/flotta-12.jpg', desc: 'Compattezza e manovrabilità per carichi meno ingombranti.' },
-  { id: 'r7', name: 'CENTINATO 3 ASSI', cat: 'Rimorchi', cap: 'Merci pallettizzate', img: 'images/flotta-13.jpg', desc: 'Teli scorrevoli per il trasporto di merci pallettizzate e carichi protetti.' },
+  // GRU
+  { id: 'g1', name: 'EFFER 955 6S + JIB 6S', cat: 'Gru', cap: '734 kNm — Sbraccio 30+ m', img: 'images/flotta-1.jpg', desc: 'La nostra gru di punta. Portata massima 24 t, sbraccio idraulico fino a 16 m che con il Jib 6S raggiunge oltre 30 m. Sistema PROGRESS 2.0. Per sollevamenti industriali pesanti dove altri mezzi non arrivano.' },
+  { id: 'g2', name: 'EFFER 685', cat: 'Gru', cap: 'Portata max 19 t — Sbraccio 30 m', img: 'images/flotta-2.jpg', desc: 'Portata massima 19 t, sbraccio fino a 30 m con Jib. Riferimento per cantieri edili complessi e montaggi di carpenteria metallica. Perfetto equilibrio tra portata e sbraccio.' },
+  { id: 'g3', name: 'HIAB IQ 708', cat: 'Gru', cap: '60-70 t/m — Sbraccio verticale 40 m', img: 'images/flotta-6.jpg', desc: 'Gru di nuova generazione nella classe 60-70 t/m. Sbraccio verticale fino a 40 m, sistema di controllo SPACEevo per movimenti di precisione millimetrica. Ideale per montaggi industriali complessi.' },
+  { id: 'g4', name: 'EFFER 525 6S + JIB 6S', cat: 'Gru', cap: '446 kNm — Versatile e precisa', img: 'images/flotta-4.jpg', desc: 'Coppia di carico 446 kNm. Con il Jib 6S raggiunge sbracci importanti mantenendo agilità di manovra. La scelta per cantieri in spazi angusti e zone alpine difficili.' },
+  { id: 'g5', name: 'EFFER 375', cat: 'Gru', cap: 'Compatta e agile — Centri urbani', img: 'images/flotta-8.jpg', desc: 'La più agile della flotta. Compatta, veloce da posizionare, ideale per interventi rapidi in centri urbani, cantieri con accesso limitato e lavori dove la velocità di set-up fa la differenza.' },
+  // CAMION
+  { id: 'c1', name: 'SCANIA R770 4 ASSI', cat: 'Camion', cap: '770 CV — V8', img: 'images/flotta-1.jpg', desc: 'Motrice di punta della flotta. 770 CV V8, 4 assi per i carichi più impegnativi. Abbinata alla gru Effer 955 per i sollevamenti più pesanti.' },
+  { id: 'c2', name: 'SCANIA R730 4 ASSI', cat: 'Camion', cap: '730 CV — V8', img: 'images/flotta-2.jpg', desc: 'Potenza V8 da 730 CV su 4 assi. Abbinata alla gru Effer 685 per cantieri edili complessi e montaggi di carpenteria metallica.' },
+  { id: 'c3', name: 'SCANIA R660 4 ASSI', cat: 'Camion', cap: '660 CV — 4 Assi', img: 'images/flotta-3.jpg', desc: 'Motrice robusta a 4 assi abbinata alla Hiab IQ 708. Potenza e stabilità per i lavori più impegnativi in tutto il Nord Italia.' },
+  { id: 'c4', name: 'VOLVO FH650 3 ASSI', cat: 'Camion', cap: '650 CV — 3 Assi', img: 'images/flotta-4.jpg', desc: 'Trattore Volvo FH650 3 assi abbinato alla gru Effer 525. Equilibrio perfetto tra potenza, capacità di carico e agilità di manovra.' },
+  { id: 'c5', name: 'MERCEDES 2 ASSI', cat: 'Camion', cap: 'Agile — Centri urbani', img: 'images/flotta-8.jpg', desc: 'Motrice compatta a 2 assi abbinata alla Effer 375. Veloce da posizionare, ideale per interventi in centri urbani e cantieri con accesso limitato.' },
+  { id: 'c6', name: 'SCANIA S520 2 ASSI', cat: 'Camion', cap: '520 CV V8 — Trattore stradale', img: 'images/flotta-5.jpg', desc: 'Trattore stradale V8 da 520 CV dedicato al traino di semirimorchi ribassati per trasporti eccezionali su tutto il territorio nazionale.' },
+  { id: 'c7', name: 'SCANIA R560 2 ASSI', cat: 'Camion', cap: '560 CV V8 — Trattore stradale', img: 'images/flotta-7.jpg', desc: 'Trattore stradale V8 da 560 CV per trasporti a lungo raggio e logistica pesante. Potenza e affidabilità per ogni missione.' },
+  // RIMORCHI
+  { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI", cat: 'Rimorchi', cap: '3 Assi — Rampe idrauliche', img: 'images/flotta-9.jpg', desc: "Pianale tecnico a 3 assi con rampe idrauliche per il carico di mezzi d'opera e macchinari industriali." },
+  { id: 'r2', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi pesanti', img: 'images/flotta-10.jpg', desc: 'Soluzione robusta a 4 assi per il trasporto di macchinari industriali di grandi dimensioni e peso elevato.' },
+  { id: 'r3', name: 'CULLA RIBASSATO 3 ASSI', cat: 'Rimorchi', cap: 'Altezza ridotta', img: 'images/flotta-11.jpg', desc: 'Ideale per macchine agricole, operatrici o macchinari con altezza elevata che richiedono piano di carico ribassato.' },
+  { id: 'r4', name: 'PIANALE ALLUNGABILE 3 ASSI', cat: 'Rimorchi', cap: 'Lunghezza variabile', img: 'images/flotta-12.jpg', desc: 'Per travi, prefabbricati e carichi longitudinali eccezionali. La lunghezza variabile si adatta a ogni esigenza.' },
+  { id: 'r5', name: 'PIANALE PASSO CORTO 2 ASSI', cat: 'Rimorchi', cap: 'Agile — 2 Assi', img: 'images/flotta-13.jpg', desc: 'Compatto e manovrabile per carichi meno ingombranti. Ideale per cantieri urbani e consegne in spazi ristretti.' },
+  { id: 'r6', name: 'CENTINATO 3 ASSI', cat: 'Rimorchi', cap: 'Merci pallettizzate', img: 'images/flotta-5.jpg', desc: 'Teli scorrevoli per il trasporto di merci pallettizzate e carichi che richiedono protezione dagli agenti atmosferici.' },
 ];
 
 const categories = ['Gru', 'Camion', 'Rimorchi'];
