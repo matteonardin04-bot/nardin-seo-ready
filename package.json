@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000 --host 0.0.0.0",
-    "build": "tsc && vite build && node scripts/inject-seo.mjs",
+    "build": "tsc && vite build && node scripts/inject-seo.mjs && react-snap",
     "preview": "vite preview --port 3000 --host 0.0.0.0",
     "lint": "echo 'No lint step needed'"
   },

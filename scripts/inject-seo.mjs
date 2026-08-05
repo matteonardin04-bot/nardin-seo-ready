@@ -5,6 +5,20 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, '../dist');
 const indexPath = resolve(distDir, 'index.html');
+const sitemapPath = resolve(distDir, 'sitemap.xml');
+
+const SITE_URL = 'https://nardinautotrasporti.it';
+
+// Single source of truth for every route on the site.
+// Add a new page? Add one line here and the sitemap regenerates automatically
+// on the next `npm run build` — no need to hand-edit sitemap.xml ever again.
+const ROUTES = [
+  { path: '/', priority: '1.0', changefreq: 'monthly' },
+  { path: '/noleggio-autogru-trento', priority: '0.9', changefreq: 'monthly' },
+  { path: '/trasporti-eccezionali-trentino', priority: '0.9', changefreq: 'monthly' },
+  { path: '/trasporto-gru-edili', priority: '0.9', changefreq: 'monthly' },
+  { path: '/logistica-industriale', priority: '0.9', changefreq: 'monthly' },
+];
 
 const staticContent = `
   <noscript>
@@ -127,7 +141,23 @@ const staticContent = `
   </noscript>
 `;
 
+// --- 1. Inject the noscript SEO fallback into the SPA shell ---
 let html = readFileSync(indexPath, 'utf-8');
 html = html.replace('<div id="root"></div>', `<div id="root"></div>\n${staticContent}`);
 writeFileSync(indexPath, html);
 console.log('SEO static snapshot injected into dist/index.html');
+
+// --- 2. Generate sitemap.xml dynamically from ROUTES, every build ---
+const today = new Date().toISOString().split('T')[0];
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${ROUTES.map(r => `<url>
+<loc>${SITE_URL}${r.path}</loc>
+<lastmod>${today}</lastmod>
+<changefreq>${r.changefreq}</changefreq>
+<priority>${r.priority}</priority>
+</url>`).join('\n')}
+</urlset>
+`;
+writeFileSync(sitemapPath, sitemapXml);
+console.log(`Sitemap generated with ${ROUTES.length} URLs at dist/sitemap.xml`);
