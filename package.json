@@ -13,7 +13,8 @@
     "@formspree/react": "^3.0.0",
     "motion": "^12.38.0",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.1.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
@@ -24,5 +25,15 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",
     "vite": "^8.0.6"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "include": [
+      "/",
+      "/noleggio-autogru-trento",
+      "/trasporti-eccezionali-trentino",
+      "/trasporto-gru-edili",
+      "/logistica-industriale"
+    ]
   }
 }

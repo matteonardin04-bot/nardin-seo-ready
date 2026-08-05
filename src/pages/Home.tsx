@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
+import { Link } from 'react-router-dom';
 
 const fleetData = [
   // GRU
@@ -97,7 +98,7 @@ const inp = (extra = {}) => ({
   ...extra,
 });
 
-export default function App() {
+export default function Home() {
   const [tab, setTab] = useState('Gru');
   const [scrolled, setScrolled] = useState(false);
   const [mobile, setMobile] = useState(false);
@@ -139,7 +140,7 @@ export default function App() {
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
         #ticker { animation: ticker 35s linear infinite; display: flex; white-space: nowrap; }
         input:focus, textarea:focus, select:focus { border-color: #EA580C !important; }
-        @media (max-width: 899px) { .mobile-cta-bar { display: flex !important; } }
+        @media (max-width: 899px) { .mobile-cta-bar { display: flex !important; } body { padding-bottom: 64px; } }
       `}</style>
 
       {/* FLEET MODAL */}
@@ -170,10 +171,16 @@ export default function App() {
       {menuOpen && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 150, background: S.black, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 24 }}>
           <button onClick={closeMenu} style={{ position: 'absolute', top: 20, right: 20, background: 'none', border: 'none', color: S.text, fontSize: 28, cursor: 'pointer' }}>×</button>
-          {['home', 'chi-siamo', 'servizi', 'flotta', 'contatti'].map(id => (
-            <button key={id} onClick={() => go(id)} style={{ background: 'none', border: 'none', color: S.text, cursor: 'pointer', fontFamily: S.bebas, fontSize: 34, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              {id.replace('-', ' ')}
-            </button>
+          {[
+            { to: '/', label: 'Home' },
+            { to: '/noleggio-autogru-trento', label: 'Noleggio Autogrù' },
+            { to: '/trasporti-eccezionali-trentino', label: 'Trasporti Eccezionali' },
+            { to: '/trasporto-gru-edili', label: 'Gru Edili' },
+            { to: '/logistica-industriale', label: 'Logistica' },
+          ].map(item => (
+            <Link key={item.to} to={item.to} onClick={closeMenu} style={{ color: S.text, textDecoration: 'none', cursor: 'pointer', fontFamily: S.bebas, fontSize: 34, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              {item.label}
+            </Link>
           ))}
           <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
         </div>
@@ -182,16 +189,22 @@ export default function App() {
       {/* NAVBAR */}
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent', borderBottom: scrolled ? `1px solid ${S.border}` : '1px solid transparent', padding: scrolled ? '10px 0' : '18px 0', transition: 'all 0.3s' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div onClick={() => go('home')} style={{ cursor: 'pointer' }}>
+          <Link to="/" style={{ cursor: 'pointer' }}>
             <img src="images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 72, width: 'auto', objectFit: 'contain' }} onError={e => { e.currentTarget.style.display = 'none'; }} />
-          </div>
+          </Link>
           {!mobile && (
             <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
-              {['chi-siamo', 'servizi', 'flotta', 'contatti'].map(id => (
-                <button key={id} onClick={() => go(id)} style={{ background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', padding: 0 }}
+              {[
+                { to: '/', label: 'Home' },
+                { to: '/noleggio-autogru-trento', label: 'Noleggio Autogrù' },
+                { to: '/trasporti-eccezionali-trentino', label: 'Trasporti Eccezionali' },
+                { to: '/trasporto-gru-edili', label: 'Gru Edili' },
+                { to: '/logistica-industriale', label: 'Logistica' },
+              ].map(item => (
+                <Link key={item.to} to={item.to} style={{ color: S.gray, textDecoration: 'none', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
-                >{id.replace('-', ' ')}</button>
+                >{item.label}</Link>
               ))}
               <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
             </div>
@@ -210,7 +223,7 @@ export default function App() {
       </nav>
 
       {/* HERO */}
-      <section id="home" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: 80, overflow: 'hidden' }}>
+      <section id="home" style={{ position: 'relative', minHeight: mobile ? '92svh' : '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: mobile ? 48 : 80, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0 }}>
           <img src="images/hero.jpg" alt="Nardin Autotrasporti — Sollevamenti industriali e trasporti speciali Trento" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25 }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #0A0A0A 40%, transparent 100%)' }} />
@@ -256,9 +269,9 @@ export default function App() {
 
       {/* STATS */}
       <div style={{ background: S.dark, borderBottom: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', minWidth: 0 }}>
           {[{ n: '40+', l: 'Anni di Esperienza' }, { n: '95', l: 't/m Portata Massima' }, { n: 'H24', l: 'Pronto Intervento' }, { n: '16+', l: 'Mezzi in Flotta' }].map((s, i) => (
-            <div key={i} style={{ padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? `1px solid ${S.border}` : 'none' }}>
+            <div key={i} style={{ padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? `1px solid ${S.border}` : 'none', minWidth: 0 }}>
               <div style={{ fontFamily: S.bebas, fontSize: 'clamp(32px, 4vw, 48px)', color: S.orange, lineHeight: 1 }}>{s.n}</div>
               <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginTop: 5 }}>{s.l}</div>
             </div>
@@ -359,10 +372,10 @@ export default function App() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 2, background: S.border }}>
             {[
-              { n: '01', t: 'Noleggio Autogrù Trento', d: 'Autogrù Effer e Hiab fino a 95 t/m con operatore. Per montaggi industriali, carpenterie metalliche e movimentazioni in spazi angusti.', tags: ['Effer fino a 95 t/m', 'Con Operatore', 'Spazi Angusti'] },
-              { n: '02', t: 'Trasporti Eccezionali', d: 'Gestione completa per carichi fuori sagoma in tutto il Trentino e Nord Italia. Permessi speciali e scorta tecnica inclusi.', tags: ['Carichi Fuori Sagoma', 'Permessi Inclusi', 'Scorta Tecnica'] },
-              { n: '03', t: 'Trasporto Gru Edili', d: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain e similari. Pianificazione logistica completa per cantieri di ogni dimensione.', tags: ['Gru Potain', 'Logistica Cantiere', 'Nord Italia'] },
-              { n: '04', t: 'Logistica Industriale', d: 'Movimentazione macchinari pesanti, macchine utensili, prefabbricati e carpenteria metallica. Soluzioni su misura per ogni esigenza.', tags: ['Macchinari Pesanti', 'Prefabbricati', 'Su Misura'] },
+              { n: '01', t: 'Noleggio Autogrù Trento', d: 'Autogrù Effer e Hiab fino a 95 t/m con operatore. Per montaggi industriali, carpenterie metalliche e movimentazioni in spazi angusti.', tags: ['Effer fino a 95 t/m', 'Con Operatore', 'Spazi Angusti'], to: '/noleggio-autogru-trento' },
+              { n: '02', t: 'Trasporti Eccezionali', d: 'Gestione completa per carichi fuori sagoma in tutto il Trentino e Nord Italia. Permessi speciali e scorta tecnica inclusi.', tags: ['Carichi Fuori Sagoma', 'Permessi Inclusi', 'Scorta Tecnica'], to: '/trasporti-eccezionali-trentino' },
+              { n: '03', t: 'Trasporto Gru Edili', d: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain e similari. Pianificazione logistica completa per cantieri di ogni dimensione.', tags: ['Gru Potain', 'Logistica Cantiere', 'Nord Italia'], to: '/trasporto-gru-edili' },
+              { n: '04', t: 'Logistica Industriale', d: 'Movimentazione macchinari pesanti, macchine utensili, prefabbricati e carpenteria metallica. Soluzioni su misura per ogni esigenza.', tags: ['Macchinari Pesanti', 'Prefabbricati', 'Su Misura'], to: '/logistica-industriale' },
             ].map((s, i) => (
               <div key={i} style={{ background: S.black, padding: 'clamp(24px,4vw,48px)' }}>
                 <div style={{ fontFamily: S.bebas, fontSize: 56, color: 'rgba(234,88,12,0.1)', lineHeight: 1, marginBottom: 12 }}>{s.n}</div>
@@ -371,10 +384,10 @@ export default function App() {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20 }}>
                   {s.tags.map(tag => <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>)}
                 </div>
-                <button onClick={() => go('contatti')} style={{ background: 'none', border: `1px solid ${S.orange}`, color: S.orange, padding: '8px 20px', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}
+                <Link to={s.to} style={{ display: 'inline-block', background: 'none', border: `1px solid ${S.orange}`, color: S.orange, padding: '8px 20px', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}
                   onMouseEnter={e => { e.currentTarget.style.background = S.orange; e.currentTarget.style.color = '#fff'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = S.orange; }}
-                >RICHIEDI PREVENTIVO →</button>
+                >SCOPRI IL SERVIZIO →</Link>
               </div>
             ))}
           </div>
