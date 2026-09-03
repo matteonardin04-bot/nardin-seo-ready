@@ -2,6 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Link } from 'react-router-dom';
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+function trackPhoneClick() {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'phone_click');
+  }
+}
+
+function trackWhatsAppClick() {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'whatsapp_click');
+  }
+}
+
 const fleetData = [
   // GRU
   { id: 'g1', name: 'EFFER 955 6S + JIB 6S', cat: 'Gru', cap: '734 kNm — Sbraccio 30+ m', img: 'images/gru-1.jpg', desc: 'La nostra gru di punta. Portata massima 24 t, sbraccio idraulico fino a 16 m che con il Jib 6S raggiunge oltre 30 m. Sistema PROGRESS 2.0. Per sollevamenti industriali pesanti dove altri mezzi non arrivano.' },
@@ -182,7 +200,7 @@ export default function Home() {
               {item.label}
             </Link>
           ))}
-          <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
+          <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
         </div>
       )}
 
@@ -206,12 +224,12 @@ export default function Home() {
                   onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
                 >{item.label}</Link>
               ))}
-              <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
             </div>
           )}
           {mobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <a href="tel:+390461990268" style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
               <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
@@ -245,7 +263,7 @@ export default function Home() {
                 onMouseEnter={e => (e.currentTarget.style.background = '#C2410C')}
                 onMouseLeave={e => (e.currentTarget.style.background = S.orange)}
               >RICHIEDI PREVENTIVO GRATUITO</button>
-              <a href="tel:+390461990268" style={{ background: 'transparent', color: S.text, border: `1px solid ${S.border}`, padding: '16px 36px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center' }}
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: 'transparent', color: S.text, border: `1px solid ${S.border}`, padding: '16px 36px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center' }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = S.orange)}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = S.border)}
               >CHIAMA ORA: 0461 990268</a>
@@ -561,14 +579,14 @@ export default function Home() {
             <div style={{ background: S.black, padding: 'clamp(28px,4vw,52px)', display: 'flex', flexDirection: 'column', gap: 28 }}>
               <div>
                 <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono Diretto</p>
-                <a href="tel:+390461990268" style={{ fontFamily: S.bebas, fontSize: 'clamp(24px,3vw,36px)', color: S.text, textDecoration: 'none' }}
+                <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ fontFamily: S.bebas, fontSize: 'clamp(24px,3vw,36px)', color: S.text, textDecoration: 'none' }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.orange)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.text)}
                 >+39 0461 990268</a>
               </div>
               <div>
                 <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>WhatsApp H24</p>
-                <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ fontFamily: S.bebas, fontSize: 'clamp(20px,2.5vw,30px)', color: S.text, textDecoration: 'none' }}
+                <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ fontFamily: S.bebas, fontSize: 'clamp(20px,2.5vw,30px)', color: S.text, textDecoration: 'none' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#22C55E')}
                   onMouseLeave={e => (e.currentTarget.style.color = S.text)}
                 >+39 348 4420285</a>
@@ -596,7 +614,7 @@ export default function Home() {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: 14 }}>
                   <div style={{ fontFamily: S.bebas, fontSize: 72, color: S.orange }}>✓</div>
                   <h3 style={{ fontFamily: S.bebas, fontSize: 32, color: S.text }}>RICHIESTA INVIATA</h3>
-                  <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.6 }}>Ti richiamiamo entro 2 ore in orario lavorativo.<br />Per urgenze: <a href="tel:+390461990268" style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
+                  <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.6 }}>Ti richiamiamo entro 2 ore in orario lavorativo.<br />Per urgenze: <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -645,7 +663,7 @@ export default function Home() {
                   >
                     {state.submitting ? 'INVIO IN CORSO...' : 'RICHIEDI PREVENTIVO GRATUITO'}
                   </button>
-                  <p style={{ fontSize: 11, color: '#4B5563', textAlign: 'center' }}>Ti richiamiamo entro 2 ore in orario lavorativo. Per urgenze: <a href="tel:+390461990268" style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
+                  <p style={{ fontSize: 11, color: '#4B5563', textAlign: 'center' }}>Ti richiamiamo entro 2 ore in orario lavorativo. Per urgenze: <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
                 </form>
               )}
             </div>
@@ -680,8 +698,8 @@ export default function Home() {
                 <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Contatti</p>
                 <p style={{ color: S.gray, fontSize: 12, lineHeight: 1.9 }}>
                   Via Aeroporto, 31<br />38121 Trento (TN)<br />
-                  <a href="tel:+390461990268" style={{ color: S.gray, textDecoration: 'none' }}>+39 0461 990268</a><br />
-                  <a href="https://wa.me/393484420285" style={{ color: '#22C55E', textDecoration: 'none', fontSize: 11 }}>WhatsApp H24</a><br />
+                  <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.gray, textDecoration: 'none' }}>+39 0461 990268</a><br />
+                  <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} style={{ color: '#22C55E', textDecoration: 'none', fontSize: 11 }}>WhatsApp H24</a><br />
                   <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, textDecoration: 'none', fontSize: 11 }}>info@nardinautotrasporti.it</a>
                 </p>
               </div>
@@ -699,14 +717,14 @@ export default function Home() {
 
       {/* MOBILE STICKY CTA BAR */}
       <div className="mobile-cta-bar" style={{ display: 'none', position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 120, background: '#0A0A0A', borderTop: `1px solid ${S.border}`, padding: '10px 16px', gap: 8 }}>
-        <a href="tel:+390461990268" style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 CHIAMA</a>
-        <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
+        <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 CHIAMA</a>
+        <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
         <button onClick={() => go('contatti')} style={{ flex: 1, background: S.dark, color: S.text, border: `1px solid ${S.border}`, padding: '12px 8px', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>PREVENTIVO</button>
       </div>
 
       {/* WHATSAPP FAB (desktop only) */}
       {!mobile && (
-        <a href="https://wa.me/393484420285" target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 110, background: '#16A34A', color: '#fff', width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', border: '2px solid rgba(255,255,255,0.15)' }}
+        <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 110, background: '#16A34A', color: '#fff', width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', border: '2px solid rgba(255,255,255,0.15)' }}
           onMouseEnter={e => { e.currentTarget.style.background = '#15803D'; e.currentTarget.style.transform = 'scale(1.1)'; }}
           onMouseLeave={e => { e.currentTarget.style.background = '#16A34A'; e.currentTarget.style.transform = 'scale(1)'; }}
         >
