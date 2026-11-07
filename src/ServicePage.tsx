@@ -13,6 +13,8 @@ export type ServicePageProps = {
   caseStudy: { title: string; desc: string; img: string };
   faqs: { q: string; a: string }[];
   defaultService: string;
+  // Optional fleet section (shown between hero and case study).
+  fleet?: { title: string; intro: string; items: { name: string; spec: string; use: string }[] };
 };
 
 export default function ServicePage(p: ServicePageProps) {
@@ -56,6 +58,25 @@ export default function ServicePage(p: ServicePageProps) {
           </div>
         </div>
       </section>
+
+      {/* FLOTTA */}
+      {p.fleet && (
+        <section style={{ padding: mobile ? '50px 0' : '80px 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+            <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(28px,4vw,44px)', color: S.text, marginBottom: 12 }}>{p.fleet.title}</h2>
+            <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.7, maxWidth: 760, marginBottom: 28 }}>{p.fleet.intro}</p>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(auto-fit, minmax(220px, 1fr))', gap: 2, background: S.border }}>
+              {p.fleet.items.map(f => (
+                <div key={f.name} style={{ background: S.dark, padding: '20px 22px' }}>
+                  <h3 style={{ fontFamily: S.bebas, fontSize: 22, color: S.text, marginBottom: 6 }}>{f.name}</h3>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', color: S.orange, textTransform: 'uppercase', marginBottom: 10 }}>{f.spec}</p>
+                  <p style={{ color: S.gray, fontSize: 13, lineHeight: 1.6 }}>{f.use}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CASO STUDIO CORRELATO */}
       <section style={{ padding: mobile ? '50px 0' : '90px 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
