@@ -61,7 +61,7 @@ export default function ServicePage(p: ServicePageProps) {
       <section style={{ padding: mobile ? '50px 0' : '90px 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1.4fr', gap: 32, alignItems: 'center' }}>
           <div style={{ height: mobile ? 200 : 320, overflow: 'hidden', background: S.black }}>
-            <img src={p.caseStudy.img} alt={p.caseStudy.title} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={p.caseStudy.img} alt={p.caseStudy.title} fetchPriority="high" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
             <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 10 }}>Caso Reale</p>

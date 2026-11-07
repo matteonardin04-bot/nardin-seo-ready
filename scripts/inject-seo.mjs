@@ -156,21 +156,25 @@ console.log('SEO static snapshot injected into dist/index.html');
 const PAGES = {
   '/noleggio-autogru-trento': {
     src: 'src/pages/NoleggioAutogru.tsx',
+    image: '/images/progetto-1.webp',
     title: 'Noleggio Autogrù Trento | Effer e Hiab fino a 95 t/m — Nardin',
     description: 'Noleggio autogrù a Trento con operatore. Effer e Hiab fino a 95 t/m, per montaggi industriali, carpenterie metalliche e spazi angusti. Preventivo in 24h.',
   },
   '/trasporti-eccezionali-trentino': {
     src: 'src/pages/TrasportiEccezionali.tsx',
+    image: '/images/progetto-3.webp',
     title: 'Trasporti Eccezionali Trentino | Permessi e Scorta Inclusi — Nardin',
     description: 'Trasporti eccezionali per carichi fuori sagoma in Trentino, Veneto e Lombardia. Permessi speciali e scorta tecnica gestiti internamente. Preventivo gratuito.',
   },
   '/trasporto-gru-edili': {
     src: 'src/pages/TrasportoGruEdili.tsx',
+    image: '/images/progetto-1.webp',
     title: 'Trasporto Gru Edili Trento | Smontaggio e Montaggio Potain — Nardin',
     description: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain e similari a Trento e Nord Italia. Pianificazione logistica completa per cantieri di ogni dimensione.',
   },
   '/logistica-industriale': {
     src: 'src/pages/LogisticaIndustriale.tsx',
+    image: '/images/progetto-2.webp',
     title: 'Logistica Industriale Trento | Movimentazione Macchinari — Nardin',
     description: 'Movimentazione macchinari pesanti, macchine utensili, prefabbricati e carpenteria metallica a Trento e Nord Italia. Soluzioni su misura, preventivo gratuito.',
   },
@@ -189,7 +193,7 @@ function chunkFiles(key, seen = new Set()) {
 const mainFiles = new Set(chunkFiles('index.html'));
 const escapeAttr = v => v.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
-function withHead(baseHtml, { title, description, url, preload }) {
+function withHead(baseHtml, { title, description, url, preload, image }) {
   let out = baseHtml
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeAttr(title)}</title>`)
     .replace(/(<meta name="description" content=")[^"]*(")/, `$1${escapeAttr(description)}$2`)
@@ -199,7 +203,10 @@ function withHead(baseHtml, { title, description, url, preload }) {
     .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escapeAttr(description)}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${escapeAttr(title)}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${escapeAttr(description)}$2`);
-  const links = preload.map(f => `    <link rel="modulepreload" crossorigin href="${f}">`).join('\n');
+  const links = [
+    ...(image ? [`    <link rel="preload" as="image" href="${image}" fetchpriority="high">`] : []),
+    ...preload.map(f => `    <link rel="modulepreload" crossorigin href="${f}">`),
+  ].join('\n');
   if (links) out = out.replace('</head>', `${links}\n  </head>`);
   return out;
 }
@@ -226,6 +233,7 @@ for (const [path, page] of Object.entries(PAGES)) {
     description: page.description,
     url: `${SITE_URL}${path}`,
     preload,
+    image: page.image,
   }));
 }
 console.log(`Per-page HTML written for ${Object.keys(PAGES).length} service pages`);
