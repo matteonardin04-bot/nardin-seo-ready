@@ -46,7 +46,7 @@ export default function ServicePage(p: ServicePageProps) {
             rel="noopener noreferrer"
             style={{ display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: S.orange, fontSize: 13, fontWeight: 700, marginBottom: 32 }}
           >
-            ★★★★★ <span style={{ color: S.text }}>34 recensioni 5 stelle su Google</span>
+            ★★★★★ <span style={{ color: S.text }}>61 recensioni 5 stelle su Google</span>
           </a>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
