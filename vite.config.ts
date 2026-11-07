@@ -13,6 +13,9 @@ export default defineConfig({
   // can't parse that newer syntax and fails to render pages during prerender.
   build: {
     target: 'es2019',
+    // Lets scripts/inject-seo.mjs find each page's code chunk and preload it
+    // in that page's HTML, so lazy-loaded pages don't wait for an extra round trip.
+    manifest: true,
   },
   server: {
     port: 3000,

@@ -13,7 +13,7 @@ export default function TrasportiEccezionali() {
       caseStudy={{
         title: 'Trasporto Eccezionale — Paratoie La Spezia',
         desc: 'Trasporto di paratoie metalliche da 20 metri di lunghezza destinate a un bacino di contenimento a La Spezia. Gestione completa di permessi eccezionali, scorta tecnica e logistica su percorso nazionale.',
-        img: '/images/progetto-3.jpg',
+        img: '/images/progetto-3.webp',
       }}
       faqs={[
         { q: 'Chi si occupa dei permessi per il trasporto eccezionale?', a: 'Ce ne occupiamo internamente noi: autorizzazioni, scorta tecnica e pianificazione del percorso più sicuro.' },

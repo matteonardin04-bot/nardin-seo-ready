@@ -13,7 +13,7 @@ export default function TrasportoGruEdili() {
       caseStudy={{
         title: 'Montaggio Gru Edile Terex FC6.24H — Centro storico',
         desc: 'Montaggio di gru a torre Terex FC6.24 a rotazione in alto per cantiere in centro storico. Altezza di lavoro 18 m, braccio da 24 m. Soluzione studiata per spazi urbani ristretti dove le gru tradizionali non possono operare.',
-        img: '/images/progetto-1.jpg',
+        img: '/images/progetto-1.webp',
       }}
       faqs={[
         { q: 'Gestite anche il montaggio, non solo il trasporto?', a: 'Sì, offriamo il servizio completo: smontaggio, trasporto e rimontaggio della gru sul nuovo cantiere.' },

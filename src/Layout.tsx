@@ -83,7 +83,7 @@ export function Navbar({ mobile }: { mobile: boolean }) {
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent', borderBottom: scrolled ? `1px solid ${S.border}` : '1px solid transparent', padding: scrolled ? '10px 0' : '18px 0', transition: 'all 0.3s' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" style={{ cursor: 'pointer' }}>
-            <img src="/images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 72, width: 'auto', objectFit: 'contain' }} onError={e => { e.currentTarget.style.display = 'none'; }} />
+            <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={72} height={72} style={{ height: 72, width: 'auto', objectFit: 'contain' }} onError={e => { e.currentTarget.style.display = 'none'; }} />
           </Link>
           {!mobile && (
             <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
@@ -119,7 +119,7 @@ export function Footer() {
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 28 }}>
           <div>
-            <img src="/images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
+            <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={56} height={56} loading="lazy" decoding="async" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
             <p style={{ color: S.gray, fontSize: 12, maxWidth: 280, lineHeight: 1.6 }}>Noleggio autogrù, trasporti eccezionali e sollevamenti industriali a Trento dal 1980.</p>
             <p style={{ color: '#374151', fontSize: 11, marginTop: 12, lineHeight: 1.7 }}>
               Nardin Autotrasporti s.n.c. di Nardin Walter e Ivana<br />P.IVA 01762870226 · Albo TN/2053832Z<br />Assicurazione Vettoriale All-Risks
@@ -198,7 +198,6 @@ export function PageChrome({ children }: { children: ReactNode }) {
   return (
     <div style={{ fontFamily: S.inter, background: S.black, color: S.text, overflowX: 'hidden' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         input:focus, textarea:focus, select:focus { border-color: #EA580C !important; }
         @media (max-width: 899px) { .mobile-cta-bar { display: flex !important; } body { padding-bottom: 64px; } }

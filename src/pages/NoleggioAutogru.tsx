@@ -13,7 +13,7 @@ export default function NoleggioAutogru() {
       caseStudy={{
         title: 'Sollevamento Gru Potain 12t — Centro storico Trento',
         desc: 'Montaggio gru a torre in spazio ristretto nel centro storico di Trento. Operazione completata in un solo giorno con autogrù Effer 95 t/m — dove i mezzi tradizionali non possono operare.',
-        img: '/images/progetto-1.jpg',
+        img: '/images/progetto-1.webp',
       }}
       faqs={[
         { q: 'Quanto costa il noleggio autogrù a Trento?', a: 'Il costo dipende da portata richiesta, durata e complessità del sollevamento. Sopralluogo gratuito e preventivo dettagliato entro 24 ore.' },

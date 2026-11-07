@@ -13,7 +13,7 @@ export default function LogisticaIndustriale() {
       caseStudy={{
         title: 'Trasporto Carpenteria Metallica — Capannone industriale Rovereto',
         desc: 'Movimentazione strutture metalliche prefabbricate da 8t per nuovo capannone industriale. Pianale ribassato con scorta tecnica inclusa.',
-        img: '/images/progetto-2.jpg',
+        img: '/images/progetto-2.webp',
       }}
       faqs={[
         { q: 'Che tipo di macchinari movimentate?', a: 'Macchine utensili, impianti industriali, prefabbricati e carpenteria metallica di ogni dimensione e peso.' },

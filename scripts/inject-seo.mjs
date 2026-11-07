@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -146,6 +146,89 @@ let html = readFileSync(indexPath, 'utf-8');
 html = html.replace('<div id="root"></div>', `<div id="root"></div>\n${staticContent}`);
 writeFileSync(indexPath, html);
 console.log('SEO static snapshot injected into dist/index.html');
+
+// --- 1b. Per-page HTML shells ---
+// The site is a single-page app, so before this step every URL was served the
+// homepage's <title>, description and canonical until JavaScript ran. Here we
+// write dist/<page>/index.html for each service page with its own head tags
+// (Netlify serves an existing file before applying the SPA /* redirect), and
+// preload that page's lazy-loaded code chunk so it downloads in parallel.
+const PAGES = {
+  '/noleggio-autogru-trento': {
+    src: 'src/pages/NoleggioAutogru.tsx',
+    title: 'Noleggio Autogrù Trento | Effer e Hiab fino a 95 t/m — Nardin',
+    description: 'Noleggio autogrù a Trento con operatore. Effer e Hiab fino a 95 t/m, per montaggi industriali, carpenterie metalliche e spazi angusti. Preventivo in 24h.',
+  },
+  '/trasporti-eccezionali-trentino': {
+    src: 'src/pages/TrasportiEccezionali.tsx',
+    title: 'Trasporti Eccezionali Trentino | Permessi e Scorta Inclusi — Nardin',
+    description: 'Trasporti eccezionali per carichi fuori sagoma in Trentino, Veneto e Lombardia. Permessi speciali e scorta tecnica gestiti internamente. Preventivo gratuito.',
+  },
+  '/trasporto-gru-edili': {
+    src: 'src/pages/TrasportoGruEdili.tsx',
+    title: 'Trasporto Gru Edili Trento | Smontaggio e Montaggio Potain — Nardin',
+    description: 'Smontaggio, trasporto e rimontaggio di gru a torre Potain e similari a Trento e Nord Italia. Pianificazione logistica completa per cantieri di ogni dimensione.',
+  },
+  '/logistica-industriale': {
+    src: 'src/pages/LogisticaIndustriale.tsx',
+    title: 'Logistica Industriale Trento | Movimentazione Macchinari — Nardin',
+    description: 'Movimentazione macchinari pesanti, macchine utensili, prefabbricati e carpenteria metallica a Trento e Nord Italia. Soluzioni su misura, preventivo gratuito.',
+  },
+};
+
+const manifestPath = resolve(distDir, '.vite/manifest.json');
+const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf-8')) : {};
+
+// All JS files a manifest entry needs (itself + its static imports), as /assets/... URLs.
+function chunkFiles(key, seen = new Set()) {
+  const entry = manifest[key];
+  if (!entry || seen.has(key)) return [];
+  seen.add(key);
+  return [`/${entry.file}`, ...(entry.imports || []).flatMap(k => chunkFiles(k, seen))];
+}
+const mainFiles = new Set(chunkFiles('index.html'));
+const escapeAttr = v => v.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+function withHead(baseHtml, { title, description, url, preload }) {
+  let out = baseHtml
+    .replace(/<title>[^<]*<\/title>/, `<title>${escapeAttr(title)}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*(")/, `$1${escapeAttr(description)}$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${escapeAttr(title)}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${escapeAttr(description)}$2`)
+    .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${escapeAttr(title)}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${escapeAttr(description)}$2`);
+  const links = preload.map(f => `    <link rel="modulepreload" crossorigin href="${f}">`).join('\n');
+  if (links) out = out.replace('</head>', `${links}\n  </head>`);
+  return out;
+}
+
+// Shell before any page-specific preload is added (used as base for service pages).
+const shellHtml = html;
+
+// Homepage: preload its own chunk too.
+const homePreload = chunkFiles('src/pages/Home.tsx').filter(f => !mainFiles.has(f));
+html = withHead(html, {
+  title: html.match(/<title>([^<]*)<\/title>/)[1],
+  description: html.match(/<meta name="description" content="([^"]*)"/)[1],
+  url: `${SITE_URL}/`,
+  preload: homePreload,
+});
+writeFileSync(indexPath, html);
+
+for (const [path, page] of Object.entries(PAGES)) {
+  const dir = resolve(distDir, path.slice(1));
+  mkdirSync(dir, { recursive: true });
+  const preload = chunkFiles(page.src).filter(f => !mainFiles.has(f));
+  writeFileSync(resolve(dir, 'index.html'), withHead(shellHtml, {
+    title: page.title,
+    description: page.description,
+    url: `${SITE_URL}${path}`,
+    preload,
+  }));
+}
+console.log(`Per-page HTML written for ${Object.keys(PAGES).length} service pages`);
 
 // --- 2. Generate sitemap.xml dynamically from ROUTES, every build ---
 const today = new Date().toISOString().split('T')[0];

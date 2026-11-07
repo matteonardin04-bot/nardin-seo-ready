@@ -22,27 +22,27 @@ function trackWhatsAppClick() {
 
 const fleetData = [
   // GRU
-  { id: 'g1', name: 'EFFER 955 6S + JIB 6S', cat: 'Gru', cap: '734 kNm — Sbraccio 30+ m', img: 'images/gru-1.jpg', desc: 'La nostra gru di punta. Portata massima 24 t, sbraccio idraulico fino a 16 m che con il Jib 6S raggiunge oltre 30 m. Sistema PROGRESS 2.0. Per sollevamenti industriali pesanti dove altri mezzi non arrivano.' },
-  { id: 'g2', name: 'EFFER 685', cat: 'Gru', cap: 'Portata max 19 t — Sbraccio 30 m', img: 'images/gru-2.jpg', desc: 'Portata massima 19 t, sbraccio fino a 30 m con Jib. Riferimento per cantieri edili complessi e montaggi di carpenteria metallica. Perfetto equilibrio tra portata e sbraccio.' },
-  { id: 'g3', name: 'HIAB IQ 708', cat: 'Gru', cap: '60-70 t/m — Sbraccio verticale 40 m', img: 'images/gru-3.jpg', desc: 'Gru di nuova generazione nella classe 60-70 t/m. Sbraccio verticale fino a 40 m, sistema di controllo SPACEevo per movimenti di precisione millimetrica. Ideale per montaggi industriali complessi.' },
-  { id: 'g4', name: 'EFFER 525 6S + JIB 6S', cat: 'Gru', cap: '446 kNm — Versatile e precisa', img: 'images/gru-4.jpg', desc: 'Coppia di carico 446 kNm. Con il Jib 6S raggiunge sbracci importanti mantenendo agilità di manovra. La scelta per cantieri in spazi angusti e zone alpine difficili.' },
-  { id: 'g5', name: 'EFFER 375', cat: 'Gru', cap: 'Compatta e agile — Centri urbani', img: 'images/gru-5.jpg', desc: 'La più agile della flotta. Compatta, veloce da posizionare, ideale per interventi rapidi in centri urbani, cantieri con accesso limitato e lavori dove la velocità di set-up fa la differenza.' },
+  { id: 'g1', name: 'EFFER 955 6S + JIB 6S', cat: 'Gru', cap: '734 kNm — Sbraccio 30+ m', img: '/images/gru-1.webp', desc: 'La nostra gru di punta. Portata massima 24 t, sbraccio idraulico fino a 16 m che con il Jib 6S raggiunge oltre 30 m. Sistema PROGRESS 2.0. Per sollevamenti industriali pesanti dove altri mezzi non arrivano.' },
+  { id: 'g2', name: 'EFFER 685', cat: 'Gru', cap: 'Portata max 19 t — Sbraccio 30 m', img: '/images/gru-2.webp', desc: 'Portata massima 19 t, sbraccio fino a 30 m con Jib. Riferimento per cantieri edili complessi e montaggi di carpenteria metallica. Perfetto equilibrio tra portata e sbraccio.' },
+  { id: 'g3', name: 'HIAB IQ 708', cat: 'Gru', cap: '60-70 t/m — Sbraccio verticale 40 m', img: '/images/gru-3.webp', desc: 'Gru di nuova generazione nella classe 60-70 t/m. Sbraccio verticale fino a 40 m, sistema di controllo SPACEevo per movimenti di precisione millimetrica. Ideale per montaggi industriali complessi.' },
+  { id: 'g4', name: 'EFFER 525 6S + JIB 6S', cat: 'Gru', cap: '446 kNm — Versatile e precisa', img: '/images/gru-4.webp', desc: 'Coppia di carico 446 kNm. Con il Jib 6S raggiunge sbracci importanti mantenendo agilità di manovra. La scelta per cantieri in spazi angusti e zone alpine difficili.' },
+  { id: 'g5', name: 'EFFER 375', cat: 'Gru', cap: 'Compatta e agile — Centri urbani', img: '/images/gru-5.webp', desc: 'La più agile della flotta. Compatta, veloce da posizionare, ideale per interventi rapidi in centri urbani, cantieri con accesso limitato e lavori dove la velocità di set-up fa la differenza.' },
   // CAMION
-  { id: 'c1', name: 'SCANIA R770 4 ASSI', cat: 'Camion', cap: '770 CV — V8', img: 'images/camion-1.jpg', desc: 'Motrice di punta della flotta. 770 CV V8, 4 assi per i carichi più impegnativi. Abbinata alla gru Effer 955 per i sollevamenti più pesanti.' },
-  { id: 'c2', name: 'SCANIA R730 4 ASSI', cat: 'Camion', cap: '730 CV — V8', img: 'images/camion-2.jpg', desc: 'Potenza V8 da 730 CV su 4 assi. Abbinata alla gru Effer 685 per cantieri edili complessi e montaggi di carpenteria metallica.' },
+  { id: 'c1', name: 'SCANIA R770 4 ASSI', cat: 'Camion', cap: '770 CV — V8', img: '/images/camion-1.webp', desc: 'Motrice di punta della flotta. 770 CV V8, 4 assi per i carichi più impegnativi. Abbinata alla gru Effer 955 per i sollevamenti più pesanti.' },
+  { id: 'c2', name: 'SCANIA R730 4 ASSI', cat: 'Camion', cap: '730 CV — V8', img: '/images/camion-2.webp', desc: 'Potenza V8 da 730 CV su 4 assi. Abbinata alla gru Effer 685 per cantieri edili complessi e montaggi di carpenteria metallica.' },
   { id: 'c3', name: 'SCANIA R660 4 ASSI', cat: 'Camion', cap: '660 CV — 4 Assi', img: '', desc: 'Motrice robusta a 4 assi abbinata alla Hiab IQ 708. Potenza e stabilità per i lavori più impegnativi in tutto il Nord Italia.' },
-  { id: 'c4', name: 'VOLVO FH650 3 ASSI', cat: 'Camion', cap: '650 CV — 3 Assi', img: 'images/camion-4.jpg', desc: 'Trattore Volvo FH650 3 assi abbinato alla gru Effer 525. Equilibrio perfetto tra potenza, capacità di carico e agilità di manovra.' },
-  { id: 'c5', name: 'MERCEDES 2 ASSI', cat: 'Camion', cap: 'Agile — Centri urbani', img: 'images/camion-5.jpg', desc: 'Motrice compatta a 2 assi abbinata alla Effer 375. Veloce da posizionare, ideale per interventi in centri urbani e cantieri con accesso limitato.' },
-  { id: 'c6', name: 'SCANIA S520 2 ASSI', cat: 'Camion', cap: '520 CV V8 — Trattore stradale', img: 'images/camion-6.jpg', desc: 'Trattore stradale V8 da 520 CV dedicato al traino di semirimorchi ribassati per trasporti eccezionali su tutto il territorio nazionale.' },
-  { id: 'c7', name: 'SCANIA R560 2 ASSI', cat: 'Camion', cap: '560 CV V8 — Trattore stradale', img: 'images/camion-7.jpg', desc: 'Trattore stradale V8 da 560 CV per trasporti a lungo raggio e logistica pesante. Potenza e affidabilità per ogni missione.' },
+  { id: 'c4', name: 'VOLVO FH650 3 ASSI', cat: 'Camion', cap: '650 CV — 3 Assi', img: '/images/camion-4.webp', desc: 'Trattore Volvo FH650 3 assi abbinato alla gru Effer 525. Equilibrio perfetto tra potenza, capacità di carico e agilità di manovra.' },
+  { id: 'c5', name: 'MERCEDES 2 ASSI', cat: 'Camion', cap: 'Agile — Centri urbani', img: '/images/camion-5.webp', desc: 'Motrice compatta a 2 assi abbinata alla Effer 375. Veloce da posizionare, ideale per interventi in centri urbani e cantieri con accesso limitato.' },
+  { id: 'c6', name: 'SCANIA S520 2 ASSI', cat: 'Camion', cap: '520 CV V8 — Trattore stradale', img: '/images/camion-6.webp', desc: 'Trattore stradale V8 da 520 CV dedicato al traino di semirimorchi ribassati per trasporti eccezionali su tutto il territorio nazionale.' },
+  { id: 'c7', name: 'SCANIA R560 2 ASSI', cat: 'Camion', cap: '560 CV V8 — Trattore stradale', img: '/images/camion-7.webp', desc: 'Trattore stradale V8 da 560 CV per trasporti a lungo raggio e logistica pesante. Potenza e affidabilità per ogni missione.' },
   // RIMORCHI
-  { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI", cat: 'Rimorchi', cap: '3 Assi — Rampe idrauliche', img: 'images/rimorchio-1.jpg', desc: "Pianale ribassato a 3 assi con rampe idrauliche per il carico di mezzi d'opera e macchinari industriali. Ideale per escavatori, pale e attrezzature da cantiere." },
-  { id: 'r2', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi pesanti', img: 'images/rimorchio-2.jpg', desc: 'Pianale ribassato a 4 assi con rampe idrauliche per carichi pesanti e fuori norma. Massima capacità di carico per macchinari industriali di grandi dimensioni.' },
-  { id: 'r3', name: 'PIANALE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Sponde ribaltabili', img: 'images/rimorchio-3.jpg', desc: 'Pianale a 3 assi con sponde ribaltabili. Versatile per il trasporto di materiali sfusi, prefabbricati e carichi che richiedono contenimento laterale.' },
-  { id: 'r4', name: 'CULLA RIBASSATA 3 ASSI', cat: 'Rimorchi', cap: 'Piano ultra-ribassato', img: 'images/rimorchio-4.jpg', desc: 'Semirimorchio a culla ribassata su 3 assi per carichi con altezza elevata. La soluzione ideale per macchine agricole, operatrici e macchinari fuori sagoma in altezza.' },
-  { id: 'r5', name: 'CENTINATO 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Teli scorrevoli', img: 'images/rimorchio-5.jpg', desc: 'Semirimorchio centinato a 3 assi con teli scorrevoli per il trasporto di merci pallettizzate e carichi che richiedono protezione dagli agenti atmosferici.' },
-  { id: 'r6', name: 'PIANALE CORTO CON SPONDE 2 ASSI', cat: 'Rimorchi', cap: '2 Assi — Compatto e agile', img: 'images/rimorchio-6.jpg', desc: 'Pianale corto a 2 assi con sponde ribaltabili. Compatto e manovrabile, ideale per trasporti in centri urbani e cantieri con accesso limitato.' },
-  { id: 'r7', name: 'PIANALE ALLUNGABILE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Lunghezza variabile', img: 'images/rimorchio-7.jpg', desc: 'Pianale allungabile a 3 assi con sponde per travi, carpenteria metallica e carichi longitudinali eccezionali. La lunghezza variabile si adatta a ogni esigenza.' },
+  { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI", cat: 'Rimorchi', cap: '3 Assi — Rampe idrauliche', img: '/images/rimorchio-1.webp', desc: "Pianale ribassato a 3 assi con rampe idrauliche per il carico di mezzi d'opera e macchinari industriali. Ideale per escavatori, pale e attrezzature da cantiere." },
+  { id: 'r2', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi pesanti', img: '/images/rimorchio-2.webp', desc: 'Pianale ribassato a 4 assi con rampe idrauliche per carichi pesanti e fuori norma. Massima capacità di carico per macchinari industriali di grandi dimensioni.' },
+  { id: 'r3', name: 'PIANALE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Sponde ribaltabili', img: '/images/rimorchio-3.webp', desc: 'Pianale a 3 assi con sponde ribaltabili. Versatile per il trasporto di materiali sfusi, prefabbricati e carichi che richiedono contenimento laterale.' },
+  { id: 'r4', name: 'CULLA RIBASSATA 3 ASSI', cat: 'Rimorchi', cap: 'Piano ultra-ribassato', img: '/images/rimorchio-4.webp', desc: 'Semirimorchio a culla ribassata su 3 assi per carichi con altezza elevata. La soluzione ideale per macchine agricole, operatrici e macchinari fuori sagoma in altezza.' },
+  { id: 'r5', name: 'CENTINATO 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Teli scorrevoli', img: '/images/rimorchio-5.webp', desc: 'Semirimorchio centinato a 3 assi con teli scorrevoli per il trasporto di merci pallettizzate e carichi che richiedono protezione dagli agenti atmosferici.' },
+  { id: 'r6', name: 'PIANALE CORTO CON SPONDE 2 ASSI', cat: 'Rimorchi', cap: '2 Assi — Compatto e agile', img: '/images/rimorchio-6.webp', desc: 'Pianale corto a 2 assi con sponde ribaltabili. Compatto e manovrabile, ideale per trasporti in centri urbani e cantieri con accesso limitato.' },
+  { id: 'r7', name: 'PIANALE ALLUNGABILE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Lunghezza variabile', img: '/images/rimorchio-7.webp', desc: 'Pianale allungabile a 3 assi con sponde per travi, carpenteria metallica e carichi longitudinali eccezionali. La lunghezza variabile si adatta a ogni esigenza.' },
 ];
 
 const categories = ['Gru', 'Camion', 'Rimorchi'];
@@ -55,9 +55,9 @@ const testimonials = [
 ];
 
 const projects = [
-  { id: 'p1', title: 'Sollevamento Strutture Cemento', cat: 'Cantieristica', img: 'images/progetto-1.jpg' },
-  { id: 'p2', title: 'Logistica Vigneti Eroici', cat: 'Agricoltura', img: 'images/progetto-2.jpg' },
-  { id: 'p3', title: 'Movimentazione Gru Potain', cat: 'Trasporti Speciali', img: 'images/progetto-3.jpg' },
+  { id: 'p1', title: 'Sollevamento Strutture Cemento', cat: 'Cantieristica', img: '/images/progetto-1.webp' },
+  { id: 'p2', title: 'Logistica Vigneti Eroici', cat: 'Agricoltura', img: '/images/progetto-2.webp' },
+  { id: 'p3', title: 'Movimentazione Gru Potain', cat: 'Trasporti Speciali', img: '/images/progetto-3.webp' },
 ];
 
 const caseStudies = [
@@ -66,21 +66,21 @@ const caseStudies = [
     sub: 'Centro storico — Gru a rotazione in alto',
     desc: 'Montaggio di gru a torre Terex FC6.24 a rotazione in alto per cantiere in centro storico. Altezza di lavoro 18 m, braccio da 24 m. Soluzione studiata per spazi urbani ristretti dove le gru tradizionali non possono operare.',
     tags: ['Terex FC6.24', 'Altezza 18 m — Braccio 24 m', 'Centro storico'],
-    img: 'images/progetto-1.jpg',
+    img: '/images/progetto-1.webp',
   },
   {
     title: 'Montaggio Impianto Lavorazione Legname',
     sub: 'Montaggio industriale in combinata',
     desc: 'Installazione di impianto per lavorazione legname da 8 tonnellate con impiego simultaneo di due autogrù in combinata. La doppia gru si è resa necessaria per gestire le dimensioni e l\'altezza dell\'impianto in sicurezza.',
     tags: ['Doppia gru in combinata', '8 tonnellate', 'Montaggio industriale'],
-    img: 'images/progetto-2.jpg',
+    img: '/images/progetto-2.webp',
   },
   {
     title: 'Trasporto Eccezionale — Paratoie La Spezia',
     sub: 'Bacino di contenimento — La Spezia',
     desc: 'Trasporto di paratoie metalliche da 20 metri di lunghezza destinate a un bacino di contenimento a La Spezia. Gestione completa di permessi eccezionali, scorta tecnica e logistica su percorso nazionale.',
     tags: ['Trasporto Eccezionale', '20 m lunghezza', 'La Spezia'],
-    img: 'images/progetto-3.jpg',
+    img: '/images/progetto-3.webp',
   },
 ];
 
@@ -153,7 +153,6 @@ export default function Home() {
     <div style={{ fontFamily: S.inter, background: S.black, color: S.text, overflowX: 'hidden' }}>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
         #ticker { animation: ticker 35s linear infinite; display: flex; white-space: nowrap; }
@@ -208,7 +207,7 @@ export default function Home() {
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent', borderBottom: scrolled ? `1px solid ${S.border}` : '1px solid transparent', padding: scrolled ? '10px 0' : '18px 0', transition: 'all 0.3s' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" style={{ cursor: 'pointer' }}>
-            <img src="images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 72, width: 'auto', objectFit: 'contain' }} onError={e => { e.currentTarget.style.display = 'none'; }} />
+            <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={72} height={72} style={{ height: 72, width: 'auto', objectFit: 'contain' }} onError={e => { e.currentTarget.style.display = 'none'; }} />
           </Link>
           {!mobile && (
             <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
@@ -243,7 +242,7 @@ export default function Home() {
       {/* HERO */}
       <section id="home" style={{ position: 'relative', minHeight: mobile ? '92svh' : '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: mobile ? 48 : 80, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0 }}>
-          <img src="images/hero.jpg" alt="Nardin Autotrasporti — Sollevamenti industriali e trasporti speciali Trento" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25 }} />
+          <img src="/images/hero.webp" fetchPriority="high" alt="Nardin Autotrasporti — Sollevamenti industriali e trasporti speciali Trento" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25 }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #0A0A0A 40%, transparent 100%)' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0A0A0A 20%, transparent 70%)' }} />
         </div>
@@ -339,7 +338,7 @@ export default function Home() {
       <section id="chi-siamo" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? 40 : 80, alignItems: 'center' }}>
           <div style={{ position: 'relative' }}>
-            <img src="images/about.jpg" alt="Walter e Ivana Nardin — Nardin Autotrasporti Trento" onError={e => (e.currentTarget.style.display = 'none')} style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
+            <img src="/images/about.webp" loading="lazy" decoding="async" alt="Walter e Ivana Nardin — Nardin Autotrasporti Trento" onError={e => (e.currentTarget.style.display = 'none')} style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
             <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20, background: 'rgba(10,10,10,0.92)', border: `1px solid ${S.border}`, padding: '18px 22px' }}>
               <p style={{ fontFamily: S.bebas, fontSize: 18, letterSpacing: '0.05em', color: S.text, marginBottom: 5 }}>"La nostra forza è l'uomo dietro la macchina."</p>
               <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase' }}>Walter & Ivana Nardin</p>
@@ -426,7 +425,7 @@ export default function Home() {
             {caseStudies.map((c, i) => (
               <div key={i} style={{ background: S.dark, overflow: 'hidden' }}>
                 <div style={{ height: 200, overflow: 'hidden', position: 'relative' }}>
-                  <img src={c.img} alt={c.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(30%)', transition: 'transform 0.6s' }}
+                  <img src={c.img} alt={c.title} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(30%)', transition: 'transform 0.6s' }}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'grayscale(30%)'; }}
                   />
@@ -502,7 +501,7 @@ export default function Home() {
                 onMouseLeave={e => (e.currentTarget.style.background = S.black)}
               >
                 <div style={{ height: 190, overflow: 'hidden', position: 'relative' }}>
-                  <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                  <img src={item.img} alt={item.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                     onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
                     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
                   />
@@ -676,7 +675,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 28 }}>
             <div>
-              <img src="images/logo-nardin.png" alt="Nardin Autotrasporti" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
+              <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={56} height={56} loading="lazy" decoding="async" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
               <p style={{ color: S.gray, fontSize: 12, maxWidth: 280, lineHeight: 1.6 }}>Noleggio autogrù, trasporti eccezionali e sollevamenti industriali a Trento dal 1980.</p>
               <p style={{ color: '#374151', fontSize: 11, marginTop: 12, lineHeight: 1.7 }}>
                 Nardin Autotrasporti s.n.c. di Nardin Walter e Ivana<br />
