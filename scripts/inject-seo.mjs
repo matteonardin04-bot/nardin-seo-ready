@@ -150,7 +150,7 @@ console.log('SEO static snapshot injected into dist/index.html');
 // --- 1b. Per-page HTML shells ---
 // The site is a single-page app, so before this step every URL was served the
 // homepage's <title>, description and canonical until JavaScript ran. Here we
-// write dist/<page>/index.html for each service page with its own head tags
+// write dist/<page>.html for each service page with its own head tags
 // (Netlify serves an existing file before applying the SPA /* redirect), and
 // preload that page's lazy-loaded code chunk so it downloads in parallel.
 const PAGES = {
@@ -218,10 +218,10 @@ html = withHead(html, {
 writeFileSync(indexPath, html);
 
 for (const [path, page] of Object.entries(PAGES)) {
-  const dir = resolve(distDir, path.slice(1));
-  mkdirSync(dir, { recursive: true });
+  // Written as <page>.html (not <page>/index.html): Netlify serves it at /<page>
+  // directly, whereas a folder would trigger a 301 redirect to /<page>/.
   const preload = chunkFiles(page.src).filter(f => !mainFiles.has(f));
-  writeFileSync(resolve(dir, 'index.html'), withHead(shellHtml, {
+  writeFileSync(resolve(distDir, `${path.slice(1)}.html`), withHead(shellHtml, {
     title: page.title,
     description: page.description,
     url: `${SITE_URL}${path}`,
