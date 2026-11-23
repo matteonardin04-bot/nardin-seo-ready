@@ -65,16 +65,16 @@ const staticContent = `
       <section id="casi-studio">
         <h2>Casi Studio — Lavori Recenti</h2>
         <article>
-          <h3>Sollevamento Gru Potain 12t — Centro storico Trento</h3>
-          <p>Montaggio gru a torre in spazio ristretto nel centro storico. Operazione completata in un solo giorno con autogrù Effer 95 t/m.</p>
+          <h3>Montaggio Gru Edile Terex FC6.24H — Centro storico</h3>
+          <p>Montaggio di gru a torre Terex FC6.24 a rotazione in alto per cantiere in centro storico. Altezza di lavoro 18 m, braccio da 24 m, in spazi urbani ristretti.</p>
         </article>
         <article>
-          <h3>Trasporto Carpenteria Metallica — Capannone industriale Rovereto</h3>
-          <p>Movimentazione strutture metalliche prefabbricate da 8t per nuovo capannone industriale. Pianale ribassato con scorta tecnica inclusa.</p>
+          <h3>Montaggio Impianto Lavorazione Legname — Doppia gru in combinata</h3>
+          <p>Installazione di un impianto da 8 tonnellate con due autogrù in combinata, per gestire dimensioni e altezza dell'impianto in sicurezza.</p>
         </article>
         <article>
-          <h3>Logistica Vigneti Eroici — Valli del Trentino</h3>
-          <p>Trasporto attrezzature agricole in zona alpina impervia. Soluzione su misura per terreni difficili con mezzi specializzati.</p>
+          <h3>Trasporto Eccezionale — Paratoie La Spezia</h3>
+          <p>Trasporto di paratoie metalliche da 20 metri per un bacino di contenimento a La Spezia, con permessi eccezionali, scorta tecnica e logistica su percorso nazionale.</p>
         </article>
       </section>
 
@@ -82,23 +82,30 @@ const staticContent = `
         <h2>Parco Mezzi — Flotta Proprietaria</h2>
         <h3>Autogrù</h3>
         <ul>
-          <li>Motrice Scania R770 4 assi + Effer 955 — 95 t/m, 770 CV</li>
-          <li>Motrice Scania R730 4 assi + Gru Effer — V8 730 CV</li>
-          <li>Trattore Volvo 3 assi + Effer 525 — 52.5 t/m</li>
-          <li>Trattore Mercedes 2 assi + Effer 375 — 37.5 t/m</li>
+          <li>Effer 955 6S + Jib 6S — 734 kNm, sbraccio oltre 30 m</li>
+          <li>Effer 685 — portata max 19 t, sbraccio 30 m</li>
+          <li>Hiab iQ 708 — classe 60-70 t/m, sbraccio verticale 40 m</li>
+          <li>Effer 525 6S + Jib 6S — 446 kNm</li>
+          <li>Effer 375 — compatta, per centri urbani</li>
         </ul>
         <h3>Camion</h3>
         <ul>
-          <li>Trattore Scania S520 2 assi — 520 CV V8</li>
-          <li>Trattore Scania R560 2 assi — 560 CV V8</li>
+          <li>Scania R770 4 assi — 770 CV V8</li>
+          <li>Scania R730 4 assi — 730 CV V8</li>
+          <li>Scania R660 4 assi — 660 CV</li>
+          <li>Volvo FH650 3 assi — 650 CV</li>
+          <li>Mercedes 2 assi</li>
+          <li>Scania S520 2 assi — 520 CV V8</li>
+          <li>Scania R560 2 assi — 560 CV V8</li>
         </ul>
         <h3>Rimorchi</h3>
         <ul>
-          <li>Pianale Collo d'Oca 3 e 4 assi con rampe</li>
-          <li>Semirimorchio Culla Ribassato 3 assi</li>
-          <li>Pianale Allungabile 3 assi</li>
-          <li>Pianale Passo Corto 2 assi</li>
-          <li>Semirimorchio Centinato 3 assi</li>
+          <li>Pianale collo d'oca 3 e 4 assi con rampe idrauliche</li>
+          <li>Pianale con sponde 3 assi</li>
+          <li>Culla ribassata 3 assi</li>
+          <li>Centinato 3 assi</li>
+          <li>Pianale corto con sponde 2 assi</li>
+          <li>Pianale allungabile con sponde 3 assi</li>
         </ul>
       </section>
 
