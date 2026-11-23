@@ -11,9 +11,9 @@ export default function NoleggioAutogru() {
       intro="Autogrù Effer e Hiab fino a 95 t/m con operatore esperto, per montaggi industriali, carpenterie metalliche e movimentazioni in spazi angusti nel centro storico e nei cantieri del Trentino."
       bullets={['Effer fino a 95 t/m', 'Con Operatore', 'Spazi Angusti', 'Preventivo 24h']}
       caseStudy={{
-        title: 'Sollevamento Gru Potain 12t — Centro storico Trento',
-        desc: 'Montaggio gru a torre in spazio ristretto nel centro storico di Trento. Operazione completata in un solo giorno con autogrù Effer 95 t/m — dove i mezzi tradizionali non possono operare.',
-        img: '/images/progetto-1.webp',
+        title: 'Montaggio Impianto Lavorazione Legname — Doppia autogrù in combinata',
+        desc: 'Installazione di impianto per lavorazione legname da 8 tonnellate con impiego simultaneo di due autogrù in combinata. La doppia gru si è resa necessaria per gestire le dimensioni e l\'altezza dell\'impianto in sicurezza.',
+        img: '/images/progetto-2.webp',
       }}
       faqs={[
         { q: 'Quanto costa il noleggio autogrù a Trento?', a: 'Il costo dipende da portata richiesta, durata e complessità del sollevamento. Sopralluogo gratuito e preventivo dettagliato entro 24 ore.' },

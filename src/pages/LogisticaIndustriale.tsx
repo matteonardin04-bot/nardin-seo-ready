@@ -11,9 +11,9 @@ export default function LogisticaIndustriale() {
       intro="Movimentazione macchinari pesanti, macchine utensili, prefabbricati e carpenteria metallica: soluzioni logistiche su misura per l'industria del Trentino e del Nord Italia."
       bullets={['Macchinari Pesanti', 'Prefabbricati', 'Su Misura', 'Flotta Propria']}
       caseStudy={{
-        title: 'Trasporto Carpenteria Metallica — Capannone industriale Rovereto',
-        desc: 'Movimentazione strutture metalliche prefabbricate da 8t per nuovo capannone industriale. Pianale ribassato con scorta tecnica inclusa.',
-        img: '/images/progetto-2.webp',
+        title: 'Trasporto Eccezionale — Paratoie La Spezia',
+        desc: 'Trasporto di paratoie metalliche da 20 metri di lunghezza destinate a un bacino di contenimento a La Spezia. Gestione completa di permessi eccezionali, scorta tecnica e logistica su percorso nazionale.',
+        img: '/images/progetto-3.webp',
       }}
       faqs={[
         { q: 'Che tipo di macchinari movimentate?', a: 'Macchine utensili, impianti industriali, prefabbricati e carpenteria metallica di ogni dimensione e peso.' },
