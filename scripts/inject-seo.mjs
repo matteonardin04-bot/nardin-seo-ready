@@ -108,8 +108,9 @@ const staticContent = `
           <li>Pianale collo d'oca 3 e 4 assi con rampe idrauliche</li>
           <li>Pianale con sponde 3 assi</li>
           <li>Culla ribassata 3 assi</li>
-          <li>Centinato 3 assi</li>
           <li>Pianale corto con sponde 2 assi</li>
+          <li>Rimorchio con sponde 3 assi</li>
+          <li>Rimorchio pianale con rampe 3 assi</li>
           <li>Pianale allungabile con sponde 3 assi</li>
         </ul>
       </section>
