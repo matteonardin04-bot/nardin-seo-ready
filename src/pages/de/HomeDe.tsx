@@ -39,12 +39,13 @@ const fleetData = [
   { id: 'c7', name: 'SCANIA R560 2 ACHSEN', cat: 'Camion', cap: '560 PS V8 — Sattelzugmaschine', img: '/images/camion-7.webp', desc: 'V8-Sattelzugmaschine mit 560 PS für Langstreckentransporte und Schwerlastlogistik. Leistung und Zuverlässigkeit für jeden Einsatz.' },
   // RIMORCHI
   { id: 'r1', name: "SATTELTIEFLADER 3 ACHSEN", cat: 'Rimorchi', cap: '3 Achsen — hydraulische Rampen', img: '/images/rimorchio-1.webp', desc: "Tieflader mit 3 Achsen und hydraulischen Rampen für Baumaschinen und Industrieanlagen. Ideal für Bagger, Radlader und Baustellengerät." },
-  { id: 'r2', name: "SATTELTIEFLADER 4 ACHSEN", cat: 'Rimorchi', cap: '4 Achsen — Schwerlast', img: '/images/rimorchio-2.webp', desc: 'Tieflader mit 4 Achsen und hydraulischen Rampen für schwere und übergroße Lasten. Maximale Nutzlast für große Industriemaschinen.' },
+  { id: 'r2', name: "SATTELTIEFLADER 4 ACHSEN", cat: 'Rimorchi', cap: '4 Achsen — Schwerlast', img: '', desc: 'Tieflader mit 4 Achsen und hydraulischen Rampen für schwere und übergroße Lasten. Maximale Nutzlast für große Industriemaschinen.' },
   { id: 'r3', name: 'PRITSCHENAUFLIEGER 3 ACHSEN', cat: 'Rimorchi', cap: '3 Achsen — klappbare Bordwände', img: '/images/rimorchio-3.webp', desc: 'Pritschenauflieger mit 3 Achsen und klappbaren Bordwänden. Vielseitig für Schüttgut, Fertigteile und Ladungen mit seitlicher Sicherung.' },
   { id: 'r4', name: 'TIEFBETTAUFLIEGER 3 ACHSEN', cat: 'Rimorchi', cap: 'Extra tiefe Ladefläche', img: '/images/rimorchio-4.webp', desc: 'Tiefbettauflieger mit 3 Achsen für hohe Ladungen. Die ideale Lösung für Landmaschinen, Arbeitsmaschinen und überhohe Anlagen.' },
-  { id: 'r5', name: 'PLANENAUFLIEGER 3 ACHSEN', cat: 'Rimorchi', cap: '3 Achsen — Schiebeplanen', img: '/images/rimorchio-5.webp', desc: 'Planenauflieger mit 3 Achsen und Schiebeplanen für Palettenware und witterungsempfindliche Ladungen.' },
+  { id: 'r8', name: 'ANHÄNGER MIT BORDWÄNDEN 3 ACHSEN', cat: 'Rimorchi', cap: '3 Achsen — Alu-Bordwände', img: '/images/rimorchio-8.webp', desc: 'Schwarzmüller-Deichselanhänger mit 3 Achsen und klappbaren Alu-Bordwänden. Ideal für Baumaterial, Fertigteile und Ladungen mit seitlicher Sicherung: am Motorwagen erhöht er die Nutzlast jeder Fahrt.' },
+  { id: 'r9', name: 'PLATEAUANHÄNGER MIT RAMPEN 3 ACHSEN', cat: 'Rimorchi', cap: '3 Achsen — Auffahrrampen', img: '/images/rimorchio-9.webp', desc: 'FGM-Deichselanhänger mit 3 Achsen, Plateau und Auffahrrampen. Für Minibagger, Arbeitsbühnen und Baumaschinen, die ohne Kran selbst auffahren.' },
   { id: 'r6', name: 'KURZER PRITSCHENAUFLIEGER 2 ACHSEN', cat: 'Rimorchi', cap: '2 Achsen — kompakt und wendig', img: '/images/rimorchio-6.webp', desc: 'Kurzer Pritschenauflieger mit 2 Achsen und klappbaren Bordwänden. Kompakt und wendig, ideal für Innenstädte und Baustellen mit eingeschränkter Zufahrt.' },
-  { id: 'r7', name: 'AUSZIEHBARER PRITSCHENAUFLIEGER 3 ACHSEN', cat: 'Rimorchi', cap: '3 Achsen — variable Länge', img: '/images/rimorchio-7.webp', desc: 'Ausziehbarer Auflieger mit 3 Achsen und Bordwänden für Träger, Stahlbau und überlange Ladungen. Die variable Länge passt sich jedem Bedarf an.' },
+  { id: 'r7', name: 'AUSZIEHBARER PRITSCHENAUFLIEGER 3 ACHSEN', cat: 'Rimorchi', cap: '3 Achsen — variable Länge', img: '', desc: 'Ausziehbarer Auflieger mit 3 Achsen und Bordwänden für Träger, Stahlbau und überlange Ladungen. Die variable Länge passt sich jedem Bedarf an.' },
 ];
 
 const categories = ['Gru', 'Camion', 'Rimorchi'];
@@ -168,7 +169,7 @@ export default function HomeDe() {
         <div onClick={() => setModalId(null)} style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.88)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
           <div onClick={e => e.stopPropagation()} style={{ background: S.dark, border: `1px solid ${S.border}`, maxWidth: 680, width: '100%', overflow: 'hidden' }}>
             <div style={{ height: 280, overflow: 'hidden', position: 'relative' }}>
-              <img src={modal.img} alt={modal.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              {modal.img ? <img src={modal.img} alt={modal.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#161616', color: S.gray, fontSize: 14, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Foto folgt</div>}
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #111 0%, transparent 60%)' }} />
               <button onClick={() => setModalId(null)} style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(0,0,0,0.7)', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', fontSize: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
               <span style={{ position: 'absolute', bottom: 16, left: 20, background: S.orange, color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>{({ Gru: 'Krane', Camion: 'Lkw', Rimorchi: 'Auflieger' } as Record<string, string>)[modal.cat]}</span>
@@ -507,10 +508,12 @@ export default function HomeDe() {
                 onMouseLeave={e => (e.currentTarget.style.background = S.black)}
               >
                 <div style={{ height: 190, overflow: 'hidden', position: 'relative' }}>
-                  <img src={item.img} alt={item.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
-                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-                  />
+                  {item.img ? (
+                    <img src={item.img} alt={item.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                      onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+                      onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                    />
+                  ) : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#161616', color: S.gray, fontSize: 14, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Foto folgt</div>}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)' }} />
                 </div>
                 <div style={{ padding: 18 }}>
