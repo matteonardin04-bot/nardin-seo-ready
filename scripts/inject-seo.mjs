@@ -18,6 +18,11 @@ const ROUTES = [
   { path: '/trasporti-eccezionali-trentino', priority: '0.9', changefreq: 'monthly' },
   { path: '/trasporto-gru-edili', priority: '0.9', changefreq: 'monthly' },
   { path: '/logistica-industriale', priority: '0.9', changefreq: 'monthly' },
+  { path: '/de', priority: '0.9', changefreq: 'monthly' },
+  { path: '/de/autokranvermietung-trient', priority: '0.8', changefreq: 'monthly' },
+  { path: '/de/schwertransporte-trentino', priority: '0.8', changefreq: 'monthly' },
+  { path: '/de/baukran-transport-montage', priority: '0.8', changefreq: 'monthly' },
+  { path: '/de/industrielogistik', priority: '0.8', changefreq: 'monthly' },
 ];
 
 const staticContent = `
@@ -187,6 +192,59 @@ const PAGES = {
   },
 };
 
+// Versioni tedesche
+Object.assign(PAGES, {
+  '/de': {
+    src: 'src/pages/de/HomeDe.tsx',
+    image: '/images/hero.webp',
+    title: 'Nardin Autotrasporti | Autokranvermietung und Schwertransporte Trient',
+    description: 'Autokranvermietung, Schwertransporte und Industriehübe in Trient und Norditalien seit 1980. Effer-Autokrane bis 95 mt, eigene Flotte, Genehmigungen inklusive, 24/7-Notdienst.',
+  },
+  '/de/autokranvermietung-trient': {
+    src: 'src/pages/de/AutokranvermietungDe.tsx',
+    image: '/images/progetto-1.webp',
+    title: 'Autokranvermietung Trient | Effer und Hiab bis 95 mt — Nardin',
+    description: 'Autokranvermietung in Trient mit Kranführer. Effer und Hiab bis 95 mt für Industriemontagen, Stahlbau und enge Platzverhältnisse. Angebot in 24 Std.',
+  },
+  '/de/schwertransporte-trentino': {
+    src: 'src/pages/de/SchwertransporteDe.tsx',
+    image: '/images/progetto-3.webp',
+    title: 'Schwertransporte Trentino | Genehmigungen und Begleitung inklusive — Nardin',
+    description: 'Schwertransporte für übergroße Ladungen im Trentino, in Venetien und der Lombardei. Sondergenehmigungen und Begleitfahrzeuge intern abgewickelt. Kostenloses Angebot.',
+  },
+  '/de/baukran-transport-montage': {
+    src: 'src/pages/de/BaukranDe.tsx',
+    image: '/images/progetto-1.webp',
+    title: 'Baukran-Transport Trient | Demontage und Montage Potain — Nardin',
+    description: 'Demontage, Transport und Wiedermontage von Potain-Turmdrehkranen und ähnlichen Modellen in Trient und Norditalien. Komplette Logistikplanung für Baustellen jeder Größe.',
+  },
+  '/de/industrielogistik': {
+    src: 'src/pages/de/IndustrielogistikDe.tsx',
+    image: '/images/progetto-2.webp',
+    title: 'Industrielogistik Trient | Maschinentransport — Nardin',
+    description: 'Transport und Umsetzen von Schwermaschinen, Werkzeugmaschinen, Fertigteilen und Stahlbau in Trient und Norditalien. Maßgeschneiderte Lösungen, kostenloses Angebot.',
+  },
+});
+
+// Coppie IT <-> DE per hreflang (stesse di src/LangSwitch.tsx)
+const LANG_PAIRS = [
+  ['/', '/de'],
+  ['/noleggio-autogru-trento', '/de/autokranvermietung-trient'],
+  ['/trasporti-eccezionali-trentino', '/de/schwertransporte-trentino'],
+  ['/trasporto-gru-edili', '/de/baukran-transport-montage'],
+  ['/logistica-industriale', '/de/industrielogistik'],
+];
+function withLang(out, path) {
+  const pair = LANG_PAIRS.find(([it, de]) => it === path || de === path);
+  if (!pair) return out;
+  const isDe = path === pair[1];
+  return out
+    .replace(/<html lang="[^"]*"/, `<html lang="${isDe ? 'de' : 'it'}"`)
+    .replace(/(<link rel="alternate" hreflang="it" href=")[^"]*(")/, `$1${SITE_URL}${pair[0]}$2`)
+    .replace(/(<link rel="alternate" hreflang="de" href=")[^"]*(")/, `$1${SITE_URL}${pair[1]}$2`)
+    .replace(/(<link rel="alternate" hreflang="x-default" href=")[^"]*(")/, `$1${SITE_URL}${pair[0]}$2`);
+}
+
 const manifestPath = resolve(distDir, '.vite/manifest.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf-8')) : {};
 
@@ -235,15 +293,20 @@ for (const [path, page] of Object.entries(PAGES)) {
   // Written as <page>.html (not <page>/index.html): Netlify serves it at /<page>
   // directly, whereas a folder would trigger a 301 redirect to /<page>/.
   const preload = chunkFiles(page.src).filter(f => !mainFiles.has(f));
-  writeFileSync(resolve(distDir, `${path.slice(1)}.html`), withHead(shellHtml, {
+  const outFile = resolve(distDir, `${path.slice(1)}.html`);
+  mkdirSync(dirname(outFile), { recursive: true });
+  let pageHtml = withLang(withHead(shellHtml, {
     title: page.title,
     description: page.description,
     url: `${SITE_URL}${path}`,
     preload,
     image: page.image,
-  }));
+  }), path);
+  // Le pagine tedesche non devono mostrare a Google il testo italiano di riserva
+  if (path === '/de' || path.startsWith('/de/')) pageHtml = pageHtml.replace(/<noscript>[\s\S]*?<\/noscript>/, '');
+  writeFileSync(outFile, pageHtml);
 }
-console.log(`Per-page HTML written for ${Object.keys(PAGES).length} service pages`);
+console.log(`Per-page HTML written for ${Object.keys(PAGES).length} pages (IT + DE)`);
 
 // --- 2. Generate sitemap.xml dynamically from ROUTES, every build ---
 const today = new Date().toISOString().split('T')[0];
