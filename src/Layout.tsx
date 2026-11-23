@@ -76,7 +76,7 @@ export function Navbar({ mobile }: { mobile: boolean }) {
               {item.label}
             </Link>
           ))}
-          <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
+          <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
         </div>
       )}
 
@@ -88,17 +88,17 @@ export function Navbar({ mobile }: { mobile: boolean }) {
           {!mobile && (
             <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
               {ROUTE_NAV_ITEMS.map(item => (
-                <Link key={item.to} to={item.to} style={{ color: S.gray, textDecoration: 'none', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+                <Link key={item.to} to={item.to} style={{ color: S.gray, textDecoration: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
                 >{item.label}</Link>
               ))}
-              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
             </div>
           )}
           {mobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
               <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
@@ -120,51 +120,51 @@ export function Footer() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 28 }}>
           <div>
             <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={56} height={56} loading="lazy" decoding="async" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
-            <p style={{ color: S.gray, fontSize: 12, maxWidth: 280, lineHeight: 1.6 }}>Noleggio autogrù, trasporti eccezionali e sollevamenti industriali a Trento dal 1980.</p>
-            <p style={{ color: '#374151', fontSize: 11, marginTop: 12, lineHeight: 1.7 }}>
+            <p style={{ color: S.gray, fontSize: 14, maxWidth: 280, lineHeight: 1.6 }}>Noleggio autogrù, trasporti eccezionali e sollevamenti industriali a Trento dal 1980.</p>
+            <p style={{ color: '#9CA3AF', fontSize: 13, marginTop: 12, lineHeight: 1.7 }}>
               Nardin Autotrasporti s.n.c. di Nardin Walter e Ivana<br />P.IVA 01762870226 · Albo TN/2053832Z<br />Assicurazione Vettoriale All-Risks
             </p>
           </div>
           <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
             <div>
-              <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Servizi</p>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Servizi</p>
               {[
                 { to: '/noleggio-autogru-trento', label: 'Noleggio Autogrù' },
                 { to: '/trasporti-eccezionali-trentino', label: 'Trasporti Eccezionali' },
                 { to: '/trasporto-gru-edili', label: 'Trasporto Gru Edili' },
                 { to: '/logistica-industriale', label: 'Logistica Industriale' },
               ].map(s => (
-                <Link key={s.to} to={s.to} style={{ display: 'block', color: S.gray, fontSize: 12, padding: '3px 0', textDecoration: 'none' }}>{s.label}</Link>
+                <Link key={s.to} to={s.to} style={{ display: 'block', color: S.gray, fontSize: 14, padding: '3px 0', textDecoration: 'none' }}>{s.label}</Link>
               ))}
             </div>
             <div>
-              <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Navigazione</p>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Navigazione</p>
               {[
                 { id: 'chi-siamo', label: 'chi siamo' },
                 { id: 'servizi', label: 'servizi' },
                 { id: 'flotta', label: 'flotta' },
                 { id: 'contatti', label: 'contatti' },
               ].map(item => (
-                <button key={item.id} onClick={() => go(item.id)} style={{ display: 'block', background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 12, textTransform: 'capitalize', padding: '3px 0', textAlign: 'left' }}
+                <button key={item.id} onClick={() => go(item.id)} style={{ display: 'block', background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 14, textTransform: 'capitalize', padding: '3px 0', textAlign: 'left' }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
                 >{item.label}</button>
               ))}
             </div>
             <div>
-              <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Contatti</p>
-              <p style={{ color: S.gray, fontSize: 12, lineHeight: 1.9 }}>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Contatti</p>
+              <p style={{ color: S.gray, fontSize: 14, lineHeight: 1.9 }}>
                 Via Aeroporto, 31<br />38121 Trento (TN)<br />
                 <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.gray, textDecoration: 'none' }}>+39 0461 990268</a><br />
-                <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} style={{ color: '#22C55E', textDecoration: 'none', fontSize: 11 }}>WhatsApp H24</a><br />
-                <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, textDecoration: 'none', fontSize: 11 }}>info@nardinautotrasporti.it</a>
+                <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} style={{ color: '#22C55E', textDecoration: 'none', fontSize: 13 }}>WhatsApp H24</a><br />
+                <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, textDecoration: 'none', fontSize: 13 }}>info@nardinautotrasporti.it</a>
               </p>
             </div>
           </div>
         </div>
         <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
-          <p style={{ fontSize: 10, color: '#374151' }}>© 2026 Nardin Autotrasporti s.n.c. — Tutti i diritti riservati</p>
-          <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, fontWeight: 700, color: '#374151', textDecoration: 'none', textTransform: 'uppercase' }}>Instagram</a>
+          <p style={{ fontSize: 12, color: '#9CA3AF' }}>© 2026 Nardin Autotrasporti s.n.c. — Tutti i diritti riservati</p>
+          <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 700, color: '#9CA3AF', textDecoration: 'none', textTransform: 'uppercase' }}>Instagram</a>
         </div>
       </div>
     </footer>
@@ -174,9 +174,9 @@ export function Footer() {
 export function StickyMobileBar({ onPreventivo }: { onPreventivo: () => void }) {
   return (
     <div className="mobile-cta-bar" style={{ display: 'none', position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 120, background: '#0A0A0A', borderTop: `1px solid ${S.border}`, padding: '10px 16px', gap: 8 }}>
-      <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 CHIAMA</a>
-      <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
-      <button onClick={onPreventivo} style={{ flex: 1, background: S.dark, color: S.text, border: `1px solid ${S.border}`, padding: '12px 8px', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>PREVENTIVO</button>
+      <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 CHIAMA</a>
+      <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
+      <button onClick={onPreventivo} style={{ flex: 1, background: S.dark, color: S.text, border: `1px solid ${S.border}`, padding: '12px 8px', cursor: 'pointer', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>PREVENTIVO</button>
     </div>
   );
 }

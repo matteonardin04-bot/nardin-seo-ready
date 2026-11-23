@@ -7,7 +7,7 @@ export const S = {
   border: '#1C1C1C',
   text: '#F5F5F0',
   muted: '#9CA3AF',
-  gray: '#6B7280',
+  gray: '#A3A3A3',
   bebas: "'Bebas Neue', sans-serif",
   inter: "'Inter', sans-serif",
 };
@@ -18,7 +18,7 @@ export const inp = (extra: object = {}) => ({
   border: `1px solid ${S.border}`,
   color: S.text,
   padding: '12px 14px',
-  fontSize: 14,
+  fontSize: 16,
   outline: 'none',
   fontFamily: S.inter,
   ...extra,
