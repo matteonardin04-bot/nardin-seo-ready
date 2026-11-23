@@ -38,12 +38,13 @@ const fleetData = [
   { id: 'c7', name: 'SCANIA R560 2 ASSI', cat: 'Camion', cap: '560 CV V8 — Trattore stradale', img: '/images/camion-7.webp', desc: 'Trattore stradale V8 da 560 CV per trasporti a lungo raggio e logistica pesante. Potenza e affidabilità per ogni missione.' },
   // RIMORCHI
   { id: 'r1', name: "PIANALE COLLO D'OCA 3 ASSI", cat: 'Rimorchi', cap: '3 Assi — Rampe idrauliche', img: '/images/rimorchio-1.webp', desc: "Pianale ribassato a 3 assi con rampe idrauliche per il carico di mezzi d'opera e macchinari industriali. Ideale per escavatori, pale e attrezzature da cantiere." },
-  { id: 'r2', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi pesanti', img: '/images/rimorchio-2.webp', desc: 'Pianale ribassato a 4 assi con rampe idrauliche per carichi pesanti e fuori norma. Massima capacità di carico per macchinari industriali di grandi dimensioni.' },
+  { id: 'r2', name: "PIANALE COLLO D'OCA 4 ASSI", cat: 'Rimorchi', cap: '4 Assi — Carichi pesanti', img: '', desc: 'Pianale ribassato a 4 assi con rampe idrauliche per carichi pesanti e fuori norma. Massima capacità di carico per macchinari industriali di grandi dimensioni.' },
   { id: 'r3', name: 'PIANALE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Sponde ribaltabili', img: '/images/rimorchio-3.webp', desc: 'Pianale a 3 assi con sponde ribaltabili. Versatile per il trasporto di materiali sfusi, prefabbricati e carichi che richiedono contenimento laterale.' },
   { id: 'r4', name: 'CULLA RIBASSATA 3 ASSI', cat: 'Rimorchi', cap: 'Piano ultra-ribassato', img: '/images/rimorchio-4.webp', desc: 'Semirimorchio a culla ribassata su 3 assi per carichi con altezza elevata. La soluzione ideale per macchine agricole, operatrici e macchinari fuori sagoma in altezza.' },
-  { id: 'r5', name: 'CENTINATO 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Teli scorrevoli', img: '/images/rimorchio-5.webp', desc: 'Semirimorchio centinato a 3 assi con teli scorrevoli per il trasporto di merci pallettizzate e carichi che richiedono protezione dagli agenti atmosferici.' },
+  { id: 'r8', name: 'RIMORCHIO CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Sponde in alluminio', img: '/images/rimorchio-8.webp', desc: 'Rimorchio a timone Schwarzmüller a 3 assi con sponde ribaltabili in alluminio. Ideale per materiali da cantiere, prefabbricati e carichi da contenere lateralmente: agganciato alla motrice aumenta la capacità di carico di ogni viaggio.' },
+  { id: 'r9', name: 'RIMORCHIO PIANALE CON RAMPE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Rampe di carico', img: '/images/rimorchio-9.webp', desc: 'Rimorchio a timone FGM a 3 assi con pianale e rampe di carico. Per mini-escavatori, piattaforme aeree e macchine da cantiere che salgono a bordo in autonomia, senza bisogno della gru.' },
   { id: 'r6', name: 'PIANALE CORTO CON SPONDE 2 ASSI', cat: 'Rimorchi', cap: '2 Assi — Compatto e agile', img: '/images/rimorchio-6.webp', desc: 'Pianale corto a 2 assi con sponde ribaltabili. Compatto e manovrabile, ideale per trasporti in centri urbani e cantieri con accesso limitato.' },
-  { id: 'r7', name: 'PIANALE ALLUNGABILE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Lunghezza variabile', img: '/images/rimorchio-7.webp', desc: 'Pianale allungabile a 3 assi con sponde per travi, carpenteria metallica e carichi longitudinali eccezionali. La lunghezza variabile si adatta a ogni esigenza.' },
+  { id: 'r7', name: 'PIANALE ALLUNGABILE CON SPONDE 3 ASSI', cat: 'Rimorchi', cap: '3 Assi — Lunghezza variabile', img: '', desc: 'Pianale allungabile a 3 assi con sponde per travi, carpenteria metallica e carichi longitudinali eccezionali. La lunghezza variabile si adatta a ogni esigenza.' },
 ];
 
 const categories = ['Gru', 'Camion', 'Rimorchi'];
@@ -166,7 +167,7 @@ export default function Home() {
         <div onClick={() => setModalId(null)} style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.88)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
           <div onClick={e => e.stopPropagation()} style={{ background: S.dark, border: `1px solid ${S.border}`, maxWidth: 680, width: '100%', overflow: 'hidden' }}>
             <div style={{ height: 280, overflow: 'hidden', position: 'relative' }}>
-              <img src={modal.img} alt={modal.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              {modal.img ? <img src={modal.img} alt={modal.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#161616', color: S.gray, fontSize: 14, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Foto in arrivo</div>}
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #111 0%, transparent 60%)' }} />
               <button onClick={() => setModalId(null)} style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(0,0,0,0.7)', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', fontSize: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
               <span style={{ position: 'absolute', bottom: 16, left: 20, background: S.orange, color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>{modal.cat}</span>
@@ -505,10 +506,12 @@ export default function Home() {
                 onMouseLeave={e => (e.currentTarget.style.background = S.black)}
               >
                 <div style={{ height: 190, overflow: 'hidden', position: 'relative' }}>
-                  <img src={item.img} alt={item.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
-                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-                  />
+                  {item.img ? (
+                    <img src={item.img} alt={item.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                      onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+                      onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                    />
+                  ) : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#161616', color: S.gray, fontSize: 14, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Foto in arrivo</div>}
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)' }} />
                 </div>
                 <div style={{ padding: 18 }}>
