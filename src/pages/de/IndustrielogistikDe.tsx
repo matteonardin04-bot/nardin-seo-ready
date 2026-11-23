@@ -11,9 +11,9 @@ export default function IndustrielogistikDe() {
       intro="Transport und Umsetzen von Schwermaschinen, Werkzeugmaschinen, Fertigteilen und Stahlbau: maßgeschneiderte Logistiklösungen für die Industrie im Trentino und in Norditalien."
       bullets={['Schwermaschinen', 'Fertigteile', 'Maßgeschneidert', 'Eigene Flotte']}
       caseStudy={{
-        title: 'Schwertransport — Schleusentore La Spezia',
-        desc: 'Transport von 20 Meter langen Stahl-Schleusentoren für ein Rückhaltebecken in La Spezia. Komplette Abwicklung von Sondergenehmigungen, Begleitfahrzeugen und Logistik auf der Strecke durch Italien.',
-        img: '/images/progetto-3.webp',
+        title: 'Stahlbau-Transport — Industriehalle Rovereto',
+        desc: 'Transport vorgefertigter Stahlkonstruktionen von 8 t für eine neue Industriehalle. Tieflader mit Begleitfahrzeug inklusive.',
+        img: '/images/progetto-2.webp',
       }}
       faqs={[
         { q: 'Welche Maschinen transportieren Sie?', a: 'Werkzeugmaschinen, Industrieanlagen, Fertigteile und Stahlbau jeder Größe und jedes Gewichts.' },
