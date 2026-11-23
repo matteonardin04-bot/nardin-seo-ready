@@ -35,7 +35,12 @@
       "/noleggio-autogru-trento",
       "/trasporti-eccezionali-trentino",
       "/trasporto-gru-edili",
-      "/logistica-industriale"
+      "/logistica-industriale",
+      "/de",
+      "/de/autokranvermietung-trient",
+      "/de/schwertransporte-trentino",
+      "/de/baukran-transport-montage",
+      "/de/industrielogistik"
     ]
   }
 }

@@ -35,25 +35,25 @@ export default function ServicePage(p: ServicePageProps) {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Trento — Dal 1980</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Trento — Dal 1980</span>
           </div>
           <h1 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 20 }}>
             {p.h1}<br /><span style={{ color: S.orange }}>{p.h1Highlight}</span>
           </h1>
-          <p style={{ color: S.muted, fontSize: 16, lineHeight: 1.7, maxWidth: 640, marginBottom: 24 }}>{p.intro}</p>
+          <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.7, maxWidth: 640, marginBottom: 24 }}>{p.intro}</p>
 
           <a
             href="https://www.google.com/maps/place/Nardin+Autotrasporti"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: S.orange, fontSize: 13, fontWeight: 700, marginBottom: 32 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: S.orange, fontSize: 15, fontWeight: 700, marginBottom: 32 }}
           >
             ★★★★★ <span style={{ color: S.text }}>61 recensioni 5 stelle su Google</span>
           </a>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             {p.bullets.map(b => (
-              <span key={b} style={{ border: `1px solid ${S.border}`, padding: '6px 14px', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', color: S.gray, textTransform: 'uppercase' }}>{b}</span>
+              <span key={b} style={{ border: `1px solid ${S.border}`, padding: '6px 14px', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', color: S.gray, textTransform: 'uppercase' }}>{b}</span>
             ))}
           </div>
         </div>
@@ -64,13 +64,13 @@ export default function ServicePage(p: ServicePageProps) {
         <section style={{ padding: mobile ? '50px 0' : '80px 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
           <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
             <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(28px,4vw,44px)', color: S.text, marginBottom: 12 }}>{p.fleet.title}</h2>
-            <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.7, maxWidth: 760, marginBottom: 28 }}>{p.fleet.intro}</p>
+            <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.7, maxWidth: 760, marginBottom: 28 }}>{p.fleet.intro}</p>
             <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(auto-fit, minmax(220px, 1fr))', gap: 2, background: S.border }}>
               {p.fleet.items.map(f => (
                 <div key={f.name} style={{ background: S.dark, padding: '20px 22px' }}>
                   <h3 style={{ fontFamily: S.bebas, fontSize: 22, color: S.text, marginBottom: 6 }}>{f.name}</h3>
-                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', color: S.orange, textTransform: 'uppercase', marginBottom: 10 }}>{f.spec}</p>
-                  <p style={{ color: S.gray, fontSize: 13, lineHeight: 1.6 }}>{f.use}</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', color: S.orange, textTransform: 'uppercase', marginBottom: 10 }}>{f.spec}</p>
+                  <p style={{ color: S.gray, fontSize: 15, lineHeight: 1.6 }}>{f.use}</p>
                 </div>
               ))}
             </div>
@@ -85,10 +85,10 @@ export default function ServicePage(p: ServicePageProps) {
             <img src={p.caseStudy.img} alt={p.caseStudy.title} fetchPriority="high" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
-            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 10 }}>Caso Reale</p>
+            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 10 }}>Caso Reale</p>
             <div style={{ width: 36, height: 3, background: S.orange, marginBottom: 20 }} />
             <h2 style={{ fontFamily: S.bebas, fontSize: 28, color: S.text, marginBottom: 14 }}>{p.caseStudy.title}</h2>
-            <p style={{ color: S.gray, fontSize: 14, lineHeight: 1.7 }}>{p.caseStudy.desc}</p>
+            <p style={{ color: S.gray, fontSize: 16, lineHeight: 1.7 }}>{p.caseStudy.desc}</p>
           </div>
         </div>
       </section>
@@ -100,8 +100,8 @@ export default function ServicePage(p: ServicePageProps) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: S.border }}>
             {p.faqs.map(f => (
               <div key={f.q} style={{ background: S.dark, padding: '20px 24px' }}>
-                <p style={{ fontWeight: 700, fontSize: 14, color: S.text, marginBottom: 8 }}>{f.q}</p>
-                <p style={{ color: S.gray, fontSize: 13, lineHeight: 1.6 }}>{f.a}</p>
+                <p style={{ fontWeight: 700, fontSize: 16, color: S.text, marginBottom: 8 }}>{f.q}</p>
+                <p style={{ color: S.gray, fontSize: 15, lineHeight: 1.6 }}>{f.a}</p>
               </div>
             ))}
           </div>

@@ -18,6 +18,11 @@ const ROUTES = [
   { path: '/trasporti-eccezionali-trentino', priority: '0.9', changefreq: 'monthly' },
   { path: '/trasporto-gru-edili', priority: '0.9', changefreq: 'monthly' },
   { path: '/logistica-industriale', priority: '0.9', changefreq: 'monthly' },
+  { path: '/de', priority: '0.9', changefreq: 'monthly' },
+  { path: '/de/autokranvermietung-trient', priority: '0.8', changefreq: 'monthly' },
+  { path: '/de/schwertransporte-trentino', priority: '0.8', changefreq: 'monthly' },
+  { path: '/de/baukran-transport-montage', priority: '0.8', changefreq: 'monthly' },
+  { path: '/de/industrielogistik', priority: '0.8', changefreq: 'monthly' },
 ];
 
 const staticContent = `
@@ -65,16 +70,16 @@ const staticContent = `
       <section id="casi-studio">
         <h2>Casi Studio — Lavori Recenti</h2>
         <article>
-          <h3>Sollevamento Gru Potain 12t — Centro storico Trento</h3>
-          <p>Montaggio gru a torre in spazio ristretto nel centro storico. Operazione completata in un solo giorno con autogrù Effer 95 t/m.</p>
+          <h3>Montaggio Gru Edile Terex FC6.24H — Centro storico</h3>
+          <p>Montaggio di gru a torre Terex FC6.24 a rotazione in alto per cantiere in centro storico. Altezza di lavoro 18 m, braccio da 24 m, in spazi urbani ristretti.</p>
         </article>
         <article>
-          <h3>Trasporto Carpenteria Metallica — Capannone industriale Rovereto</h3>
-          <p>Movimentazione strutture metalliche prefabbricate da 8t per nuovo capannone industriale. Pianale ribassato con scorta tecnica inclusa.</p>
+          <h3>Montaggio Impianto Lavorazione Legname — Doppia gru in combinata</h3>
+          <p>Installazione di un impianto da 8 tonnellate con due autogrù in combinata, per gestire dimensioni e altezza dell'impianto in sicurezza.</p>
         </article>
         <article>
-          <h3>Logistica Vigneti Eroici — Valli del Trentino</h3>
-          <p>Trasporto attrezzature agricole in zona alpina impervia. Soluzione su misura per terreni difficili con mezzi specializzati.</p>
+          <h3>Trasporto Eccezionale — Paratoie La Spezia</h3>
+          <p>Trasporto di paratoie metalliche da 20 metri per un bacino di contenimento a La Spezia, con permessi eccezionali, scorta tecnica e logistica su percorso nazionale.</p>
         </article>
       </section>
 
@@ -82,23 +87,30 @@ const staticContent = `
         <h2>Parco Mezzi — Flotta Proprietaria</h2>
         <h3>Autogrù</h3>
         <ul>
-          <li>Motrice Scania R770 4 assi + Effer 955 — 95 t/m, 770 CV</li>
-          <li>Motrice Scania R730 4 assi + Gru Effer — V8 730 CV</li>
-          <li>Trattore Volvo 3 assi + Effer 525 — 52.5 t/m</li>
-          <li>Trattore Mercedes 2 assi + Effer 375 — 37.5 t/m</li>
+          <li>Effer 955 6S + Jib 6S — 734 kNm, sbraccio oltre 30 m</li>
+          <li>Effer 685 — portata max 19 t, sbraccio 30 m</li>
+          <li>Hiab iQ 708 — classe 60-70 t/m, sbraccio verticale 40 m</li>
+          <li>Effer 525 6S + Jib 6S — 446 kNm</li>
+          <li>Effer 375 — compatta, per centri urbani</li>
         </ul>
         <h3>Camion</h3>
         <ul>
-          <li>Trattore Scania S520 2 assi — 520 CV V8</li>
-          <li>Trattore Scania R560 2 assi — 560 CV V8</li>
+          <li>Scania R770 4 assi — 770 CV V8</li>
+          <li>Scania R730 4 assi — 730 CV V8</li>
+          <li>Scania R660 4 assi — 660 CV</li>
+          <li>Volvo FH650 3 assi — 650 CV</li>
+          <li>Mercedes 2 assi</li>
+          <li>Scania S520 2 assi — 520 CV V8</li>
+          <li>Scania R560 2 assi — 560 CV V8</li>
         </ul>
         <h3>Rimorchi</h3>
         <ul>
-          <li>Pianale Collo d'Oca 3 e 4 assi con rampe</li>
-          <li>Semirimorchio Culla Ribassato 3 assi</li>
-          <li>Pianale Allungabile 3 assi</li>
-          <li>Pianale Passo Corto 2 assi</li>
-          <li>Semirimorchio Centinato 3 assi</li>
+          <li>Pianale collo d'oca 3 e 4 assi con rampe idrauliche</li>
+          <li>Pianale con sponde 3 assi</li>
+          <li>Culla ribassata 3 assi</li>
+          <li>Centinato 3 assi</li>
+          <li>Pianale corto con sponde 2 assi</li>
+          <li>Pianale allungabile con sponde 3 assi</li>
         </ul>
       </section>
 
@@ -180,6 +192,59 @@ const PAGES = {
   },
 };
 
+// Versioni tedesche
+Object.assign(PAGES, {
+  '/de': {
+    src: 'src/pages/de/HomeDe.tsx',
+    image: '/images/hero.webp',
+    title: 'Nardin Autotrasporti | Autokranvermietung und Schwertransporte Trient',
+    description: 'Autokranvermietung, Schwertransporte und Industriehübe in Trient und Norditalien seit 1980. Effer-Autokrane bis 95 mt, eigene Flotte, Genehmigungen inklusive, 24/7-Notdienst.',
+  },
+  '/de/autokranvermietung-trient': {
+    src: 'src/pages/de/AutokranvermietungDe.tsx',
+    image: '/images/progetto-1.webp',
+    title: 'Autokranvermietung Trient | Effer und Hiab bis 95 mt — Nardin',
+    description: 'Autokranvermietung in Trient mit Kranführer. Effer und Hiab bis 95 mt für Industriemontagen, Stahlbau und enge Platzverhältnisse. Angebot in 24 Std.',
+  },
+  '/de/schwertransporte-trentino': {
+    src: 'src/pages/de/SchwertransporteDe.tsx',
+    image: '/images/progetto-3.webp',
+    title: 'Schwertransporte Trentino | Genehmigungen und Begleitung inklusive — Nardin',
+    description: 'Schwertransporte für übergroße Ladungen im Trentino, in Venetien und der Lombardei. Sondergenehmigungen und Begleitfahrzeuge intern abgewickelt. Kostenloses Angebot.',
+  },
+  '/de/baukran-transport-montage': {
+    src: 'src/pages/de/BaukranDe.tsx',
+    image: '/images/progetto-1.webp',
+    title: 'Baukran-Transport Trient | Demontage und Montage Potain — Nardin',
+    description: 'Demontage, Transport und Wiedermontage von Potain-Turmdrehkranen und ähnlichen Modellen in Trient und Norditalien. Komplette Logistikplanung für Baustellen jeder Größe.',
+  },
+  '/de/industrielogistik': {
+    src: 'src/pages/de/IndustrielogistikDe.tsx',
+    image: '/images/progetto-2.webp',
+    title: 'Industrielogistik Trient | Maschinentransport — Nardin',
+    description: 'Transport und Umsetzen von Schwermaschinen, Werkzeugmaschinen, Fertigteilen und Stahlbau in Trient und Norditalien. Maßgeschneiderte Lösungen, kostenloses Angebot.',
+  },
+});
+
+// Coppie IT <-> DE per hreflang (stesse di src/LangSwitch.tsx)
+const LANG_PAIRS = [
+  ['/', '/de'],
+  ['/noleggio-autogru-trento', '/de/autokranvermietung-trient'],
+  ['/trasporti-eccezionali-trentino', '/de/schwertransporte-trentino'],
+  ['/trasporto-gru-edili', '/de/baukran-transport-montage'],
+  ['/logistica-industriale', '/de/industrielogistik'],
+];
+function withLang(out, path) {
+  const pair = LANG_PAIRS.find(([it, de]) => it === path || de === path);
+  if (!pair) return out;
+  const isDe = path === pair[1];
+  return out
+    .replace(/<html lang="[^"]*"/, `<html lang="${isDe ? 'de' : 'it'}"`)
+    .replace(/(<link rel="alternate" hreflang="it" href=")[^"]*(")/, `$1${SITE_URL}${pair[0]}$2`)
+    .replace(/(<link rel="alternate" hreflang="de" href=")[^"]*(")/, `$1${SITE_URL}${pair[1]}$2`)
+    .replace(/(<link rel="alternate" hreflang="x-default" href=")[^"]*(")/, `$1${SITE_URL}${pair[0]}$2`);
+}
+
 const manifestPath = resolve(distDir, '.vite/manifest.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf-8')) : {};
 
@@ -228,15 +293,20 @@ for (const [path, page] of Object.entries(PAGES)) {
   // Written as <page>.html (not <page>/index.html): Netlify serves it at /<page>
   // directly, whereas a folder would trigger a 301 redirect to /<page>/.
   const preload = chunkFiles(page.src).filter(f => !mainFiles.has(f));
-  writeFileSync(resolve(distDir, `${path.slice(1)}.html`), withHead(shellHtml, {
+  const outFile = resolve(distDir, `${path.slice(1)}.html`);
+  mkdirSync(dirname(outFile), { recursive: true });
+  let pageHtml = withLang(withHead(shellHtml, {
     title: page.title,
     description: page.description,
     url: `${SITE_URL}${path}`,
     preload,
     image: page.image,
-  }));
+  }), path);
+  // Le pagine tedesche non devono mostrare a Google il testo italiano di riserva
+  if (path === '/de' || path.startsWith('/de/')) pageHtml = pageHtml.replace(/<noscript>[\s\S]*?<\/noscript>/, '');
+  writeFileSync(outFile, pageHtml);
 }
-console.log(`Per-page HTML written for ${Object.keys(PAGES).length} service pages`);
+console.log(`Per-page HTML written for ${Object.keys(PAGES).length} pages (IT + DE)`);
 
 // --- 2. Generate sitemap.xml dynamically from ROUTES, every build ---
 const today = new Date().toISOString().split('T')[0];

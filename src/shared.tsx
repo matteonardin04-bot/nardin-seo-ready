@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { altPaths } from './LangSwitch';
 
 export const S = {
   orange: '#EA580C',
@@ -7,7 +8,7 @@ export const S = {
   border: '#1C1C1C',
   text: '#F5F5F0',
   muted: '#9CA3AF',
-  gray: '#6B7280',
+  gray: '#A3A3A3',
   bebas: "'Bebas Neue', sans-serif",
   inter: "'Inter', sans-serif",
 };
@@ -18,7 +19,7 @@ export const inp = (extra: object = {}) => ({
   border: `1px solid ${S.border}`,
   color: S.text,
   padding: '12px 14px',
-  fontSize: 14,
+  fontSize: 16,
   outline: 'none',
   fontFamily: S.inter,
   ...extra,
@@ -72,6 +73,20 @@ export function Head({
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', `https://nardinautotrasporti.it${path}`);
+
+    // Lingua della pagina + link hreflang tra versione italiana e tedesca
+    document.documentElement.lang = path === '/de' || path.startsWith('/de/') ? 'de' : 'it';
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+    const alt = altPaths(path);
+    if (alt) {
+      ([['it', alt.it], ['de', alt.de], ['x-default', alt.it]] as const).forEach(([lang, p]) => {
+        const l = document.createElement('link');
+        l.setAttribute('rel', 'alternate');
+        l.setAttribute('hreflang', lang);
+        l.setAttribute('href', `https://nardinautotrasporti.it${p}`);
+        document.head.appendChild(l);
+      });
+    }
 
     const ldId = 'service-jsonld';
     document.getElementById(ldId)?.remove();
