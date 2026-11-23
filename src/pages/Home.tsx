@@ -99,7 +99,7 @@ const S = {
   border: '#1C1C1C',
   text: '#F5F5F0',
   muted: '#9CA3AF',
-  gray: '#6B7280',
+  gray: '#A3A3A3',
   bebas: "'Bebas Neue', sans-serif",
   inter: "'Inter', sans-serif",
 };
@@ -110,7 +110,7 @@ const inp = (extra = {}) => ({
   border: `1px solid ${S.border}`,
   color: S.text,
   padding: '12px 14px',
-  fontSize: 14,
+  fontSize: 16,
   outline: 'none',
   fontFamily: S.inter,
   ...extra,
@@ -168,15 +168,15 @@ export default function Home() {
               <img src={modal.img} alt={modal.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #111 0%, transparent 60%)' }} />
               <button onClick={() => setModalId(null)} style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(0,0,0,0.7)', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', fontSize: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
-              <span style={{ position: 'absolute', bottom: 16, left: 20, background: S.orange, color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>{modal.cat}</span>
+              <span style={{ position: 'absolute', bottom: 16, left: 20, background: S.orange, color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', padding: '3px 10px', textTransform: 'uppercase' }}>{modal.cat}</span>
             </div>
             <div style={{ padding: '24px 28px 28px' }}>
               <div style={{ fontFamily: S.bebas, fontSize: 30, letterSpacing: '0.05em', color: S.text, marginBottom: 8 }}>{modal.name}</div>
               <div style={{ display: 'inline-block', background: S.border, padding: '4px 12px', marginBottom: 14 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase' }}>{modal.cap}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase' }}>{modal.cap}</span>
               </div>
-              <p style={{ color: S.muted, fontSize: 14, lineHeight: 1.65, marginBottom: 20 }}>{modal.desc}</p>
-              <button onClick={() => { setModalId(null); go('contatti'); }} style={{ width: '100%', background: S.orange, color: '#fff', border: 'none', padding: 14, cursor: 'pointer', fontWeight: 700, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+              <p style={{ color: S.muted, fontSize: 16, lineHeight: 1.65, marginBottom: 20 }}>{modal.desc}</p>
+              <button onClick={() => { setModalId(null); go('contatti'); }} style={{ width: '100%', background: S.orange, color: '#fff', border: 'none', padding: 14, cursor: 'pointer', fontWeight: 700, fontSize: 13, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
                 RICHIEDI PREVENTIVO
               </button>
             </div>
@@ -199,7 +199,7 @@ export default function Home() {
               {item.label}
             </Link>
           ))}
-          <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
+          <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '12px 32px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 8 }}>CHIAMA ORA</a>
         </div>
       )}
 
@@ -218,17 +218,17 @@ export default function Home() {
                 { to: '/trasporto-gru-edili', label: 'Gru Edili' },
                 { to: '/logistica-industriale', label: 'Logistica' },
               ].map(item => (
-                <Link key={item.to} to={item.to} style={{ color: S.gray, textDecoration: 'none', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+                <Link key={item.to} to={item.to} style={{ color: S.gray, textDecoration: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
                 >{item.label}</Link>
               ))}
-              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '9px 18px', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>CHIAMA ORA</a>
             </div>
           )}
           {mobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>CHIAMA</a>
               <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
@@ -254,15 +254,15 @@ export default function Home() {
               <span style={{ color: S.orange }}>INDUSTRIALI</span><br />
               E TRASPORTI SPECIALI
             </h1>
-            <p style={{ fontSize: 'clamp(14px, 1.6vw, 18px)', color: S.muted, maxWidth: 540, lineHeight: 1.65, marginBottom: 40 }}>
+            <p style={{ fontSize: 'clamp(17px, 1.6vw, 20px)', color: S.muted, maxWidth: 540, lineHeight: 1.65, marginBottom: 40 }}>
               Autogrù Effer fino a 95 t/m, flotta proprietaria, permessi inclusi. Operativi a Trento e in tutto il Nord Italia dal 1980.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <button onClick={() => go('contatti')} style={{ background: S.orange, color: '#fff', border: 'none', padding: '16px 36px', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+              <button onClick={() => go('contatti')} style={{ background: S.orange, color: '#fff', border: 'none', padding: '16px 36px', cursor: 'pointer', fontSize: 13, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                 onMouseEnter={e => (e.currentTarget.style.background = '#C2410C')}
                 onMouseLeave={e => (e.currentTarget.style.background = S.orange)}
               >RICHIEDI PREVENTIVO GRATUITO</button>
-              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: 'transparent', color: S.text, border: `1px solid ${S.border}`, padding: '16px 36px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center' }}
+              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: 'transparent', color: S.text, border: `1px solid ${S.border}`, padding: '16px 36px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center' }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = S.orange)}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = S.border)}
               >CHIAMA ORA: 0461 990268</a>
@@ -273,11 +273,11 @@ export default function Home() {
 
       {/* TICKER */}
       <div style={{ background: S.orange, overflow: 'hidden', padding: '11px 0', borderTop: '1px solid #C2410C' }}>
-        <div id="ticker">
+        <div id="ticker" aria-hidden="true">
           {['NOLEGGIO AUTOGRÙ TRENTO', 'SOLLEVAMENTI INDUSTRIALI', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY', 'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'TRASPORTI ECCEZIONALI', 'TRENTO', 'AUTOGRÙ EFFER 95 T/M',
             'NOLEGGIO AUTOGRÙ TRENTO', 'SOLLEVAMENTI INDUSTRIALI', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY', 'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'TRASPORTI ECCEZIONALI', 'TRENTO', 'AUTOGRÙ EFFER 95 T/M',
             'NOLEGGIO AUTOGRÙ TRENTO', 'SOLLEVAMENTI INDUSTRIALI', 'DAL 1980', 'NORD ITALIA', 'H24 EMERGENCY', 'FLOTTA PROPRIETARIA', 'PERMESSI INCLUSI', 'TRASPORTI ECCEZIONALI', 'TRENTO', 'AUTOGRÙ EFFER 95 T/M'].map((item, i) => (
-            <span key={i} style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: '#fff', textTransform: 'uppercase', padding: '0 24px' }}>
+            <span key={i} style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: '#fff', textTransform: 'uppercase', padding: '0 24px' }}>
               {item} <span style={{ opacity: 0.4 }}>◆</span>
             </span>
           ))}
@@ -290,7 +290,7 @@ export default function Home() {
           {[{ n: '40+', l: 'Anni di Esperienza' }, { n: '95', l: 't/m Portata Massima' }, { n: 'H24', l: 'Pronto Intervento' }, { n: '16+', l: 'Mezzi in Flotta' }].map((s, i) => (
             <div key={i} style={{ padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? `1px solid ${S.border}` : 'none', minWidth: 0 }}>
               <div style={{ fontFamily: S.bebas, fontSize: 'clamp(32px, 4vw, 48px)', color: S.orange, lineHeight: 1 }}>{s.n}</div>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginTop: 5 }}>{s.l}</div>
+              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginTop: 5 }}>{s.l}</div>
             </div>
           ))}
         </div>
@@ -301,7 +301,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Il Nostro Processo</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Il Nostro Processo</span>
           </div>
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
             COME<br /><span style={{ color: S.orange }}>LAVORIAMO</span>
@@ -327,7 +327,7 @@ export default function Home() {
                   <span style={{ fontFamily: S.bebas, fontSize: 48, color: 'rgba(234,88,12,0.15)', lineHeight: 1 }}>{step.n}</span>
                 </div>
                 <h3 style={{ fontFamily: S.bebas, fontSize: 22, color: S.text, letterSpacing: '0.03em' }}>{step.title}</h3>
-                <p style={{ color: S.gray, fontSize: 13, lineHeight: 1.65 }}>{step.desc}</p>
+                <p style={{ color: S.gray, fontSize: 15, lineHeight: 1.65 }}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -341,22 +341,22 @@ export default function Home() {
             <img src="/images/about.webp" loading="lazy" decoding="async" alt="Walter e Ivana Nardin — Nardin Autotrasporti Trento" onError={e => (e.currentTarget.style.display = 'none')} style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
             <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20, background: 'rgba(10,10,10,0.92)', border: `1px solid ${S.border}`, padding: '18px 22px' }}>
               <p style={{ fontFamily: S.bebas, fontSize: 18, letterSpacing: '0.05em', color: S.text, marginBottom: 5 }}>"La nostra forza è l'uomo dietro la macchina."</p>
-              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase' }}>Walter & Ivana Nardin</p>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase' }}>Walter & Ivana Nardin</p>
             </div>
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <div style={{ width: 22, height: 2, background: S.orange }} />
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>La Nostra Storia</span>
+              <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>La Nostra Storia</span>
             </div>
             <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,5vw,64px)', lineHeight: 0.95, letterSpacing: '0.03em', color: S.text, marginBottom: 24 }}>
               DAL 1980<br />ECCELLENZA<br /><span style={{ color: S.orange }}>TECNICA</span>
             </h2>
             <div style={{ width: 36, height: 3, background: S.orange, marginBottom: 24 }} />
-            <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.75, marginBottom: 16 }}>
+            <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.75, marginBottom: 16 }}>
               Tutto ha inizio nel <strong style={{ color: S.text }}>1980</strong>, quando Nardin Mario fonda l'azienda con una visione chiara: offrire servizi di trasporto caratterizzati da massima affidabilità.
             </p>
-            <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.75, marginBottom: 32 }}>
+            <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.75, marginBottom: 32 }}>
               Oggi, quella passione continua con <strong style={{ color: S.text }}>Walter e Ivana Nardin</strong>. Siamo il punto di riferimento per <strong style={{ color: S.text }}>noleggio autogrù a Trento</strong> e <strong style={{ color: S.text }}>sollevamenti industriali in Trentino</strong> con autogrù Effer fino a 95 t/m.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: S.border, border: `1px solid ${S.border}`, marginBottom: 24 }}>
@@ -367,12 +367,12 @@ export default function Home() {
                 { t: 'Albo Autotrasportatori', s: 'TN/2053832Z' },
               ].map((item, i) => (
                 <div key={i} style={{ background: S.dark, padding: 18 }}>
-                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.text, textTransform: 'uppercase', marginBottom: 2 }}>{item.t}</p>
-                  <p style={{ fontSize: 11, color: S.gray }}>{item.s}</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', color: S.text, textTransform: 'uppercase', marginBottom: 2 }}>{item.t}</p>
+                  <p style={{ fontSize: 13, color: S.gray }}>{item.s}</p>
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: 11, color: '#4B5563', letterSpacing: '0.05em' }}>P.IVA 01762870226 · Nardin Autotrasporti s.n.c. di Nardin Walter e Ivana</p>
+            <p style={{ fontSize: 13, color: '#9CA3AF', letterSpacing: '0.05em' }}>P.IVA 01762870226 · Nardin Autotrasporti s.n.c. di Nardin Walter e Ivana</p>
           </div>
         </div>
       </section>
@@ -382,7 +382,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Cosa Facciamo</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Cosa Facciamo</span>
           </div>
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
             I NOSTRI<br /><span style={{ color: S.orange }}>SERVIZI</span>
@@ -397,11 +397,11 @@ export default function Home() {
               <div key={i} style={{ background: S.black, padding: 'clamp(24px,4vw,48px)' }}>
                 <div style={{ fontFamily: S.bebas, fontSize: 56, color: 'rgba(234,88,12,0.1)', lineHeight: 1, marginBottom: 12 }}>{s.n}</div>
                 <h3 style={{ fontFamily: S.bebas, fontSize: 'clamp(22px,2.5vw,30px)', color: S.text, marginBottom: 12 }}>{s.t}</h3>
-                <p style={{ color: S.gray, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>{s.d}</p>
+                <p style={{ color: S.gray, fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>{s.d}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20 }}>
-                  {s.tags.map(tag => <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '3px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>)}
+                  {s.tags.map(tag => <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '3px 10px', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>)}
                 </div>
-                <Link to={s.to} style={{ display: 'inline-block', background: 'none', border: `1px solid ${S.orange}`, color: S.orange, padding: '8px 20px', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}
+                <Link to={s.to} style={{ display: 'inline-block', background: 'none', border: `1px solid ${S.orange}`, color: S.orange, padding: '8px 20px', cursor: 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}
                   onMouseEnter={e => { e.currentTarget.style.background = S.orange; e.currentTarget.style.color = '#fff'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = S.orange; }}
                 >SCOPRI IL SERVIZIO →</Link>
@@ -416,7 +416,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Casi Reali</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Casi Reali</span>
           </div>
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
             CASI<br /><span style={{ color: S.orange }}>STUDIO</span>
@@ -432,12 +432,12 @@ export default function Home() {
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)' }} />
                 </div>
                 <div style={{ padding: 24 }}>
-                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{c.sub}</p>
+                  <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{c.sub}</p>
                   <h3 style={{ fontFamily: S.bebas, fontSize: 22, color: S.text, marginBottom: 12, letterSpacing: '0.03em' }}>{c.title}</h3>
-                  <p style={{ color: S.gray, fontSize: 13, lineHeight: 1.6, marginBottom: 16 }}>{c.desc}</p>
+                  <p style={{ color: S.gray, fontSize: 15, lineHeight: 1.6, marginBottom: 16 }}>{c.desc}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {c.tags.map(tag => (
-                      <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '2px 8px', fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>
+                      <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '2px 8px', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>
                     ))}
                   </div>
                 </div>
@@ -454,7 +454,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Dicono di Noi</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Dicono di Noi</span>
           </div>
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 40 }}>
             PARTNER DI<br /><span style={{ color: S.orange }}>FIDUCIA</span>
@@ -462,12 +462,12 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(4,1fr)', gap: 2, background: S.border }}>
             {testimonials.map((t, i) => (
               <div key={i} style={{ background: S.dark, padding: 'clamp(20px,3vw,32px)', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ color: S.orange, fontSize: 16, letterSpacing: 2, marginBottom: 16 }}>★★★★★</div>
-                <p style={{ color: S.muted, fontSize: 13, lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: 20 }}>"{t.text}"</p>
+                <div style={{ color: S.orange, fontSize: 17, letterSpacing: 2, marginBottom: 16 }}>★★★★★</div>
+                <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: 20 }}>"{t.text}"</p>
                 <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 16 }}>
-                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.text, textTransform: 'uppercase', marginBottom: 2 }}>{t.name}</p>
-                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase', marginBottom: 8 }}>{t.comp}</p>
-                  <span style={{ border: `1px solid ${S.border}`, padding: '3px 9px', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', color: S.gray, textTransform: 'uppercase' }}>{t.spec}</span>
+                  <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', color: S.text, textTransform: 'uppercase', marginBottom: 2 }}>{t.name}</p>
+                  <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase', marginBottom: 8 }}>{t.comp}</p>
+                  <span style={{ border: `1px solid ${S.border}`, padding: '3px 9px', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: S.gray, textTransform: 'uppercase' }}>{t.spec}</span>
                 </div>
               </div>
             ))}
@@ -480,7 +480,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Flotta Proprietaria</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Flotta Proprietaria</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
             <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text }}>
@@ -488,7 +488,7 @@ export default function Home() {
             </h2>
             <div style={{ display: 'flex', gap: 2, background: S.border }}>
               {categories.map(cat => (
-                <button key={cat} onClick={() => setTab(cat)} style={{ background: tab === cat ? S.orange : S.black, color: tab === cat ? '#fff' : S.gray, border: 'none', padding: '10px 22px', cursor: 'pointer', fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', transition: 'all 0.2s' }}>
+                <button key={cat} onClick={() => setTab(cat)} style={{ background: tab === cat ? S.orange : S.black, color: tab === cat ? '#fff' : S.gray, border: 'none', padding: '10px 22px', cursor: 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', transition: 'all 0.2s' }}>
                   {cat}
                 </button>
               ))}
@@ -508,10 +508,10 @@ export default function Home() {
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)' }} />
                 </div>
                 <div style={{ padding: 18 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{item.cap}</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{item.cap}</div>
                   <h4 style={{ fontFamily: S.bebas, fontSize: 18, color: S.text, marginBottom: 6, lineHeight: 1.1 }}>{item.name}</h4>
-                  <p style={{ fontSize: 12, color: S.gray, lineHeight: 1.5, marginBottom: 12 }}>{item.desc}</p>
-                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase' }}>DETTAGLI →</span>
+                  <p style={{ fontSize: 14, color: S.gray, lineHeight: 1.5, marginBottom: 12 }}>{item.desc}</p>
+                  <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase' }}>DETTAGLI →</span>
                 </div>
               </div>
             ))}
@@ -524,7 +524,7 @@ export default function Home() {
         <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Domande Frequenti</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Domande Frequenti</span>
           </div>
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
             TUTTO<br /><span style={{ color: S.orange }}>QUELLO CHE SERVE</span>
@@ -538,7 +538,7 @@ export default function Home() {
                 </button>
                 {openFaq === i && (
                   <div style={{ padding: '0 24px 20px', borderTop: `1px solid ${S.border}` }}>
-                    <p style={{ color: S.muted, fontSize: 14, lineHeight: 1.7, paddingTop: 16 }}>{f.a}</p>
+                    <p style={{ color: S.muted, fontSize: 16, lineHeight: 1.7, paddingTop: 16 }}>{f.a}</p>
                   </div>
                 )}
               </div>
@@ -552,7 +552,7 @@ export default function Home() {
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Contattaci</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Contattaci</span>
           </div>
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 24 }}>
             PREVENTIVO<br /><span style={{ color: S.orange }}>GRATUITO</span>
@@ -567,9 +567,9 @@ export default function Home() {
               { label: 'Permessi Inclusi', link: null },
               { label: 'Assicurazione All-Risks', link: null },
             ].map((b, i) => b.link ? (
-              <a key={i} href={b.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase', textDecoration: 'none', borderRight: i < 4 ? `1px solid ${S.border}` : 'none', paddingRight: 12 }}>{b.label}</a>
+              <a key={i} href={b.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', color: S.orange, textTransform: 'uppercase', textDecoration: 'none', borderRight: i < 4 ? `1px solid ${S.border}` : 'none', paddingRight: 12 }}>{b.label}</a>
             ) : (
-              <span key={i} style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase', borderRight: i < 4 ? `1px solid ${S.border}` : 'none', paddingRight: 12 }}>{b.label}</span>
+              <span key={i} style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase', borderRight: i < 4 ? `1px solid ${S.border}` : 'none', paddingRight: 12 }}>{b.label}</span>
             ))}
           </div>
 
@@ -577,29 +577,29 @@ export default function Home() {
             {/* INFO PANEL */}
             <div style={{ background: S.black, padding: 'clamp(28px,4vw,52px)', display: 'flex', flexDirection: 'column', gap: 28 }}>
               <div>
-                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono Diretto</p>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono Diretto</p>
                 <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ fontFamily: S.bebas, fontSize: 'clamp(24px,3vw,36px)', color: S.text, textDecoration: 'none' }}
                   onMouseEnter={e => (e.currentTarget.style.color = S.orange)}
                   onMouseLeave={e => (e.currentTarget.style.color = S.text)}
                 >+39 0461 990268</a>
               </div>
               <div>
-                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>WhatsApp H24</p>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>WhatsApp H24</p>
                 <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ fontFamily: S.bebas, fontSize: 'clamp(20px,2.5vw,30px)', color: S.text, textDecoration: 'none' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#22C55E')}
                   onMouseLeave={e => (e.currentTarget.style.color = S.text)}
                 >+39 348 4420285</a>
               </div>
               <div>
-                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Sede Operativa</p>
-                <p style={{ color: S.text, fontSize: 15, lineHeight: 1.5 }}>Via Aeroporto, 31<br />38121 Trento (TN)</p>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Sede Operativa</p>
+                <p style={{ color: S.text, fontSize: 17, lineHeight: 1.5 }}>Via Aeroporto, 31<br />38121 Trento (TN)</p>
               </div>
               <div>
-                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email</p>
-                <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, fontSize: 14, textDecoration: 'none' }}>info@nardinautotrasporti.it</a>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email</p>
+                <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, fontSize: 16, textDecoration: 'none' }}>info@nardinautotrasporti.it</a>
               </div>
               <div style={{ marginTop: 'auto', paddingTop: 24, borderTop: `1px solid ${S.border}` }}>
-                <p style={{ fontSize: 10, color: '#4B5563', lineHeight: 1.7 }}>
+                <p style={{ fontSize: 12, color: '#9CA3AF', lineHeight: 1.7 }}>
                   Nardin Autotrasporti s.n.c.<br />
                   P.IVA 01762870226<br />
                   Albo Autotrasportatori TN/2053832Z
@@ -613,28 +613,28 @@ export default function Home() {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: 14 }}>
                   <div style={{ fontFamily: S.bebas, fontSize: 72, color: S.orange }}>✓</div>
                   <h3 style={{ fontFamily: S.bebas, fontSize: 32, color: S.text }}>RICHIESTA INVIATA</h3>
-                  <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.6 }}>Ti richiamiamo entro 2 ore in orario lavorativo.<br />Per urgenze: <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
+                  <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.6 }}>Ti richiamiamo entro 2 ore in orario lavorativo.<br />Per urgenze: <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 12 }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ragione Sociale *</label>
+                      <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ragione Sociale *</label>
                       <input name="company" type="text" required placeholder="Azienda S.r.l." style={inp()} />
-                      <ValidationError prefix="Company" field="company" errors={state.errors} style={{ color: '#EF4444', fontSize: 11, marginTop: 3 }} />
+                      <ValidationError prefix="Company" field="company" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono *</label>
+                      <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono *</label>
                       <input name="phone" type="tel" required placeholder="+39 ..." style={inp()} />
                     </div>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email *</label>
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email *</label>
                     <input name="email" type="email" required placeholder="info@azienda.it" style={inp()} />
-                    <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: 11, marginTop: 3 }} />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Tipo Intervento</label>
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Tipo Intervento</label>
                     <select name="service" style={inp({ cursor: 'pointer' })}>
                       <option>Noleggio Autogrù</option>
                       <option>Sollevamento Industriale</option>
@@ -644,25 +644,25 @@ export default function Home() {
                     </select>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Luogo / Cantiere</label>
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Luogo / Cantiere</label>
                     <input name="location" type="text" placeholder="Città, indirizzo cantiere..." style={inp()} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Descrizione Lavoro</label>
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Descrizione Lavoro</label>
                     <textarea name="message" rows={3} placeholder="Pesi, dimensioni, altezze, tempistiche, note..." style={inp({ resize: 'vertical', fontFamily: S.inter })} />
-                    <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: 11, marginTop: 3 }} />
+                    <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Foto Carico / Cantiere (opzionale)</label>
+                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Foto Carico / Cantiere (opzionale)</label>
                     <input name="attachment" type="file" accept="image/*,.pdf" style={{ ...inp(), padding: '10px 14px', cursor: 'pointer' }} />
                   </div>
-                  <button type="submit" disabled={state.submitting} style={{ background: S.orange, color: '#fff', border: 'none', padding: 18, cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1, fontSize: 11, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}
+                  <button type="submit" disabled={state.submitting} style={{ background: S.orange, color: '#fff', border: 'none', padding: 18, cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1, fontSize: 13, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}
                     onMouseEnter={e => { if (!state.submitting) e.currentTarget.style.background = '#C2410C'; }}
                     onMouseLeave={e => { if (!state.submitting) e.currentTarget.style.background = S.orange; }}
                   >
                     {state.submitting ? 'INVIO IN CORSO...' : 'RICHIEDI PREVENTIVO GRATUITO'}
                   </button>
-                  <p style={{ fontSize: 11, color: '#4B5563', textAlign: 'center' }}>Ti richiamiamo entro 2 ore in orario lavorativo. Per urgenze: <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
+                  <p style={{ fontSize: 13, color: '#9CA3AF', textAlign: 'center' }}>Ti richiamiamo entro 2 ore in orario lavorativo. Per urgenze: <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
                 </form>
               )}
             </div>
@@ -676,8 +676,8 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 28 }}>
             <div>
               <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={56} height={56} loading="lazy" decoding="async" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
-              <p style={{ color: S.gray, fontSize: 12, maxWidth: 280, lineHeight: 1.6 }}>Noleggio autogrù, trasporti eccezionali e sollevamenti industriali a Trento dal 1980.</p>
-              <p style={{ color: '#374151', fontSize: 11, marginTop: 12, lineHeight: 1.7 }}>
+              <p style={{ color: S.gray, fontSize: 14, maxWidth: 280, lineHeight: 1.6 }}>Noleggio autogrù, trasporti eccezionali e sollevamenti industriali a Trento dal 1980.</p>
+              <p style={{ color: '#9CA3AF', fontSize: 13, marginTop: 12, lineHeight: 1.7 }}>
                 Nardin Autotrasporti s.n.c. di Nardin Walter e Ivana<br />
                 P.IVA 01762870226 · Albo TN/2053832Z<br />
                 Assicurazione Vettoriale All-Risks
@@ -685,30 +685,30 @@ export default function Home() {
             </div>
             <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
               <div>
-                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Navigazione</p>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Navigazione</p>
                 {['chi-siamo', 'servizi', 'flotta', 'contatti'].map(id => (
-                  <button key={id} onClick={() => go(id)} style={{ display: 'block', background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 12, textTransform: 'capitalize', padding: '3px 0', textAlign: 'left' }}
+                  <button key={id} onClick={() => go(id)} style={{ display: 'block', background: 'none', border: 'none', color: S.gray, cursor: 'pointer', fontSize: 14, textTransform: 'capitalize', padding: '3px 0', textAlign: 'left' }}
                     onMouseEnter={e => (e.currentTarget.style.color = S.text)}
                     onMouseLeave={e => (e.currentTarget.style.color = S.gray)}
                   >{id.replace('-', ' ')}</button>
                 ))}
               </div>
               <div>
-                <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Contatti</p>
-                <p style={{ color: S.gray, fontSize: 12, lineHeight: 1.9 }}>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase', marginBottom: 12 }}>Contatti</p>
+                <p style={{ color: S.gray, fontSize: 14, lineHeight: 1.9 }}>
                   Via Aeroporto, 31<br />38121 Trento (TN)<br />
                   <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ color: S.gray, textDecoration: 'none' }}>+39 0461 990268</a><br />
-                  <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} style={{ color: '#22C55E', textDecoration: 'none', fontSize: 11 }}>WhatsApp H24</a><br />
-                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, textDecoration: 'none', fontSize: 11 }}>info@nardinautotrasporti.it</a>
+                  <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} style={{ color: '#22C55E', textDecoration: 'none', fontSize: 13 }}>WhatsApp H24</a><br />
+                  <a href="mailto:info@nardinautotrasporti.it" style={{ color: S.orange, textDecoration: 'none', fontSize: 13 }}>info@nardinautotrasporti.it</a>
                 </p>
               </div>
             </div>
           </div>
           <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
-            <p style={{ fontSize: 10, color: '#374151' }}>© 2026 Nardin Autotrasporti s.n.c. — Tutti i diritti riservati</p>
-            <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, fontWeight: 700, color: '#374151', textDecoration: 'none', textTransform: 'uppercase' }}
+            <p style={{ fontSize: 12, color: '#9CA3AF' }}>© 2026 Nardin Autotrasporti s.n.c. — Tutti i diritti riservati</p>
+            <a href="https://www.instagram.com/nardinautotrasporti/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 700, color: '#9CA3AF', textDecoration: 'none', textTransform: 'uppercase' }}
               onMouseEnter={e => (e.currentTarget.style.color = S.text)}
-              onMouseLeave={e => (e.currentTarget.style.color = '#374151')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#9CA3AF')}
             >Instagram</a>
           </div>
         </div>
@@ -716,9 +716,9 @@ export default function Home() {
 
       {/* MOBILE STICKY CTA BAR */}
       <div className="mobile-cta-bar" style={{ display: 'none', position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 120, background: '#0A0A0A', borderTop: `1px solid ${S.border}`, padding: '10px 16px', gap: 8 }}>
-        <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 CHIAMA</a>
-        <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
-        <button onClick={() => go('contatti')} style={{ flex: 1, background: S.dark, color: S.text, border: `1px solid ${S.border}`, padding: '12px 8px', cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>PREVENTIVO</button>
+        <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 CHIAMA</a>
+        <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
+        <button onClick={() => go('contatti')} style={{ flex: 1, background: S.dark, color: S.text, border: `1px solid ${S.border}`, padding: '12px 8px', cursor: 'pointer', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>PREVENTIVO</button>
       </div>
 
       {/* WHATSAPP FAB (desktop only) */}
