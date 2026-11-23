@@ -9,6 +9,11 @@ const TrasportiEccezionali = lazy(() => import('./pages/TrasportiEccezionali'));
 const TrasportoGruEdili = lazy(() => import('./pages/TrasportoGruEdili'));
 const LogisticaIndustriale = lazy(() => import('./pages/LogisticaIndustriale'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const HomeDe = lazy(() => import('./pages/de/HomeDe'));
+const AutokranvermietungDe = lazy(() => import('./pages/de/AutokranvermietungDe'));
+const SchwertransporteDe = lazy(() => import('./pages/de/SchwertransporteDe'));
+const BaukranDe = lazy(() => import('./pages/de/BaukranDe'));
+const IndustrielogistikDe = lazy(() => import('./pages/de/IndustrielogistikDe'));
 import './index.css';
 
 // Scrolls to the top of the page every time the route changes.
@@ -33,6 +38,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/trasporti-eccezionali-trentino" element={<TrasportiEccezionali />} />
         <Route path="/trasporto-gru-edili" element={<TrasportoGruEdili />} />
         <Route path="/logistica-industriale" element={<LogisticaIndustriale />} />
+        <Route path="/de" element={<HomeDe />} />
+        <Route path="/de/autokranvermietung-trient" element={<AutokranvermietungDe />} />
+        <Route path="/de/schwertransporte-trentino" element={<SchwertransporteDe />} />
+        <Route path="/de/baukran-transport-montage" element={<BaukranDe />} />
+        <Route path="/de/industrielogistik" element={<IndustrielogistikDe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       </Suspense>
