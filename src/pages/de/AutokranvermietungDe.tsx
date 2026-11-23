@@ -11,9 +11,9 @@ export default function AutokranvermietungDe() {
       intro="Effer- und Hiab-Autokrane bis 95 mt mit erfahrenem Kranführer, für Industriemontagen, Stahlbau und Hübe auf engstem Raum in der Altstadt und auf Baustellen im Trentino."
       bullets={['Effer bis 95 mt', 'Mit Kranführer', 'Enge Platzverhältnisse', 'Angebot in 24 Std.']}
       caseStudy={{
-        title: 'Hub eines Potain-Krans 12 t — Altstadt Trient',
-        desc: 'Montage eines Turmdrehkrans auf engstem Raum in der Altstadt von Trient. In nur einem Tag mit einem Effer-Autokran 95 mt abgeschlossen — dort, wo herkömmliche Fahrzeuge nicht arbeiten können.',
-        img: '/images/progetto-1.webp',
+        title: 'Montage einer Holzverarbeitungsanlage — Tandemhub mit zwei Autokranen',
+        desc: 'Installation einer 8 Tonnen schweren Holzverarbeitungsanlage mit zwei Autokranen im Tandemhub. Der Doppelkran war nötig, um Abmessungen und Höhe der Anlage sicher zu beherrschen.',
+        img: '/images/progetto-2.webp',
       }}
       faqs={[
         { q: 'Was kostet die Autokranvermietung in Trient?', a: 'Der Preis hängt von der benötigten Tragkraft, der Dauer und der Komplexität des Hubs ab. Kostenlose Besichtigung und detailliertes Angebot innerhalb von 24 Stunden.' },
