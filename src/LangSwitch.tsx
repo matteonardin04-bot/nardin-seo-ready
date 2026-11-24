@@ -18,11 +18,11 @@ export default function LangSwitch({ big = false }: { big?: boolean }) {
   const { pathname } = useLocation();
   const isDe = pathname === '/de' || pathname.startsWith('/de/');
   const alt = altPaths(pathname) || { it: '/', de: '/de' };
-  const base = { textDecoration: 'none', fontWeight: 700, letterSpacing: '0.15em', fontSize: big ? 22 : 12 } as const;
+  const base = { textDecoration: 'none', fontWeight: 700, letterSpacing: '0.15em', fontSize: big ? 22 : 14, padding: big ? 0 : '8px 4px' } as const;
   return (
     <span style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }} aria-label="Lingua / Sprache">
       <Link to={alt.it} hrefLang="it" style={{ ...base, color: isDe ? '#A3A3A3' : '#EA580C' }}>IT</Link>
-      <span style={{ color: '#525252', fontSize: big ? 22 : 12 }}>|</span>
+      <span style={{ color: '#525252', fontSize: big ? 22 : 14 }}>|</span>
       <Link to={alt.de} hrefLang="de" style={{ ...base, color: isDe ? '#EA580C' : '#A3A3A3' }}>DE</Link>
     </span>
   );
