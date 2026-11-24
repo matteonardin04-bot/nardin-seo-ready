@@ -1,19 +1,42 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, type ComponentType } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 // Each page is loaded on demand: a visitor landing on a service page (e.g. from
 // Google Ads) no longer downloads the much larger Home page code first.
-const Home = lazy(() => import('./pages/Home'));
-const NoleggioAutogru = lazy(() => import('./pages/NoleggioAutogru'));
-const TrasportiEccezionali = lazy(() => import('./pages/TrasportiEccezionali'));
-const TrasportoGruEdili = lazy(() => import('./pages/TrasportoGruEdili'));
-const LogisticaIndustriale = lazy(() => import('./pages/LogisticaIndustriale'));
-const NotFound = lazy(() => import('./pages/NotFound'));
-const HomeDe = lazy(() => import('./pages/de/HomeDe'));
-const AutokranvermietungDe = lazy(() => import('./pages/de/AutokranvermietungDe'));
-const SchwertransporteDe = lazy(() => import('./pages/de/SchwertransporteDe'));
-const BaukranDe = lazy(() => import('./pages/de/BaukranDe'));
-const IndustrielogistikDe = lazy(() => import('./pages/de/IndustrielogistikDe'));
+// lazyPage() also exposes preload(): before the first render we load the current
+// page's code, so React can replace the prerendered HTML without an empty flash.
+type PageModule = { default: ComponentType };
+function lazyPage(load: () => Promise<PageModule>) {
+  let Loaded: ComponentType | null = null;
+  const Lazy = lazy(load);
+  const Page = (props: Record<string, never>) => (Loaded ? <Loaded {...props} /> : <Lazy {...props} />);
+  Page.preload = () => load().then(m => { Loaded = m.default; });
+  return Page;
+}
+const Home = lazyPage(() => import('./pages/Home'));
+const NoleggioAutogru = lazyPage(() => import('./pages/NoleggioAutogru'));
+const TrasportiEccezionali = lazyPage(() => import('./pages/TrasportiEccezionali'));
+const TrasportoGruEdili = lazyPage(() => import('./pages/TrasportoGruEdili'));
+const LogisticaIndustriale = lazyPage(() => import('./pages/LogisticaIndustriale'));
+const NotFound = lazyPage(() => import('./pages/NotFound'));
+const HomeDe = lazyPage(() => import('./pages/de/HomeDe'));
+const AutokranvermietungDe = lazyPage(() => import('./pages/de/AutokranvermietungDe'));
+const SchwertransporteDe = lazyPage(() => import('./pages/de/SchwertransporteDe'));
+const BaukranDe = lazyPage(() => import('./pages/de/BaukranDe'));
+const IndustrielogistikDe = lazyPage(() => import('./pages/de/IndustrielogistikDe'));
+
+const PRELOAD: Record<string, { preload: () => Promise<void> }> = {
+  '/': Home,
+  '/noleggio-autogru-trento': NoleggioAutogru,
+  '/trasporti-eccezionali-trentino': TrasportiEccezionali,
+  '/trasporto-gru-edili': TrasportoGruEdili,
+  '/logistica-industriale': LogisticaIndustriale,
+  '/de': HomeDe,
+  '/de/autokranvermietung-trient': AutokranvermietungDe,
+  '/de/schwertransporte-trentino': SchwertransporteDe,
+  '/de/baukran-transport-montage': BaukranDe,
+  '/de/industrielogistik': IndustrielogistikDe,
+};
 import './index.css';
 
 // Scrolls to the top of the page every time the route changes.
@@ -27,7 +50,10 @@ function ScrollToTop() {
   return null;
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+const pagePreload = (PRELOAD[currentPath] ?? NotFound).preload();
+
+pagePreload.catch(() => undefined).finally(() => ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollToTop />
@@ -48,4 +74,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </Suspense>
     </BrowserRouter>
   </React.StrictMode>
-);
+));

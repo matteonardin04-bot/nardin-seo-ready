@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, '../dist');
@@ -280,14 +280,31 @@ function withHead(baseHtml, { title, description, url, preload, image }) {
 // Shell before any page-specific preload is added (used as base for service pages).
 const shellHtml = html;
 
+// Plain SPA shell, served by Netlify for every URL without its own file (the
+// "/* -> /app.html" rule in netlify.toml): unknown URLs must not flash the homepage.
+writeFileSync(resolve(distDir, 'app.html'), shellHtml);
+
+// --- Prerendered page content ---
+// Each page is rendered at build time twice (mobile and desktop layout); CSS shows
+// the one matching the screen, so text and images appear before the JavaScript
+// has loaded. React then replaces it with the live page (same layout, no jump).
+const { render } = await import(pathToFileURL(resolve(__dirname, '../dist-ssr/entry-server.js')).href);
+const SNAPSHOT_CSS = '#ssr-m,#ssr-d{display:none}@media (max-width:899px){#ssr-m{display:block}}@media (min-width:900px){#ssr-d{display:block}}';
+function withSnapshot(pageHtml, path) {
+  const mobileHtml = render(path, true);
+  const desktopHtml = render(path, false);
+  return pageHtml.replace('<div id="root"></div>',
+    `<div id="root"><style>${SNAPSHOT_CSS}</style><div id="ssr-m">${mobileHtml}</div><div id="ssr-d">${desktopHtml}</div></div>`);
+}
+
 // Homepage: preload its own chunk too.
 const homePreload = chunkFiles('src/pages/Home.tsx').filter(f => !mainFiles.has(f));
-html = withHead(html, {
+html = withSnapshot(withHead(html, {
   title: html.match(/<title>([^<]*)<\/title>/)[1],
   description: html.match(/<meta name="description" content="([^"]*)"/)[1],
   url: `${SITE_URL}/`,
   preload: homePreload,
-});
+}), '/');
 writeFileSync(indexPath, html);
 
 for (const [path, page] of Object.entries(PAGES)) {
@@ -305,6 +322,7 @@ for (const [path, page] of Object.entries(PAGES)) {
   }), path);
   // Le pagine tedesche non devono mostrare a Google il testo italiano di riserva
   if (path === '/de' || path.startsWith('/de/')) pageHtml = pageHtml.replace(/<noscript>[\s\S]*?<\/noscript>/, '');
+  pageHtml = withSnapshot(pageHtml, path);
   writeFileSync(outFile, pageHtml);
 }
 console.log(`Per-page HTML written for ${Object.keys(PAGES).length} pages (IT + DE)`);

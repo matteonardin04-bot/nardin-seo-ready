@@ -1,3 +1,4 @@
+import { initialMobile } from '../viewport';
 import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Link } from 'react-router-dom';
@@ -122,7 +123,7 @@ const inp = (extra = {}) => ({
 export default function Home() {
   const [tab, setTab] = useState('Gru');
   const [scrolled, setScrolled] = useState(false);
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(initialMobile);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalId, setModalId] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);

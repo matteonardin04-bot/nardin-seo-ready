@@ -1,3 +1,4 @@
+import { initialMobile } from './viewport';
 import { useState, useEffect, ReactNode } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import LangSwitch from './LangSwitch';
@@ -30,7 +31,7 @@ function trackWhatsAppClick() {
 }
 
 export function useIsMobile() {
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(initialMobile);
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 900);
     check();
