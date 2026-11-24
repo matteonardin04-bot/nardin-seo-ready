@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -156,6 +156,18 @@ const staticContent = `
 
 // --- 1. Inject the noscript SEO fallback into the SPA shell ---
 let html = readFileSync(indexPath, 'utf-8');
+
+// Preload the fonts used above the fold (titles in Bebas Neue, text in Inter
+// 400/700): they arrive before the first paint, so text doesn't render in a
+// fallback font and then reflow when the real font lands (mobile layout shift).
+const CRITICAL_FONTS = ['bebas-neue-latin-400-normal', 'inter-latin-400-normal', 'inter-latin-700-normal'];
+const assetFiles = readdirSync(resolve(distDir, 'assets'));
+const fontPreloads = CRITICAL_FONTS
+  .map(prefix => assetFiles.find(f => f.startsWith(prefix) && f.endsWith('.woff2')))
+  .filter(Boolean)
+  .map(f => `    <link rel="preload" as="font" type="font/woff2" href="/assets/${f}" crossorigin>`)
+  .join('\n');
+html = html.replace('</head>', `${fontPreloads}\n  </head>`);
 html = html.replace('<div id="root"></div>', `<div id="root"></div>\n${staticContent}`);
 writeFileSync(indexPath, html);
 console.log('SEO static snapshot injected into dist/index.html');

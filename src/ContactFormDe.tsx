@@ -35,29 +35,29 @@ export default function ContactForm({ mobile, defaultService }: { mobile: boolea
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: 14 }}>
             <div style={{ fontFamily: S.bebas, fontSize: 72, color: S.orange }}>✓</div>
             <h3 style={{ fontFamily: S.bebas, fontSize: 32, color: S.text }}>ANFRAGE GESENDET</h3>
-            <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.6 }}>Wir rufen Sie innerhalb von 2 Stunden während der Geschäftszeiten zurück.<br />Dringend: <a href="tel:+390461990268" style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
+            <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.6 }}>Wir rufen Sie innerhalb von 2 Stunden während der Geschäftszeiten zurück.<br />Dringend: <a href="tel:+390461990268" style={{ color: S.orange, textDecoration: 'underline' }}>0461 990268</a></p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 12 }}>
               <div>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Firmenname *</label>
-                <input name="company" type="text" required placeholder="Firma GmbH" style={inp()} />
+                <label htmlFor="cf-company" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Firmenname *</label>
+                <input id="cf-company" name="company" type="text" required placeholder="Firma GmbH" style={inp()} />
                 <ValidationError prefix="Company" field="company" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefon *</label>
-                <input name="phone" type="tel" required placeholder="+39 ..." style={inp()} />
+                <label htmlFor="cf-phone" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefon *</label>
+                <input id="cf-phone" name="phone" type="tel" required placeholder="+39 ..." style={inp()} />
               </div>
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>E-Mail *</label>
-              <input name="email" type="email" required placeholder="info@azienda.it" style={inp()} />
+              <label htmlFor="cf-email" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>E-Mail *</label>
+              <input id="cf-email" name="email" type="email" required placeholder="info@azienda.it" style={inp()} />
               <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Art des Einsatzes</label>
-              <select name="service" defaultValue={defaultService} style={inp({ cursor: 'pointer' })}>
+              <label htmlFor="cf-service" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Art des Einsatzes</label>
+              <select id="cf-service" name="service" defaultValue={defaultService} style={inp({ cursor: 'pointer' })}>
                 <option>Autokranvermietung</option>
                 <option>Industriehub</option>
                 <option>Schwertransport</option>
@@ -67,22 +67,22 @@ export default function ContactForm({ mobile, defaultService }: { mobile: boolea
               </select>
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ort / Baustelle</label>
-              <input name="location" type="text" placeholder="Ort, Adresse der Baustelle..." style={inp()} />
+              <label htmlFor="cf-location" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ort / Baustelle</label>
+              <input id="cf-location" name="location" type="text" placeholder="Ort, Adresse der Baustelle..." style={inp()} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Beschreibung des Auftrags</label>
-              <textarea name="message" rows={3} placeholder="Gewichte, Maße, Höhen, Termine, Hinweise..." style={inp({ resize: 'vertical', fontFamily: S.inter })} />
+              <label htmlFor="cf-message" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Beschreibung des Auftrags</label>
+              <textarea id="cf-message" name="message" rows={3} placeholder="Gewichte, Maße, Höhen, Termine, Hinweise..." style={inp({ resize: 'vertical', fontFamily: S.inter })} />
               <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Foto der Ladung / Baustelle (optional)</label>
-              <input name="attachment" type="file" accept="image/*,.pdf" style={{ ...inp(), padding: '10px 14px', cursor: 'pointer' }} />
+              <label htmlFor="cf-attachment" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Foto der Ladung / Baustelle (optional)</label>
+              <input id="cf-attachment" name="attachment" type="file" accept="image/*,.pdf" style={{ ...inp(), padding: '10px 14px', cursor: 'pointer' }} />
             </div>
             <button type="submit" disabled={state.submitting} style={{ background: S.orange, color: '#fff', border: 'none', padding: 18, cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1, fontSize: 13, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}>
               {state.submitting ? 'WIRD GESENDET...' : 'KOSTENLOSES ANGEBOT ANFORDERN'}
             </button>
-            <p style={{ fontSize: 13, color: '#9CA3AF', textAlign: 'center' }}>Wir rufen Sie innerhalb von 2 Stunden während der Geschäftszeiten zurück. Dringend: <a href="tel:+390461990268" style={{ color: S.orange, textDecoration: 'none' }}>0461 990268</a></p>
+            <p style={{ fontSize: 13, color: '#9CA3AF', textAlign: 'center' }}>Wir rufen Sie innerhalb von 2 Stunden während der Geschäftszeiten zurück. Dringend: <a href="tel:+390461990268" style={{ color: S.orange, textDecoration: 'underline' }}>0461 990268</a></p>
           </form>
         )}
       </div>

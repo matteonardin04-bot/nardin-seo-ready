@@ -1,3 +1,4 @@
+import { initialMobile } from './viewport';
 import { useState, useEffect, ReactNode } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import LangSwitch from './LangSwitch';
@@ -30,7 +31,7 @@ function trackWhatsAppClick() {
 }
 
 export function useIsMobile() {
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(initialMobile);
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 900);
     check();
@@ -102,7 +103,7 @@ export function Navbar({ mobile }: { mobile: boolean }) {
           {mobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <LangSwitch />
-              <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+              <button onClick={openMenu} aria-label="Apri menu" style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
@@ -206,7 +207,7 @@ export function PageChrome({ children }: { children: ReactNode }) {
         @media (max-width: 899px) { .mobile-cta-bar { display: flex !important; } body { padding-bottom: 64px; } }
       `}</style>
       <Navbar mobile={mobile} />
-      {children}
+      <main>{children}</main>
       <Footer />
       <StickyMobileBar onPreventivo={() => {
         if (document.getElementById('contatti-servizio')) go('contatti-servizio');

@@ -37,7 +37,7 @@ export default function CarouselDots({ count, label }: { count: number; label: s
     <div ref={ref} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginTop: 16 }}>
       <div role="tablist" aria-label={label} style={{ display: 'flex', gap: 2 }}>
         {Array.from({ length: count }).map((_, i) => (
-          <button key={i} type="button" aria-label={`${i + 1} / ${count}`} aria-selected={i === active} onClick={() => go(i)}
+          <button key={i} type="button" role="tab" aria-label={`${i + 1} / ${count}`} aria-selected={i === active} onClick={() => go(i)}
             style={{ width: 28, height: 28, padding: 0, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <span style={{ display: 'block', width: i === active ? 22 : 8, height: 8, borderRadius: 4, background: i === active ? '#EA580C' : '#525252', transition: 'width 0.25s, background 0.25s' }} />
           </button>

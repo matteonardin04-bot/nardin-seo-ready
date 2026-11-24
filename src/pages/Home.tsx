@@ -1,3 +1,4 @@
+import { initialMobile } from '../viewport';
 import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Link } from 'react-router-dom';
@@ -122,7 +123,7 @@ const inp = (extra = {}) => ({
 export default function Home() {
   const [tab, setTab] = useState('Gru');
   const [scrolled, setScrolled] = useState(false);
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState(initialMobile);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalId, setModalId] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -234,7 +235,7 @@ export default function Home() {
           {mobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <LangSwitch />
-              <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+              <button onClick={openMenu} aria-label="Apri menu" style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
@@ -244,6 +245,7 @@ export default function Home() {
         </div>
       </nav>
 
+      <main>
       {/* HERO */}
       <section id="home" style={{ position: 'relative', minHeight: mobile ? '92svh' : '100vh', display: 'flex', alignItems: 'flex-end', paddingBottom: mobile ? 48 : 80, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0 }}>
@@ -629,23 +631,23 @@ export default function Home() {
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 12 }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ragione Sociale *</label>
-                      <input name="company" type="text" required placeholder="Azienda S.r.l." style={inp()} />
+                      <label htmlFor="cf-company" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Ragione Sociale *</label>
+                      <input id="cf-company" name="company" type="text" required placeholder="Azienda S.r.l." style={inp()} />
                       <ValidationError prefix="Company" field="company" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono *</label>
-                      <input name="phone" type="tel" required placeholder="+39 ..." style={inp()} />
+                      <label htmlFor="cf-phone" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Telefono *</label>
+                      <input id="cf-phone" name="phone" type="tel" required placeholder="+39 ..." style={inp()} />
                     </div>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email *</label>
-                    <input name="email" type="email" required placeholder="info@azienda.it" style={inp()} />
+                    <label htmlFor="cf-email" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Email *</label>
+                    <input id="cf-email" name="email" type="email" required placeholder="info@azienda.it" style={inp()} />
                     <ValidationError prefix="Email" field="email" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Tipo Intervento</label>
-                    <select name="service" style={inp({ cursor: 'pointer' })}>
+                    <label htmlFor="cf-service" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Tipo Intervento</label>
+                    <select id="cf-service" name="service" style={inp({ cursor: 'pointer' })}>
                       <option>Noleggio Autogrù</option>
                       <option>Sollevamento Industriale</option>
                       <option>Trasporto Eccezionale</option>
@@ -654,17 +656,17 @@ export default function Home() {
                     </select>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Luogo / Cantiere</label>
-                    <input name="location" type="text" placeholder="Città, indirizzo cantiere..." style={inp()} />
+                    <label htmlFor="cf-location" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Luogo / Cantiere</label>
+                    <input id="cf-location" name="location" type="text" placeholder="Città, indirizzo cantiere..." style={inp()} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Descrizione Lavoro</label>
-                    <textarea name="message" rows={3} placeholder="Pesi, dimensioni, altezze, tempistiche, note..." style={inp({ resize: 'vertical', fontFamily: S.inter })} />
+                    <label htmlFor="cf-message" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Descrizione Lavoro</label>
+                    <textarea id="cf-message" name="message" rows={3} placeholder="Pesi, dimensioni, altezze, tempistiche, note..." style={inp({ resize: 'vertical', fontFamily: S.inter })} />
                     <ValidationError prefix="Message" field="message" errors={state.errors} style={{ color: '#EF4444', fontSize: 13, marginTop: 3 }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Foto Carico / Cantiere (opzionale)</label>
-                    <input name="attachment" type="file" accept="image/*,.pdf" style={{ ...inp(), padding: '10px 14px', cursor: 'pointer' }} />
+                    <label htmlFor="cf-attachment" style={{ display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginBottom: 6 }}>Foto Carico / Cantiere (opzionale)</label>
+                    <input id="cf-attachment" name="attachment" type="file" accept="image/*,.pdf" style={{ ...inp(), padding: '10px 14px', cursor: 'pointer' }} />
                   </div>
                   <button type="submit" disabled={state.submitting} style={{ background: S.orange, color: '#fff', border: 'none', padding: 18, cursor: state.submitting ? 'not-allowed' : 'pointer', opacity: state.submitting ? 0.6 : 1, fontSize: 13, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}
                     onMouseEnter={e => { if (!state.submitting) e.currentTarget.style.background = '#C2410C'; }}
@@ -680,6 +682,7 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
       {/* FOOTER */}
       <footer style={{ background: S.black, borderTop: `1px solid ${S.border}`, padding: 'clamp(36px,6vw,72px) 0 100px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
