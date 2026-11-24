@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source(".");  /* scan only src/: the repo also contains prompt history files full of class names */
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;

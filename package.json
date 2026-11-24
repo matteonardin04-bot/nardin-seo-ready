@@ -11,6 +11,8 @@
     "lint": "echo 'No lint step needed'"
   },
   "dependencies": {
+    "@fontsource/bebas-neue": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
     "@formspree/react": "^3.0.0",
     "motion": "^12.38.0",
     "react": "^19.2.4",
@@ -29,7 +31,10 @@
   },
   "reactSnap": {
     "source": "dist",
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "include": [
       "/",
       "/noleggio-autogru-trento",

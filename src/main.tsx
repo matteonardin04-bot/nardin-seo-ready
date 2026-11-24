@@ -14,6 +14,13 @@ const AutokranvermietungDe = lazy(() => import('./pages/de/AutokranvermietungDe'
 const SchwertransporteDe = lazy(() => import('./pages/de/SchwertransporteDe'));
 const BaukranDe = lazy(() => import('./pages/de/BaukranDe'));
 const IndustrielogistikDe = lazy(() => import('./pages/de/IndustrielogistikDe'));
+// Fonts served from our own domain instead of Google Fonts: one less external,
+// render-blocking request on every page (latin subset covers Italian and German).
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/bebas-neue/latin-400.css';
 import './index.css';
 
 // Scrolls to the top of the page every time the route changes.
