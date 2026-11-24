@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Link } from 'react-router-dom';
 import { Head } from '../../shared';
+import CarouselDots from '../../CarouselDots';
 import LangSwitch from '../../LangSwitch';
 
 declare global {
@@ -210,7 +211,7 @@ export default function HomeDe() {
 
       {/* NAVBAR */}
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent', borderBottom: scrolled ? `1px solid ${S.border}` : '1px solid transparent', padding: scrolled ? '10px 0' : '18px 0', transition: 'all 0.3s' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/de" style={{ cursor: 'pointer' }}>
             <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={72} height={72} style={{ height: 72, width: 'auto', objectFit: 'contain' }} onError={e => { e.currentTarget.style.display = 'none'; }} />
           </Link>
@@ -235,7 +236,6 @@ export default function HomeDe() {
           {mobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <LangSwitch />
-              <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ background: S.orange, color: '#fff', padding: '8px 14px', textDecoration: 'none', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>ANRUFEN</a>
               <button onClick={openMenu} style={{ background: 'none', border: `1px solid ${S.border}`, color: S.text, width: 36, height: 36, cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
                 <span style={{ width: 16, height: 2, background: S.text, display: 'block' }} />
@@ -254,7 +254,7 @@ export default function HomeDe() {
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0A0A0A 20%, transparent 70%)' }} />
         </div>
         <div style={{ position: 'absolute', right: '-2%', bottom: '5%', fontFamily: S.bebas, fontSize: 'clamp(140px, 22vw, 380px)', color: 'rgba(255,255,255,0.025)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>1980</div>
-        <div style={{ position: 'relative', zIndex: 10, maxWidth: 1280, margin: '0 auto', padding: '0 40px', width: '100%' }}>
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px', width: '100%' }}>
           <div style={{ maxWidth: 720 }}>
             <h1 style={{ fontFamily: S.bebas, fontSize: 'clamp(48px, 6.5vw, 100px)', lineHeight: 0.93, letterSpacing: '0.02em', marginBottom: 24, color: S.text }}>
               INDUSTRIEHÜBE<br />
@@ -293,9 +293,9 @@ export default function HomeDe() {
 
       {/* STATS */}
       <div style={{ background: S.dark, borderBottom: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', minWidth: 0 }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px', display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', minWidth: 0 }}>
           {[{ n: '40+', l: 'Jahre Erfahrung' }, { n: '95', l: 'mt max. Lastmoment' }, { n: 'H24', l: 'Notdienst' }, { n: '16+', l: 'Fahrzeuge in der Flotte' }].map((s, i) => (
-            <div key={i} style={{ padding: '28px 16px', textAlign: 'center', borderRight: i < 3 ? `1px solid ${S.border}` : 'none', minWidth: 0 }}>
+            <div key={i} style={{ padding: '28px 16px', textAlign: 'center', borderRight: (mobile ? i % 2 === 0 : i < 3) ? `1px solid ${S.border}` : 'none', borderBottom: mobile && i < 2 ? `1px solid ${S.border}` : 'none', minWidth: 0 }}>
               <div style={{ fontFamily: S.bebas, fontSize: 'clamp(32px, 4vw, 48px)', color: S.orange, lineHeight: 1 }}>{s.n}</div>
               <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.gray, textTransform: 'uppercase', marginTop: 5 }}>{s.l}</div>
             </div>
@@ -305,7 +305,7 @@ export default function HomeDe() {
 
       {/* COME LAVORIAMO */}
       <section style={{ padding: 'clamp(60px,8vw,100px) 0', background: S.dark, borderBottom: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Unser Ablauf</span>
@@ -313,7 +313,7 @@ export default function HomeDe() {
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
             SO<br /><span style={{ color: S.orange }}>ARBEITEN WIR</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: 2, background: S.border }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'minmax(0,1fr)' : 'repeat(4,1fr)', gap: 2, background: S.border }}>
             {[
               { n: '01', title: 'Kontakt', desc: 'Telefon, WhatsApp oder Online-Formular. Antwort innerhalb von 2 Stunden während der Geschäftszeiten.', icon: (
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="1.5" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.09 2.1 2 2 0 012.06 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
@@ -328,10 +328,10 @@ export default function HomeDe() {
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="1.5" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               ) },
             ].map((step, i) => (
-              <div key={i} style={{ background: S.black, padding: 'clamp(24px,3vw,40px)', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div key={i} style={{ background: S.black, padding: mobile ? '18px 20px' : 'clamp(24px,3vw,40px)', display: 'flex', flexDirection: 'column', gap: mobile ? 8 : 16 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   {step.icon}
-                  <span style={{ fontFamily: S.bebas, fontSize: 48, color: 'rgba(234,88,12,0.15)', lineHeight: 1 }}>{step.n}</span>
+                  <span style={{ fontFamily: S.bebas, fontSize: mobile ? 32 : 48, color: 'rgba(234,88,12,0.45)', lineHeight: 1 }}>{step.n}</span>
                 </div>
                 <h3 style={{ fontFamily: S.bebas, fontSize: 22, color: S.text, letterSpacing: '0.03em' }}>{step.title}</h3>
                 <p style={{ color: S.gray, fontSize: 15, lineHeight: 1.65 }}>{step.desc}</p>
@@ -343,9 +343,9 @@ export default function HomeDe() {
 
       {/* CHI SIAMO */}
       <section id="chi-siamo" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? 40 : 80, alignItems: 'center' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px', display: 'grid', gridTemplateColumns: mobile ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)', gap: mobile ? 32 : 80, alignItems: 'center' }}>
           <div style={{ position: 'relative' }}>
-            <img src="/images/about.webp" loading="lazy" decoding="async" alt="Walter und Ivana Nardin — Nardin Autotrasporti Trient" onError={e => (e.currentTarget.style.display = 'none')} style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
+            <img src="/images/about.webp" loading="lazy" decoding="async" alt="Walter und Ivana Nardin — Nardin Autotrasporti Trient" onError={e => (e.currentTarget.style.display = 'none')} style={{ width: '100%', aspectRatio: mobile ? '4/3' : '4/5', objectFit: 'cover', filter: 'grayscale(30%)' }} />
             <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20, background: 'rgba(10,10,10,0.92)', border: `1px solid ${S.border}`, padding: '18px 22px' }}>
               <p style={{ fontFamily: S.bebas, fontSize: 18, letterSpacing: '0.05em', color: S.text, marginBottom: 5 }}>„Unsere Stärke ist der Mensch hinter der Maschine.“</p>
               <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.2em', color: S.orange, textTransform: 'uppercase' }}>Walter & Ivana Nardin</p>
@@ -366,7 +366,7 @@ export default function HomeDe() {
             <p style={{ color: S.muted, fontSize: 17, lineHeight: 1.75, marginBottom: 32 }}>
               Heute führen <strong style={{ color: S.text }}>Walter und Ivana Nardin</strong> diese Leidenschaft fort. Wir sind die erste Adresse für <strong style={{ color: S.text }}>Autokranvermietung in Trient</strong> und <strong style={{ color: S.text }}>Industriehübe im Trentino</strong> mit Effer-Autokranen bis 95 mt.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: S.border, border: `1px solid ${S.border}`, marginBottom: 24 }}>
+            <div style={{ display: mobile ? 'none' : 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr)', gap: 1, background: S.border, border: `1px solid ${S.border}`, marginBottom: 24, overflowWrap: 'anywhere' }}>
               {[
                 { t: 'Frachtführerversicherung', s: 'All-Risks-Deckung' },
                 { t: '24/7 Notdienst', s: 'Kran-Notdienst' },
@@ -386,7 +386,7 @@ export default function HomeDe() {
 
       {/* SERVIZI */}
       <section id="servizi" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Was wir tun</span>
@@ -401,11 +401,11 @@ export default function HomeDe() {
               { n: '03', t: 'Transport von Baukranen', d: 'Demontage, Transport und Wiedermontage von Potain-Turmdrehkranen und ähnlichen Modellen. Komplette Logistikplanung für Baustellen jeder Größe.', tags: ['Potain-Krane', 'Baustellenlogistik', 'Norditalien'], to: '/de/baukran-transport-montage' },
               { n: '04', t: 'Industrielogistik', d: 'Transport und Umsetzen von Schwermaschinen, Werkzeugmaschinen, Fertigteilen und Stahlbau. Maßgeschneiderte Lösungen für jeden Bedarf.', tags: ['Schwermaschinen', 'Fertigteile', 'Maßgeschneidert'], to: '/de/industrielogistik' },
             ].map((s, i) => (
-              <div key={i} style={{ background: S.black, padding: 'clamp(24px,4vw,48px)' }}>
-                <div style={{ fontFamily: S.bebas, fontSize: 56, color: 'rgba(234,88,12,0.1)', lineHeight: 1, marginBottom: 12 }}>{s.n}</div>
+              <div key={i} style={{ background: S.black, padding: mobile ? '22px 20px' : 'clamp(24px,4vw,48px)' }}>
+                <div style={{ display: mobile ? 'none' : 'block', fontFamily: S.bebas, fontSize: 56, color: 'rgba(234,88,12,0.35)', lineHeight: 1, marginBottom: 12 }}>{s.n}</div>
                 <h3 style={{ fontFamily: S.bebas, fontSize: 'clamp(22px,2.5vw,30px)', color: S.text, marginBottom: 12 }}>{s.t}</h3>
-                <p style={{ color: S.gray, fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>{s.d}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20 }}>
+                <p style={{ color: S.gray, fontSize: 16, lineHeight: 1.7, marginBottom: mobile ? 16 : 20 }}>{s.d}</p>
+                <div style={{ display: mobile ? 'none' : 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20 }}>
                   {s.tags.map(tag => <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '3px 10px', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>)}
                 </div>
                 <Link to={s.to} style={{ display: 'inline-block', background: 'none', border: `1px solid ${S.orange}`, color: S.orange, padding: '8px 20px', cursor: 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}
@@ -420,7 +420,7 @@ export default function HomeDe() {
 
       {/* CASI STUDIO */}
       <section style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Echte Projekte</span>
@@ -428,9 +428,9 @@ export default function HomeDe() {
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 48 }}>
             REFERENZ<br /><span style={{ color: S.orange }}>PROJEKTE</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,1fr)', gap: 2, background: S.border }}>
+          <div style={mobile ? { display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', gap: 12, background: 'none', margin: '0 -20px', padding: '0 20px 8px', scrollPaddingLeft: 20, scrollbarWidth: 'none' as const } : { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2, background: S.border }}>
             {caseStudies.map((c, i) => (
-              <div key={i} style={{ background: S.dark, overflow: 'hidden' }}>
+              <div key={i} style={{ ...(mobile ? { flex: '0 0 84%', scrollSnapAlign: 'start', } : {}), background: S.dark, overflow: 'hidden' }}>
                 <div style={{ height: 200, overflow: 'hidden', position: 'relative' }}>
                   <img src={c.img} alt={c.title} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(30%)', transition: 'transform 0.6s' }}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'grayscale(0%)'; }}
@@ -442,7 +442,7 @@ export default function HomeDe() {
                   <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{c.sub}</p>
                   <h3 style={{ fontFamily: S.bebas, fontSize: 22, color: S.text, marginBottom: 12, letterSpacing: '0.03em' }}>{c.title}</h3>
                   <p style={{ color: S.gray, fontSize: 15, lineHeight: 1.6, marginBottom: 16 }}>{c.desc}</p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  <div style={{ display: mobile ? 'none' : 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {c.tags.map(tag => (
                       <span key={tag} style={{ border: `1px solid ${S.border}`, padding: '2px 8px', fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: S.gray, textTransform: 'uppercase' }}>{tag}</span>
                     ))}
@@ -451,6 +451,7 @@ export default function HomeDe() {
               </div>
             ))}
           </div>
+          {mobile && <CarouselDots count={caseStudies.length} label="Wischen, um alles zu sehen" />}
         </div>
       </section>
 
@@ -458,7 +459,7 @@ export default function HomeDe() {
 
       {/* TESTIMONIALS */}
       <section style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Kundenstimmen</span>
@@ -466,9 +467,9 @@ export default function HomeDe() {
           <h2 style={{ fontFamily: S.bebas, fontSize: 'clamp(36px,6vw,72px)', lineHeight: 0.95, color: S.text, marginBottom: 40 }}>
             PARTNER<br /><span style={{ color: S.orange }}>DES VERTRAUENS</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(4,1fr)', gap: 2, background: S.border }}>
+          <div style={mobile ? { display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', gap: 12, background: 'none', margin: '0 -20px', padding: '0 20px 8px', scrollPaddingLeft: 20, scrollbarWidth: 'none' as const } : { display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 2, background: S.border }}>
             {testimonials.map((t, i) => (
-              <div key={i} style={{ background: S.dark, padding: 'clamp(20px,3vw,32px)', display: 'flex', flexDirection: 'column' }}>
+              <div key={i} style={{ ...(mobile ? { flex: '0 0 84%', scrollSnapAlign: 'start', } : {}), background: S.dark, padding: 'clamp(20px,3vw,32px)', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ color: S.orange, fontSize: 17, letterSpacing: 2, marginBottom: 16 }}>★★★★★</div>
                 <p style={{ color: S.muted, fontSize: 15, lineHeight: 1.7, fontStyle: 'italic', flexGrow: 1, marginBottom: 20 }}>"{t.text}"</p>
                 <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 16 }}>
@@ -479,12 +480,13 @@ export default function HomeDe() {
               </div>
             ))}
           </div>
+          {mobile && <CarouselDots count={testimonials.length} label="Wischen, um alles zu sehen" />}
         </div>
       </section>
 
       {/* FLOTTA */}
       <section id="flotta" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Eigene Flotte</span>
@@ -501,9 +503,9 @@ export default function HomeDe() {
               ))}
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,1fr)', gap: 2, background: S.border }}>
+          <div key={tab} style={mobile ? { display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', gap: 12, background: 'none', margin: '0 -20px', padding: '0 20px 8px', scrollPaddingLeft: 20, scrollbarWidth: 'none' as const } : { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2, background: S.border }}>
             {fleet.map(item => (
-              <div key={item.id} onClick={() => setModalId(item.id)} style={{ background: S.black, cursor: 'pointer', overflow: 'hidden' }}
+              <div key={item.id} onClick={() => setModalId(item.id)} style={{ ...(mobile ? { flex: '0 0 84%', scrollSnapAlign: 'start', } : {}), background: S.black, cursor: 'pointer', overflow: 'hidden' }}
                 onMouseEnter={e => (e.currentTarget.style.background = '#161616')}
                 onMouseLeave={e => (e.currentTarget.style.background = S.black)}
               >
@@ -519,18 +521,19 @@ export default function HomeDe() {
                 <div style={{ padding: 18 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase', marginBottom: 6 }}>{item.cap}</div>
                   <h4 style={{ fontFamily: S.bebas, fontSize: 18, color: S.text, marginBottom: 6, lineHeight: 1.1 }}>{item.name}</h4>
-                  <p style={{ fontSize: 14, color: S.gray, lineHeight: 1.5, marginBottom: 12 }}>{item.desc}</p>
+                  <p style={{ fontSize: 14, color: S.gray, lineHeight: 1.5, marginBottom: 12, ...(mobile ? { display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' } : {}) }}>{item.desc}</p>
                   <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', color: S.orange, textTransform: 'uppercase' }}>DETAILS →</span>
                 </div>
               </div>
             ))}
           </div>
+          {mobile && <CarouselDots count={fleet.length} label="Wischen, um alles zu sehen" />}
         </div>
       </section>
 
       {/* FAQ */}
       <section style={{ padding: 'clamp(60px,8vw,100px) 0', background: S.black, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Häufige Fragen</span>
@@ -558,7 +561,7 @@ export default function HomeDe() {
 
       {/* CONTATTI */}
       <section id="contatti" style={{ padding: 'clamp(60px,8vw,120px) 0', background: S.dark, borderTop: `1px solid ${S.border}` }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div style={{ width: 22, height: 2, background: S.orange }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.3em', color: S.orange, textTransform: 'uppercase' }}>Kontakt</span>
@@ -617,7 +620,7 @@ export default function HomeDe() {
             </div>
 
             {/* FORM */}
-            <div style={{ background: S.dark, padding: 'clamp(28px,4vw,52px)' }}>
+            <div style={{ background: S.dark, padding: mobile ? '24px 20px' : 'clamp(28px,4vw,52px)', order: mobile ? -1 : 0 }}>
               {state.succeeded ? (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', gap: 14 }}>
                   <div style={{ fontFamily: S.bebas, fontSize: 72, color: S.orange }}>✓</div>
@@ -681,7 +684,7 @@ export default function HomeDe() {
 
       {/* FOOTER */}
       <footer style={{ background: S.black, borderTop: `1px solid ${S.border}`, padding: 'clamp(36px,6vw,72px) 0 100px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '0 20px' : '0 40px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 28 }}>
             <div>
               <img src="/images/logo-nardin.webp" alt="Nardin Autotrasporti" width={56} height={56} loading="lazy" decoding="async" style={{ height: 56, width: 'auto', objectFit: 'contain', marginBottom: 12 }} onError={e => { e.currentTarget.style.display = 'none'; }} />
@@ -725,8 +728,8 @@ export default function HomeDe() {
 
       {/* MOBILE STICKY CTA BAR */}
       <div className="mobile-cta-bar" style={{ display: 'none', position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 120, background: '#0A0A0A', borderTop: `1px solid ${S.border}`, padding: '10px 16px', gap: 8 }}>
-        <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>📞 ANRUFEN</a>
-        <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'block' }}>💬 WHATSAPP</a>
+        <a href="tel:+390461990268" onClick={trackPhoneClick} style={{ flex: 1, background: S.orange, color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 48, whiteSpace: 'nowrap' }}>ANRUFEN</a>
+        <a href="https://wa.me/393484420285" onClick={trackWhatsAppClick} target="_blank" rel="noopener noreferrer" style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '12px 8px', textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 48, whiteSpace: 'nowrap' }}>WHATSAPP</a>
         <button onClick={() => go('contatti')} style={{ flex: 1, background: S.dark, color: S.text, border: `1px solid ${S.border}`, padding: '12px 8px', cursor: 'pointer', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>ANGEBOT</button>
       </div>
 
